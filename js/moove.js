@@ -11,5 +11,9 @@
 
 
 $("#btnSignIn").click(function(){
-  window.location.href = "Location.html"
+  window.location.href = "Location.html";
+})
+
+$("#btnWhatstheMove").click(function(){
+    window.location.href = "theMoove.html";
 })
