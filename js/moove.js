@@ -17,3 +17,7 @@ $("#btnSignIn").click(function(){
 $("#btnWhatstheMove").click(function(){
     window.location.href = "theMoove.html";
 })
+
+$(".dontmove").click(function(e){
+  e.preventDefault();
+})
