@@ -15,9 +15,6 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
        , timer;
 
 
-
-
-
      navigator.geolocation.watchPosition(function(position) {
          // Update latitude and longitude
          userLatitude = position.coords.latitude;
@@ -27,9 +24,9 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
         // Create timer if needed
         // Query Uber API if needed
         getEstimatesForUserLocation(userLatitude, userLongitude);
-      });
 
-        }); // end of document ready
+      });
+      }); // end of document ready
 })(jQuery); // end of jQuery name space
 
 var partyLatitude = 37.5553965;
@@ -67,8 +64,10 @@ function getEstimatesForUserLocation(latitude,longitude) {
           console.log("IN " + Math.ceil(shortest.duration / 60.0) + " MIN");
         }
     }
-  });
+  }
+})
 }
+
 
 
 
