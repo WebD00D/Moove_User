@@ -35,7 +35,7 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
           // Query Uber API if needed
           getEstimatesForUserLocation(userLatitude, userLongitude);
 
-     });
+     };
 
 
   }); // end of document ready
