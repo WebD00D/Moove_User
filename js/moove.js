@@ -18,7 +18,7 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
          userLatitude = position.coords.latitude;
          userLongitude = position.coords.longitude;
          // Query Uber API if needed
-         alert("about to get estimates");
+        // alert("about to get estimates");
          getEstimatesForUserLocation(userLatitude, userLongitude);
      });
 
