@@ -58,6 +58,7 @@ function getEstimatesForUserLocation(latitude,longitude) {
 
         // Update the Uber button with the shortest time
         var shortest = data[0];
+        console.log(shortest.estimate);
 
         if (typeof shortest != typeof undefined) {
           console.log("Updating time estimate...");
