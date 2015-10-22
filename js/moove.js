@@ -25,20 +25,11 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
          // Query Uber API if needed
 
         // Create timer if needed
-        // Once initialized, it will fire every 60 seconds as recommended by the Uber API
-        // We only create the timer after we've gotten the user's location for the first time
-        if (typeof timer === typeof undefined) {
-          timer = setInterval(function() {
-            getEstimatesForUserLocation(userLatitude, userLongitude);
-          }, 60000);
+        // Query Uber API if needed
+        getEstimatesForUserLocation(userLatitude, userLongitude);
+      });
 
-          // Query Uber API if needed
-          getEstimatesForUserLocation(userLatitude, userLongitude);
-
-     };
-
-
-  }); // end of document ready
+        }); // end of document ready
 })(jQuery); // end of jQuery name space
 
 var partyLatitude = 37.5553965;
