@@ -36,7 +36,7 @@ function getEstimatesForUserLocation(latitude,longitude) {
   $.ajax({
     url: "https://api.uber.com/v1/estimates/price",
     headers: {
-        Authorization: "Token "  uberServerToken
+        Authorization: "Token " + uberServerToken
     },
     data: {
       start_latitude: latitude,
