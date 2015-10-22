@@ -5,11 +5,6 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
 (function($){
   $(function(){
 
-
-alert("hey");
-
-
-
     $('.button-collapse').sideNav();
      $('select').material_select();
 
@@ -39,7 +34,8 @@ findByLocations();
 
 function findByLocations(){
   var Destinations = Parse.Object.extend("Destinations");
-  var destinations = new Parse.Query(Destinations);
+  var query = new Parse.Query(Destinations);
+
   query.equalTo("Area", "VCU");
   query.find({
   success: function(results) {
