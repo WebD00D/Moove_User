@@ -11,7 +11,7 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
 
      // create placeholder variables
      var userLatitude
-       , userLongitude;
+       , userLongitude
        , timer;
 
 
