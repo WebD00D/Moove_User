@@ -4,6 +4,13 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
 (function($){
   $(function(){
 
+    Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
+
+
+    findByLocations();
+
+
+
     $('.button-collapse').sideNav();
      $('select').material_select();
 
@@ -28,6 +35,27 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
       });
       }); // end of document ready
 })(jQuery); // end of jQuery name space
+
+
+function findByLocations(){
+  var Destinations = Parse.Object.extend("Destinations");
+  var destinations = new Parse.Query(Destinations);
+  query.equalTo("Area", "VCU");
+  query.find({
+  success: function(results) {
+  alert("Successfully retrieved " + results.length + " scores.");
+  // Do something with the returned Parse.Object values
+  for (var i = 0; i < results.length; i++) {
+    var object = results[i];
+    console.log(object.id + ' - ' + object.get('Name'));
+  }
+ },
+ error: function(error) {
+  alert("Error: " + error.code + " " + error.message);
+}
+});
+}
+
 
 var partyLatitude = 37.5553965;
 var partyLongitude = -77.4870686;
