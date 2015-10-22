@@ -43,7 +43,7 @@ function findByLocations(){
   // Do something with the returned Parse.Object values
   for (var i = 0; i < results.length; i++) {
     var object = results[i];
-    console.log(object.id + ' - ' + object.get('Name'));
+    console.log(object.get('Name'));
   }
  },
  error: function(error) {
