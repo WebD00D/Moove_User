@@ -1,13 +1,12 @@
+Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
 var uberClientId = "KBm1CGJRwFYKVRefpb6TwmQ5f8jamppM";
 var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
 
 (function($){
   $(function(){
 
-    Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
 
-
-    findByLocations();
+alert("hey");
 
 
 
@@ -36,6 +35,7 @@ var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
       }); // end of document ready
 })(jQuery); // end of jQuery name space
 
+findByLocations();
 
 function findByLocations(){
   var Destinations = Parse.Object.extend("Destinations");
