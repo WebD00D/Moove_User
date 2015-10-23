@@ -13,67 +13,41 @@
  </head>
  <body>
 
-   <nav class="light-pink lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" style="font-family:'brandon-grotesque';font-weight:700;" href="#" class="brand-logo"> Moove</a>
+   <nav role="navigation" style="background-color:white">
+    <div class="nav-wrapper container"><a id="logo-container" style="font-family:'brandon-grotesque';font-weight:700;" href="#" class="brand-logo light-blue-text"> Moove</a>
       <ul class="right hide-on-med-and-down">
-        <li><a class="nicefont" href="#">What's the moove?</a></li>
-        <li><a class="nicefont" href="#">Sign up</a></li>
-        <li><a class="nicefont" href="#">Run a bar?</a></li>
+
+          <li><a class="nicefont" href="#">So what's the Moove?</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav ">
-        <li><a class="nicefont" href="#">What's the moove?</a></li>
-        <li><a class="nicefont" href="#">Sign up</a></li>
-        <li><a class="nicefont" href="#">Run a bar?</a></li>
+              <li><a class="nicefont" href="#">So what's the Moove?</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+
   <div class="section no-pad-bot mainview" id="index-banner">
     <div class="container">
-
-    <!--  <p>Helping you make smarter mooves.</p> -->
-
-      <div class="row" style="margin-top:30%">
-        <h4 class="nicefont center-align"> Ready to make mooves?</h4>
-
-          <p class="center-align">Sign in to get started.</p>
-
-
-     <div class="col s12">
-       <div class="row">
-
-
-         <div class="input-field col s12">
-           <input id="email" type="text" class="validate">
-           <label for="first_name">Email</label>
-         </div>
-         <div class="input-field col s12">
-           <input id="password" type="password" class="validate">
-           <label for="password">Password</label>
-         </div>
-         <div clas="input-field col s12" style="padding:0px">
-           <div class="container" >
-             <button id="btnSignIn" class="btn waves-effect waves-light right" type="submit" name="action">Make Mooves
-               <i class="material-icons right">local_bar</i>
-             </button>
-             <input type="checkbox" id="test6"  />
-             <label for="test6">Remember Me</label>
+      <div class="row">
+        <h4 class="nicefont center-align">Welcome to Moove</h4>
+        <h5 class="nicefont center-align">We make deciding where to spend your night out on the town easy.
+        </h5>
+        <Br>
+        <p class="left-align" style="padding-left:10px">Where are you are looking to make mooves?</p>
+         <div class="input-field col s12" >
+           <select id="ddlLocationSelect">
+             <option value="">No location selected</option>
+             <option value="fanVCU">The Fan/VCU</option>
+             <option value="theBottom">The Bottom</option>
+           </select>
+           <label>Let's make mooves to...</label>
+           <Br>
+             <button id="btnWhatstheMove" class="btn waves-effect waves-light  right light-blue" type="submit" name="action">Find Mooves</button>
            </div>
-
          </div>
-
        </div>
-
-
      </div>
-   </div>
-
-    </div>
-
-
-
-  </div>
 
 
 
@@ -81,7 +55,7 @@
 
    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-    <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
+  <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
    <script src="js/moove.js"></script>
  </body>
 </html>

@@ -1,32 +1,19 @@
 Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
+
 var uberClientId = "KBm1CGJRwFYKVRefpb6TwmQ5f8jamppM";
 var uberServerToken = "isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE";
+
+// create placeholder variables
+var userLatitude
+  , userLongitude;
 
 (function($){
   $(function(){
 
-    $('.button-collapse').sideNav();
+     $('.button-collapse').sideNav();
      $('select').material_select();
 
-     alert(uberClientId);
 
-     // create placeholder variables
-     var userLatitude
-       , userLongitude
-       , timer;
-
-
-     navigator.geolocation.watchPosition(function(position) {
-         // Update latitude and longitude
-         userLatitude = position.coords.latitude;
-         userLongitude = position.coords.longitude;
-         // Query Uber API if needed
-
-        // Create timer if needed
-        // Query Uber API if needed
-        getEstimatesForUserLocation(userLatitude, userLongitude);
-
-      });
       }); // end of document ready
 })(jQuery); // end of jQuery name space
 
@@ -36,10 +23,10 @@ function findByLocations(){
   var Destinations = Parse.Object.extend("Destinations");
   var query = new Parse.Query(Destinations);
 
-  query.equalTo("Area", "VCU");
+  query.equalTo("Area", "VCU/F");
   query.find({
   success: function(results) {
-  alert("Successfully retrieved " + results.length + " scores.");
+  //alert("Successfully retrieved " + results.length + " scores.");
   // Do something with the returned Parse.Object values
   for (var i = 0; i < results.length; i++) {
     var object = results[i];
@@ -95,19 +82,20 @@ function getEstimatesForUserLocation(latitude,longitude) {
 
 
 
+function GetCurrentLocation(){
 
+  navigator.geolocation.watchPosition(function(position) {
+      // Update latitude and longitude
+      userLatitude = position.coords.latitude;
+      userLongitude = position.coords.longitude;
+      getEstimatesForUserLocation(userLatitude, userLongitude);
+   });
 
-
-
-
-
-
-$("#btnSignIn").click(function(){
-  window.location.href = "Location.html";
-})
+}
 
 $("#btnWhatstheMove").click(function(){
-    window.location.href = "theMoove.html";
+    selectedLocation = $("#ddlLocationSelect option:selected").val();
+    window.location.href = "theMoove.html?location=" + selectedLocation;
 })
 
 $(".dontmove").click(function(e){
