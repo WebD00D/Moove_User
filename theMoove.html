@@ -8,12 +8,14 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link type="text/css" rel="stylesheet" href="css/animsition.css">
   <link type="text/css" rel="stylesheet" href="css/moove.css">
   <script src="https://use.typekit.net/fpd5bbp.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
  </head>
  <body style='background-color:black'>
 
+   <div class="animsition">
    <div class="navbar-fixed">
    <nav role="navigation" class='grey darken-4'>
     <div class="nav-wrapper container"><a id="logo-container" style="font-family:'brandon-grotesque';font-weight:700;color:#ED4877" href="#" class="brand-logo"> Moove</a>
@@ -58,8 +60,8 @@
          <label for="input_text">Optional blurb..</label>
        </div>
 
-    <a id="btnMooveOn" href="#!" style="margin-right:10px"  class=" modal-action modal-close waves-effect waves-light btn-flat red lighten-1 center-align white-text left"><i class="fa fa-thumbs-o-down white-text"></i> Moove On</a>
-    <a id="btnMakeMooves" href="#!" class="modal-action modal-close waves-effect waves-light btn-flat  green lighten-1 center-align white-text left"><i class="fa fa-thumbs-o-up white-text"></i> Make Mooves</a>
+    <a id="btnMooveOn" href="" style="margin-right:10px"  class=" modal-action modal-close waves-effect waves-light btn-flat red lighten-1 center-align white-text left"><i class="fa fa-thumbs-o-down white-text"></i> Moove On</a>
+    <a id="btnMakeMooves" href="" class="modal-action modal-close waves-effect waves-light btn-flat  green lighten-1 center-align white-text left"><i class="fa fa-thumbs-o-up white-text"></i> Make Mooves</a>
     <Br>
 
   </div>
@@ -73,6 +75,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
    <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
    <script src="js/url.js"></script>
+   <script src="js/animsition.js"></script>
    <script src="js/moove.js"></script>
 
    <script>
@@ -85,8 +88,36 @@
     })
 
    </script>
+   <script>
+$(document).ready(function() {
+$(".animsition").animsition({
+inClass: 'fade-in',
+outClass: 'fade-out',
+inDuration: 1500,
+outDuration: 800,
+linkElement: '.animsition-link',
+// e.g. linkElement: 'a:not([target="_blank"]):not([href^=#])'
+loading: true,
+loadingParentElement: 'body', //animsition wrapper element
+loadingClass: 'animsition-loading',
+loadingInner: '', // e.g '<img src="loading.svg" />'
+timeout: false,
+timeoutCountdown: 5000,
+onLoadEvent: true,
+browser: [ 'animation-duration', '-webkit-animation-duration'],
+// "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+// The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+overlay : false,
+overlayClass : 'animsition-overlay-slide',
+overlayParentElement : 'body',
+transition: function(url){ window.location.href = url; }
+});
+});
+</script>
 
 
+
+ </div>
 
  </body>
 </html>

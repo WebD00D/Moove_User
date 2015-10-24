@@ -90,6 +90,7 @@ function findByLocations(area){
 
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
+
       var Review = Parse.Object.extend("Reviews");
       var query = new Parse.Query(Review);
       query.equalTo("DestinationID", theID);
@@ -195,19 +196,41 @@ $(".destinations").delegate(".mademoove","click",function(){
 
 
 
-$("#btnMooveOn").click(function(){
+$("#btnMooveOn").click(function(e){
+  e.preventDefault()
   var location = $(this).attr("data-objectid");
   //need to save a the review if its not empty, and has met the length requirements.
   // if no review , then just need to update the counter for Moove On
   // Refresh to show the data.
+  incrementTotals("MooveOnCount",location);
+  refreshAfterReview();
 })
 
-$("#btnMakeMooves").click(function(){
+$("#btnMakeMooves").click(function(e){
+  e.preventDefault();
   var location = $(this).attr("data-objectid");
   //need to save a the review if its not empty, and has met the length requirements.
   // if no review , then just need to update the counter for Moove On
   // Refresh to show the data.
+  incrementTotals("MooveCount",location);
+  refreshAfterReview();
 })
+
+function incrementTotals(Kind,LocationID){
+
+var Destinations = Parse.Object.extend("Destinations");
+var destinations = new Destinations();
+destinations.id = LocationID;
+destinations.increment(Kind);
+destinations.save();
+refreshAfterReview();
+
+}
+
+
+function refreshAfterReview(){
+  location.reload(true);
+}
 
 
 $("#btnWhatstheMove").click(function(){
