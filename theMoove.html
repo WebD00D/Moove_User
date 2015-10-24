@@ -12,72 +12,81 @@
   <script src="https://use.typekit.net/fpd5bbp.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
  </head>
- <body>
+ <body style='background-color:black'>
 
-   <nav role="navigation" style="background-color:white">
-    <div class="nav-wrapper container"><a id="logo-container" style="font-family:'brandon-grotesque';font-weight:700;" href="#" class="brand-logo light-blue-text"> Moove</a>
+   <div class="navbar-fixed">
+   <nav role="navigation" class='grey darken-4'>
+    <div class="nav-wrapper container"><a id="logo-container" style="font-family:'brandon-grotesque';font-weight:700;color:#ED4877" href="#" class="brand-logo"> Moove</a>
       <ul class="right hide-on-med-and-down">
+          <li><a style="color:#ED4877" class="nicefont " href="index.html">Choose Location</a></li>
+          <li><a  style="color:#ED4877" class="nicefont " href="#">So what's the Moove?</a></li>
 
-          <li><a class="nicefont" href="#">So what's the Moove?</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav ">
-              <li><a class="nicefont" href="#">So what's the Moove?</a></li>
+        <li><a style="color:#ED4877" class="nicefont " href="index.html">Choose Location</a></li>
+        <li><a  style="color:#ED4877" class="nicefont" href="#">So what's the Moove?</a></li>
       </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+</div>
+
 
   <div class="section no-pad-bot mainview" id="index-banner">
     <div class="container">
-      <div class="row">
+      <div class="row destinations">
 
-      <div class="col s12 m6 l6">
-       <div class="card-panel white">
-         <span class="black-text">
-          <b>Southern Railway TapHouse</b>
-          <span class="right black-text" style="padding-left:15px"> 2 <i class="fa fa-thumbs-o-down red-text"></i> </span>
-          <span class="right"> 15 <i class="fa fa-thumbs-o-up green-text"></i> </span>
-         </span>
-         <hr>
-         <ul class="collection">
-           <li class="collection-item" style='text-align:justify'><i class="fa fa-quote-left"></i>
-             The ratio is on POINT! Make the Moove doods! Like it is so awesome in here. Like so awesome.
-           </li>
-           <li class="collection-item" style='text-align:justify'><i class="fa fa-quote-left"></i>
-             The ratio is on POINT! Make the Moove doods! Like it is so awesome in here. Like so awesome.
-           </li>
-           <li class="collection-item" style='text-align:justify'><i class="fa fa-quote-left"></i>
-             The ratio is on POINT! Make the Moove doods! Like it is so awesome in here. Like so awesome.
-           </li>
 
-   </ul>
 
-          <div class="center-align blue-text" style="background-color:#22313f;;padding:10px;">
-            Made the Moove?
-          </div>
 
-         <div class="center-align" style="background-color:#eeeeee;padding-top:5px">
-           <img height="15px" src="http://uber-codes.com/images/SIGN-UP-HERE-FOR-UBER.png">
-           <Br>
-           <span class="blue-text"><span style="color:#22313f"><b>FAIR ESTIMATES</b></span></span>
-           <br>
-           <span class="blue-text" style="font-size:larger"><span style="color:#22313f"><i class="fa fa-money"></i></span> $16-34 <span style="color:#22313f"><i class="fa fa-clock-o"></i></span> 6 min</span>
-         </div>
-       </div>
-     </div>
+
+
 
       </div>
    </div>
  </div>
 
 
+ <!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet" style="height:200px">
+  <div class="modal-content center-align" style="padding:10px">
+    <p class='center-align nicefont' style="font-size:larger">How is Southern Railway Tap House?</p>
+
+    <div class="input-field col s6 l6">
+         <input id="input_text" type="text" length="60">
+         <label for="input_text">Optional blurb..</label>
+       </div>
+
+    <a href="#!" style="margin-right:10px"  class=" modal-action modal-close waves-effect waves-light btn-flat red lighten-1 center-align white-text left"><i class="fa fa-thumbs-o-down white-text"></i> Moove On</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat  green lighten-1 center-align white-text left"><i class="fa fa-thumbs-o-up white-text"></i> Make Mooves</a>
+    <Br>
+
+  </div>
+
+
+</div>
 
 
 
    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-  <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
+   <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
+   <script src="js/url.js"></script>
    <script src="js/moove.js"></script>
+
+   <script>
+
+    $(document).ready(function(){
+
+      var selectedLocation = url('?location');
+      findByLocations(selectedLocation);
+
+    })
+
+   </script>
+
+
+
  </body>
 </html>
