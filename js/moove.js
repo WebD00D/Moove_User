@@ -18,42 +18,42 @@
 })(jQuery); // end of jQuery name space
 
 
+var LocalDestinations = [];
 
 function findByLocations(area){
   $(".destinations").empty();
   var Destinations = Parse.Object.extend("Destinations");
   var query = new Parse.Query(Destinations);
   query.equalTo("Area", area);
-  query.limit(100);
+  query.descending("MooveCount");
   query.find({
   success: function(results) {
-    alert(results.length);
+
     for (var i = 0; i < results.length; i++) {
     var object = results[i];
     var name = object.get('Name');
-    DestinationID = object.id;
+    var MooveCount = object.get('MooveCount');
+    var MooveOnCount = object.get('MooveOnCount');
 
-    var theNumber = GetLatestReviews(DestinationID);
+    LocalDestinations.push(object.id)
 
 
-    var reviewList =   " <li class='collection-item' style='text-align:justify;'><i class='fa fa-quote-left pink-text'></i> " +
-    "     The ratio is on POINT! "+ theNumber +" Make the Moove doods! Like it is so awesome in here. Like so awesome. " +
-    "     <Br> " +
-    "  <small class='pink-text'>-- 5 min ago...</small> " +
-    "   </li> "
-
+    if (typeof MooveCount === 'undefined' ){
+      MooveCount = 0;
+    }
+    if (typeof MooveOnCount === 'undefined' ){
+      MooveOnCount = 0;
+    }
 
     var content = "<div class='col s12 m6 l6'>" +
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
       "  <span > " +
       "  <b style='color:#ED4877;padding-left:15px;font-size:x-large'>"+ name +"</b> " +
-      "  <span class='right black-text' style='padding-left:15px;padding-right:15px;padding-top:7px;font-size:larger'> " + 46 + " <i class='fa fa-thumbs-o-down red-text'></i> </span> " +
-      "  <span class='right' style='padding-top:7px;font-size:larger'> "+ 123 +" <i class='fa fa-thumbs-o-up green-text'></i> </span> " +
+      "  <span class='right black-text' style='padding-left:15px;padding-right:15px;padding-top:7px;font-size:larger'> " + MooveOnCount + " <i class='fa fa-thumbs-o-down red-text'></i> </span> " +
+      "  <span class='right' style='padding-top:7px;font-size:larger'> "+ MooveCount +" <i class='fa fa-thumbs-o-up green-text'></i> </span> " +
       " </span> " +
 
-      " <ul class='collection' style='margin-top:0px;margin-bottom:0px'> " +
-        reviewList +
-      " </ul> " +
+      " <ul id="+ object.id +" class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
 
       " <div class='center-align' style='background-color:#eeeeee;padding-top:10px;padding-bottom:5px'> " +
       "   <img height='15px' src='http://uber-codes.com/images/SIGN-UP-HERE-FOR-UBER.png'> " +
@@ -62,8 +62,8 @@ function findByLocations(area){
       "   <br> " +
       "   <span style='font-size:larger'><span style='color:#ED4877'><i class='fa fa-usd'></i></span>16-34 <span style='color:#ED4877'><i  style='color:#ED4877' class='fa fa-clock-o'></i></span> 6 min</span> " +
       "  </div> " +
-      " <div class='center-align  mademoove' style='background-color:#22313f;padding:10px;'> " +
-      "    <a style='color:white'>Made the Moove?</a> " +
+      " <div data-objectid="+ object.id +" class='center-align  mademoove' style='background-color:#22313f;padding:10px;'> " +
+      "    <a  style='color:white'>Made the Moove?</a> " +
       " </div> " +
       " </div> " +
       " </div> " +
@@ -71,31 +71,57 @@ function findByLocations(area){
       $(content).appendTo(".destinations");
 
   }
+
+    LoadReviews()
+
  },
   error: function(error) {
   alert("Error: " + error.code + " " + error.message);
   }
-});
+
+
+  });
+
+
 }
 
-function GetLatestReviews(DestinationID){
-  var Review = Parse.Object.extend("Reviews");
-  var query = new Parse.Query(Review);
-  query.equalTo("DestinationID", DestinationID);
-  query.find({
-  success: function(results) {
-    alert("Successfully retrieved " + results.length + " reviews.");
-    // Do something with the returned Parse.Object values
-    for (var i = 0; i < results.length; i++) {
-      var object = results[i];
-      return object;
-    }
-  },
-  error: function(error) {
-    alert("Error: " + error.code + " " + error.message);
+
+  function LoadReviews(){
+
+    $.each(LocalDestinations, function( index, value ) {
+      var theID = LocalDestinations[index];
+      var Review = Parse.Object.extend("Reviews");
+      var query = new Parse.Query(Review);
+      query.equalTo("DestinationID", theID);
+      query.limit(3);
+      query.find({
+      success: function(results) {
+        if (results.length > 0){
+          for (var i = 0; i < results.length; i++) {
+            var object = results[i];
+            var listitem =  " <li class='collection-item' style='text-align:justify;'><i class='fa fa-quote-left pink-text'></i> " +
+              object.get('Review') + ' ' +
+             "     <Br> " +
+             "  <small class='pink-text'>-- 5 min ago...</small> " +
+             "   </li> "
+            $(listitem).appendTo("#"+theID);
+          }
+
+        }
+
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+
+
+
+  });
+
   }
-});
-}
+
+
 
 
 
@@ -162,9 +188,26 @@ $(".destinations").delegate(".mademoove","mouseout",function(){
 })
 $(".destinations").delegate(".mademoove","click",function(){
   $('#modal1').openModal();
+  var location = $(this).attr('data-objectid');
+  $("#btnMooveOn").attr('data-objectid',location);
+  $("#btnMakeMooves").attr('data-objectid',location);
 })
 
 
+
+$("#btnMooveOn").click(function(){
+  var location = $(this).attr("data-objectid");
+  //need to save a the review if its not empty, and has met the length requirements.
+  // if no review , then just need to update the counter for Moove On
+  // Refresh to show the data.
+})
+
+$("#btnMakeMooves").click(function(){
+  var location = $(this).attr("data-objectid");
+  //need to save a the review if its not empty, and has met the length requirements.
+  // if no review , then just need to update the counter for Moove On
+  // Refresh to show the data.
+})
 
 
 $("#btnWhatstheMove").click(function(){
