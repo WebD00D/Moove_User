@@ -68,7 +68,7 @@ function findByLocations(area){
     console.log("DESTINATION " + DestinationLatitude + ' ' + DestinationLongitude);
     console.log("USER " + userLatitude + ' ' + userLongitude);
 
-    uberEstimate.push(getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude);
+    uberEstimate.push(getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude));
     console.log("UBER ESTIMATES ARRAY:" + uberEstimate);
     LocalDestinations.push(object.id)
 
