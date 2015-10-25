@@ -40,8 +40,14 @@ function findByLocations(area){
     var DestinationLongitude = object.get('Longitude');
 
     console.log(DestinationLatitude + ' ' + DestinationLongitude);
-  //  uberEstimate = GetCurrentLocation(DestinationLatitude,DestinationLongitude);
-  //  console.log("UBER ESTIMATE: " + uberEstimate);
+
+    navigator.geolocation.watchPosition(function(position) {
+      // Update latitude and longitude
+      userLatitude = position.coords.latitude;
+      userLongitude = position.coords.longitude;
+    });
+
+    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude);
 
     LocalDestinations.push(object.id)
 
