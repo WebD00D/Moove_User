@@ -17,6 +17,7 @@
       }); // end of document ready
 })(jQuery); // end of jQuery name space
 
+GetCurrentLocation();
 
 var LocalDestinations = [];
 
@@ -44,6 +45,8 @@ function findByLocations(area){
     if (typeof MooveOnCount === 'undefined' ){
       MooveOnCount = 0;
     }
+
+
 
     var content = "<div class='col s12 m6 l6'>" +
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
@@ -84,6 +87,11 @@ function findByLocations(area){
 
 
 }
+
+
+  function getUberPriceEstimate(){
+
+  }
 
 
   function LoadReviews(){
