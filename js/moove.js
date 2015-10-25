@@ -39,8 +39,9 @@ function findByLocations(area){
     var DestinationLatitude = object.get('Latitude');
     var DestinationLongitude = object.get('Longitude');
 
-    uberEstimate = GetCurrentLocation(DestinationLatitude,DestinationLongitude);
-    console.log("UBER ESTIMATE: " + uberEstimate);
+    console.log(DestinationLatitude + ' ' + DestinationLongitude);
+  //  uberEstimate = GetCurrentLocation(DestinationLatitude,DestinationLongitude);
+  //  console.log("UBER ESTIMATE: " + uberEstimate);
 
     LocalDestinations.push(object.id)
 
@@ -176,7 +177,7 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
           console.log("IN " + Math.ceil(shortest.duration / 60.0) + " MIN");
         }
 
-        return data[0];
+        console.log("Logging Returned UBER Data " + data[0]);
     }
   }
 })
@@ -189,7 +190,7 @@ function GetCurrentLocation(latEnd, longEnd){
       // Update latitude and longitude
       userLatitude = position.coords.latitude;
       userLongitude = position.coords.longitude;
-      return getEstimatesForUserLocation(userLatitude, userLongitude);
+      getEstimatesForUserLocation(userLatitude, userLongitude);
    });
 }
 
