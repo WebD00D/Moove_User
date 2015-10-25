@@ -7,9 +7,14 @@
   var userLatitude,
       userLongitude;
 
+      gettheLocation();
+
+
+  var theLocation = url('?location');
+
+
 (function($){
   $(function(){
-
      $('.button-collapse').sideNav();
      $('select').material_select();
       $('.modal-trigger').leanModal();
@@ -17,6 +22,27 @@
       }); // end of document ready
 })(jQuery); // end of jQuery name space
 
+
+
+
+function gettheLocation(){
+
+  navigator.geolocation.watchPosition(function(position) {
+    // Update latitude and longitude
+    userLatitude = position.coords.latitude;
+    userLongitude = position.coords.longitude;
+  });
+
+  if(typeof userLatitude === 'undefined' || typeof userLongitude === 'undefined') {
+     console.log('waiting for location');
+     setTimeout(function(){ gettheLocation(); }, 500); // Try to submit form after timeout
+     return false;
+   } else {
+     // Continue with location found...
+        console.log('found the location: ' + userLatitude + ' ,' + userLongitude);
+        findByLocations(theLocation);
+   }
+}
 
 
 var LocalDestinations = [];
@@ -40,14 +66,7 @@ function findByLocations(area){
     var DestinationLongitude = object.get('Longitude');
 
     console.log("DESTINATION " + DestinationLatitude + ' ' + DestinationLongitude);
-
-    navigator.geolocation.watchPosition(function(position) {
-      // Update latitude and longitude
-      userLatitude = position.coords.latitude;
-      userLongitude = position.coords.longitude;
-    });
-
-      console.log("USER " + userLatitude + ' ' + userLongitude);
+    console.log("USER " + userLatitude + ' ' + userLongitude);
 
     getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude);
 
