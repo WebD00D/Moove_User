@@ -62,7 +62,7 @@ function findByLocations(area){
       "   <br> " +
       "   <span style='font-size:larger'><span style='color:#ED4877'><i class='fa fa-usd'></i></span>16-34 <span style='color:#ED4877'><i  style='color:#ED4877' class='fa fa-clock-o'></i></span> 6 min</span> " +
       "  </div> " +
-      " <div data-objectid="+ object.id +" class='center-align  mademoove' style='background-color:#22313f;padding:10px;'> " +
+      " <div data-name='"+ name +"' data-objectid="+ object.id +" class='center-align  mademoove' style='background-color:#22313f;padding:10px;'> " +
       "    <a  style='color:white'>Made the Moove?</a> " +
       " </div> " +
       " </div> " +
@@ -94,6 +94,7 @@ function findByLocations(area){
       var Review = Parse.Object.extend("Reviews");
       var query = new Parse.Query(Review);
       query.equalTo("DestinationID", theID);
+      query.descending("createdAt");
       query.limit(3);
       query.find({
       success: function(results) {
@@ -192,6 +193,7 @@ $(".destinations").delegate(".mademoove","click",function(){
   var location = $(this).attr('data-objectid');
   $("#btnMooveOn").attr('data-objectid',location);
   $("#btnMakeMooves").attr('data-objectid',location);
+  $("#mDestinationName").text($(this).attr('data-name'));
 })
 
 
@@ -200,21 +202,76 @@ $("#btnMooveOn").click(function(e){
   e.preventDefault()
   var location = $(this).attr("data-objectid");
   //need to save a the review if its not empty, and has met the length requirements.
+  var review = $("#input_text").val();
+  if (review.length > 0){
+    if (review.length > 60){
+      return
+    } else {
+      //save the review to the database.
+      saveReview(location,review);
+    }
+  }
   // if no review , then just need to update the counter for Moove On
   // Refresh to show the data.
   incrementTotals("MooveOnCount",location);
-  refreshAfterReview();
+
+
 })
 
 $("#btnMakeMooves").click(function(e){
   e.preventDefault();
   var location = $(this).attr("data-objectid");
-  //need to save a the review if its not empty, and has met the length requirements.
-  // if no review , then just need to update the counter for Moove On
-  // Refresh to show the data.
+  var review = $("#input_text").val();
+  if (review.length > 0){
+    if (review.length > 60){
+      return
+    } else {
+      //save the review to the database.
+      saveReview(location,review);
+    }
+  }
   incrementTotals("MooveCount",location);
-  refreshAfterReview();
+
 })
+
+function saveReview(destination,reviewz){
+
+var currentdate = new Date();
+var datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+
+  //var Review = Parse.Object.extend("Reviews");
+  //var review = new Review();
+  //review.set("DestinationID", destination);
+  //review.set("Review", review);
+  //review.save("ReviewTime",datetime);
+
+  var GameScore = Parse.Object.extend("Reviews");
+  var gameScore = new GameScore();
+
+  gameScore.save({
+  DestinationID: destination,
+  Review: reviewz,
+
+
+}, {
+  success: function(gameScore) {
+    // The object was saved successfully.
+  },
+  error: function(gameScore, error) {
+    // The save failed.
+    // error is a Parse.Error with an error code and message.
+    console.log(error.message);
+  }
+});
+
+
+
+}
 
 function incrementTotals(Kind,LocationID){
 
