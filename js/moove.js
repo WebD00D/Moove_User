@@ -68,8 +68,8 @@ function findByLocations(area){
     console.log("DESTINATION " + DestinationLatitude + ' ' + DestinationLongitude);
     console.log("USER " + userLatitude + ' ' + userLongitude);
 
-    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude);
-
+    uberEstimate.push(getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude);
+    console.log("UBER ESTIMATES ARRAY:" + uberEstimate);
     LocalDestinations.push(object.id)
 
 
@@ -200,10 +200,11 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
         console.log(shortest.estimate);
 
         if (typeof shortest != typeof undefined) {
-          console.log("Updating time estimate...");
+
           console.log("IN " + Math.ceil(shortest.duration / 60.0) + " MIN");
         }
 
+        return shortest;
         //console.log("Logging Returned UBER Data " + data[0]);
     }
   }
