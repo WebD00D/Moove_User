@@ -17,9 +17,10 @@
       }); // end of document ready
 })(jQuery); // end of jQuery name space
 
-GetCurrentLocation();
+
 
 var LocalDestinations = [];
+var uberEstimate = [];
 
 function findByLocations(area){
   $(".destinations").empty();
@@ -35,6 +36,11 @@ function findByLocations(area){
     var name = object.get('Name');
     var MooveCount = object.get('MooveCount');
     var MooveOnCount = object.get('MooveOnCount');
+    var DestinationLatitude = object.get('Latitude');
+    var DestinationLongitude = object.get('Longitude');
+
+    uberEstimate = GetCurrentLocation(DestinationLatitude,DestinationLongitude);
+    console.log("UBER ESTIMATE: " + uberEstimate);
 
     LocalDestinations.push(object.id)
 
@@ -89,9 +95,6 @@ function findByLocations(area){
 }
 
 
-  function getUberPriceEstimate(){
-
-  }
 
 
   function LoadReviews(){
@@ -137,13 +140,13 @@ function findByLocations(area){
 
 
 
-var partyLatitude = 37.5553965;
-var partyLongitude = -77.4870686;
+
+
 
 //https://api.uber.com/v1/estimates/price?start_latitude=37.625732&
 //start_longitude=-122.377807&end_latitude=37.785114&end_longitude=-122.406677&server_token=isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE
 
-function getEstimatesForUserLocation(latitude,longitude) {
+function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude) {
   $.ajax({
     url: "https://api.uber.com/v1/estimates/price",
     headers: {
@@ -152,8 +155,8 @@ function getEstimatesForUserLocation(latitude,longitude) {
     data: {
       start_latitude: latitude,
       start_longitude: longitude,
-      end_latitude: partyLatitude,
-      end_longitude: partyLongitude
+      end_latitude: endLatitude,
+      end_longitude: endLongitude
     },
     success: function(result) {
       console.log(result);
@@ -172,6 +175,8 @@ function getEstimatesForUserLocation(latitude,longitude) {
           console.log("Updating time estimate...");
           console.log("IN " + Math.ceil(shortest.duration / 60.0) + " MIN");
         }
+
+        return data[0];
     }
   }
 })
@@ -179,12 +184,12 @@ function getEstimatesForUserLocation(latitude,longitude) {
 
 
 
-function GetCurrentLocation(){
+function GetCurrentLocation(latEnd, longEnd){
   navigator.geolocation.watchPosition(function(position) {
       // Update latitude and longitude
       userLatitude = position.coords.latitude;
       userLongitude = position.coords.longitude;
-      getEstimatesForUserLocation(userLatitude, userLongitude);
+      return getEstimatesForUserLocation(userLatitude, userLongitude);
    });
 }
 
