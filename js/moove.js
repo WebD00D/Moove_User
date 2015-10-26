@@ -138,6 +138,7 @@ function findByLocations(area){
       query.limit(3);
       query.find({
       success: function(results) {
+
         if (results.length > 0){
           for (var i = 0; i < results.length; i++) {
             var object = results[i];
@@ -148,8 +149,11 @@ function findByLocations(area){
              "   </li> "
             $(listitem).appendTo("#"+theID);
           }
+          LoadUberFairs();
+        } else {
+          LoadUberFairs();
         }
-        LoadUberFairs();
+
       },
       error: function(error) {
         alert("Error: " + error.code + " " + error.message);
