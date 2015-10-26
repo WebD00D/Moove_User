@@ -110,8 +110,9 @@ function findByLocations(area){
       $(content).appendTo(".destinations");
 
   }
-
+    LoadUberFairs();
     LoadReviews();
+
 
 
  },
@@ -149,9 +150,6 @@ function findByLocations(area){
              "   </li> "
             $(listitem).appendTo("#"+theID);
           }
-          LoadUberFairs();
-        } else {
-          LoadUberFairs();
         }
 
       },
@@ -166,19 +164,16 @@ function findByLocations(area){
   function LoadUberFairs(){
     for (var i = 0; i < uberEstimates.length; i++){
 
-      var estimateID = uberEstimates[i][2]
-      var timeID = uberEstimates[i][3]
-      var theEstimate =  uberEstimates[i][0]
-      var theTime = uberEstimates[i][1]
+      var estimateID = uberEstimates[i][2];
+      var timeID = uberEstimates[i][3];
+      var theEstimate =  uberEstimates[i][0];
+      var theTime = uberEstimates[i][1] ;
       console.log("TIMEID:" + timeID +"Time: " + theTime + " Estimate: " + theEstimate);
       $("#"+estimateID).text(theEstimate);
       $("#"+timeID).text(theTime);
     }
 
   } // end Load Uber Fairs
-
-
-
 
 
 
