@@ -40,8 +40,10 @@ function gettheLocation(){
      return false;
    } else {
      // Continue with location found...
+
         console.log('found the location: ' + userLatitude + ' ,' + userLongitude);
         findByLocations(theLocation);
+        $("#loadingMooves").hide();
 
    }
 }
