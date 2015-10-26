@@ -16,6 +16,7 @@
 (function($){
   $(function(){
      $('.button-collapse').sideNav();
+      $('.parallax').parallax();
      $('select').material_select();
       $('.modal-trigger').leanModal();
 
@@ -46,7 +47,7 @@ function gettheLocation(){
 
 
 var LocalDestinations = [];
-var uberEstimate = [];
+var uberEstimates = [];
 
 function findByLocations(area){
   $(".destinations").empty();
@@ -69,7 +70,7 @@ function findByLocations(area){
     console.log("USER " + userLatitude + ' ' + userLongitude);
 
     //TO DO: Get this data returned so we can parse through and set the html up
-    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude));
+    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude);
 
     LocalDestinations.push(object.id)
 
@@ -110,7 +111,8 @@ function findByLocations(area){
 
   }
 
-    LoadReviews()
+    LoadReviews();
+    LoadUberFairs();
 
  },
   error: function(error) {
@@ -123,6 +125,10 @@ function findByLocations(area){
 
 }
 
+
+  function LoadUberFairs(){
+    console.log("UBER ESTIMATES ARRAY " + uberEstimates);
+  }
 
 
 
@@ -169,9 +175,6 @@ function findByLocations(area){
 
 
 
-
-
-
 //https://api.uber.com/v1/estimates/price?start_latitude=37.625732&
 //start_longitude=-122.377807&end_latitude=37.785114&end_longitude=-122.406677&server_token=isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE
 
@@ -205,7 +208,8 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
           console.log("IN " + Math.ceil(shortest.duration / 60.0) + " MIN");
         }
 
-        return shortest;
+        var uberStuff = [shortest.estimate,shortest.duration / 60.0];
+        uberEstimates.push(uberStuff);
         //console.log("Logging Returned UBER Data " + data[0]);
     }
   }

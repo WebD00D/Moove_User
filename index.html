@@ -11,43 +11,57 @@
   <script src="https://use.typekit.net/fpd5bbp.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
  </head>
- <body>
+ <body style='background-color:black'>
 
-   <nav role="navigation" style="background-color:white">
-    <div class="nav-wrapper container"><a id="logo-container" style="font-family:'brandon-grotesque';font-weight:700;" href="#" class="brand-logo light-blue-text"> Moove</a>
+   <div class="navbar-fixed">
+   <nav role="navigation" class='grey darken-4'>
+    <div class="nav-wrapper container"><a id="logo-container" style="font-family:'brandon-grotesque';font-weight:700;color:#ED4877" href="#" class="brand-logo"> Moove</a>
       <ul class="right hide-on-med-and-down">
 
-          <li><a class="nicefont" href="#">So what's the Moove?</a></li>
+          <li><a  style="color:#ED4877" class="nicefont " href="#">So what's the Moove?</a></li>
+
       </ul>
 
       <ul id="nav-mobile" class="side-nav ">
-              <li><a class="nicefont" href="#">So what's the Moove?</a></li>
+        <li><a style="color:#ED4877" class="nicefont " href="index.html">Choose Location</a></li>
+        <li><a  style="color:#ED4877" class="nicefont" href="#">So what's the Moove?</a></li>
       </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+</div>
 
-  <div class="section no-pad-bot mainview" id="index-banner">
-    <div class="container">
-      <div class="row">
-        <h4 class="nicefont center-align">Welcome to Moove</h4>
-        <h5 class="nicefont center-align">We make deciding where to spend your night out on the town easy.
-        </h5>
-        <Br>
-        <p class="left-align" style="padding-left:10px">Where are you are looking to make mooves?</p>
-         <div class="input-field col s12" >
-           <select id="ddlLocationSelect">
-             <option value="">No location selected</option>
-             <option value="VCU/Fan">The Fan/VCU</option>
-             <option value="Bottom">The Bottom</option>
-           </select>
-           <label>Let's make mooves to...</label>
-           <Br>
-             <button id="btnWhatstheMove" class="btn waves-effect waves-light  right light-blue" type="submit" name="action">Find Mooves</button>
-           </div>
-         </div>
-       </div>
+<div id="index-banner" class="parallax-container" style="height:100vh">
+ <div class="section no-pad-bot">
+   <div class="container">
+     <br><br>
+
+     <div class="row center" style="margin-top:10%">
+       <h5 class="nicefont center-align white-text">We make deciding where to spend your night out on the town easy.
+       </h5>
      </div>
+     <div class="row center">
+       <p class="center-align" style="color:white">Where are you are looking to make mooves?</p>
+        <div class="input-field col l6 offset-l3 s12" >
+          <select id="ddlLocationSelect" class="browser-default" >
+            <option  value="">No location selected</option>
+            <option value="VCU/Fan">The Fan/VCU</option>
+            <option  value="Bottom">The Bottom</option>
+          </select>
+
+          <Br>
+            <button id="btnWhatstheMove" style="background-color:#ED4877" class="btn waves-effect waves-light  center " type="submit" name="action">Find Mooves</button>
+          </div>
+     </div>
+     <br><br>
+
+   </div>
+ </div>
+
+</div>
+
+
+
 
 
 
@@ -56,6 +70,7 @@
    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
   <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
+  <script src="js/url.js"></script>
    <script src="js/moove.js"></script>
 
  </body>
