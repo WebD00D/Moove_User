@@ -94,7 +94,7 @@ function findByLocations(area){
       "   <Br> " +
       "   <span><span style='color:#22313f'><b>FAIR ESTIMATES</b></span></span> " +
       "   <br> " +
-      "   <span style='font-size:larger'><span style='color:#ED4877'><i class='fa fa-money'></i></span><span id="+ 'eUBER'+ object.id + "></span> <span style='color:#ED4877'><i  style='color:#ED4877' class='fa fa-clock-o'></i></span> <span id="+ 'dUBER'+ object.id + "></span> " +
+      "   <span style='font-size:larger'><span style='color:#ED4877'><i class='fa fa-money'></i></span> <span id="+ 'eUBER'+ object.id + "></span> <span style='color:#ED4877'><i  style='color:#ED4877' class='fa fa-clock-o'></i></span> <span id="+ 'dUBER'+ object.id + " min.></span> " +
       "  </div> " +
       " <div data-name='"+ name +"' data-objectid="+ object.id +" class='center-align  mademoove' style='background-color:#22313f;padding:10px;'> " +
       "    <a  style='color:white'>Made the Moove?</a> " +
