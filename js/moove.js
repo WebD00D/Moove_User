@@ -167,10 +167,11 @@ function findByLocations(area){
   }
 
   function LoadUberFairs(){
-    console.log("inside Uber Fairs");
-    $.each(uberEstimates, function( index, value ) {
 
+    $.each(uberEstimates, function( index, value ) {
+      console.log("inside Uber Fairs");
       var estimateID = uberEstimates[index][2]
+      console.log(estimateID);
       var timeID = uberEstimates[index][3]
       var theEstimate = "<span>" + uberEstimates[index][0] + "</span>"
       var theTime = "<span>" +  uberEstimates[index][1] + "</span>"
