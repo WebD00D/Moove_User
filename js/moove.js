@@ -68,11 +68,9 @@ function findByLocations(area){
     var DestinationLongitude = object.get('Longitude');
 
     //TO DO: Get this data returned so we can parse through and set the html up
-    LoadReviews();
-
+    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
 
     LocalDestinations.push(object.id)
-
 
     if (typeof MooveCount === 'undefined' ){
       MooveCount = 0;
@@ -80,7 +78,7 @@ function findByLocations(area){
     if (typeof MooveOnCount === 'undefined' ){
       MooveOnCount = 0;
     }
-
+    console.log("about to log content");
     var content = "<div class='col s12 m6 l6'>" +
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
       "  <span > " +
@@ -106,11 +104,9 @@ function findByLocations(area){
 
       $(content).appendTo(".destinations");
 
-      getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
-
   }
 
-
+    LoadReviews();
 
  },
   error: function(error) {
@@ -123,12 +119,7 @@ function findByLocations(area){
 
 }
 
-
-
   function LoadReviews(){
-
-
-
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
       console.log("DESTINATION ID: " + theID);
