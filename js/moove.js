@@ -210,7 +210,7 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
         var estimateID = "eUBER"+obj;
         var timeID = "dUBER"+obj;
         var theEstimate = shortest.estimate;
-        var theTime = shortest.duration;
+        var theTime = Math.ceil(shortest.duration / 60.0);
         $("#"+estimateID).text(theEstimate);
         $("#"+timeID).text(theTime);
         //console.log("Logging Returned UBER Data " + data[0]);
