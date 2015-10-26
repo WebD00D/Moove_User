@@ -169,6 +169,8 @@ function findByLocations(area){
 
         }
 
+        LoadUberFairs();
+
       },
       error: function(error) {
         alert("Error: " + error.code + " " + error.message);
@@ -177,7 +179,7 @@ function findByLocations(area){
 
   });
 
-    LoadUberFairs();
+
 
   }
 
