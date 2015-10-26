@@ -168,20 +168,17 @@ function findByLocations(area){
 
   function LoadUberFairs(){
 
-    $.each(uberEstimates, function( index, value ) {
-      console.log("inside Uber Fairs");
-      var estimateID = uberEstimates[index][2]
-      console.log(estimateID);
-      var timeID = uberEstimates[index][3]
-      var theEstimate = "<span>" + uberEstimates[index][0] + "</span>"
-      var theTime = "<span>" +  uberEstimates[index][1] + "</span>"
-
+    for (var i = 0; i < uberEstimates.length; i++){
+      var estimateID = uberEstimates[i][2]
+      var timeID = uberEstimates[i][3]
+      var theEstimate =  uberEstimates[i][0]
+      var theTime = uberEstimates[i][1]
       console.log("TIMEID:" + timeID +"Time: " + theTime + " Estimate: " + theEstimate);
+      ("#"+estimateID).text(theEstimate);
+      ("#"+timeID).text(theTime);
+    }
 
-      $(theEstimate).appendTo("#"+estimateID);
-      $(theTime).appendTo("#"+timeID);
 
-    });
   } // end Load Uber Fairs
 
 
