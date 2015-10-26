@@ -226,6 +226,7 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
         }
 
         var uberStuff = [shortest.estimate,shortest.duration / 60.0,"eUBER"+obj,"dUBER"+obj];
+        console.log(uberStuff);
         uberEstimates.push(uberStuff);
         //console.log("Logging Returned UBER Data " + data[0]);
     }
