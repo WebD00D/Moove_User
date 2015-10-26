@@ -113,9 +113,6 @@ function findByLocations(area){
 
     LoadReviews();
 
-
-
-
  },
   error: function(error) {
   alert("Error: " + error.code + " " + error.message);
@@ -131,6 +128,7 @@ function findByLocations(area){
 
   function LoadReviews(){
 
+    console.log("UBER ESTIMATES LENGTH: " + uberEstimates.length);
 
     for (var i = 0; i < uberEstimates.length; i++){
 
@@ -143,6 +141,7 @@ function findByLocations(area){
       $("#"+timeID).text(theTime);
     }
 
+    console.log("UBER ESTIMATES LENGTH AGAIN: " + uberEstimates.length);
 
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
