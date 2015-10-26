@@ -127,9 +127,6 @@ function findByLocations(area){
 
 
 
-
-
-
   function LoadReviews(){
 
     $.each(LocalDestinations, function( index, value ) {
@@ -152,10 +149,10 @@ function findByLocations(area){
              "   </li> "
             $(listitem).appendTo("#"+theID);
           }
-
+          LoadUberFairs();
         }
 
-        LoadUberFairs();
+      //  LoadUberFairs();
 
       },
       error: function(error) {
@@ -177,7 +174,6 @@ function findByLocations(area){
       ("#"+estimateID).text(theEstimate);
       ("#"+timeID).text(theTime);
     }
-
 
   } // end Load Uber Fairs
 
