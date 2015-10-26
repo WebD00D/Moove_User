@@ -42,7 +42,7 @@ function gettheLocation(){
      // Continue with location found...
         console.log('found the location: ' + userLatitude + ' ,' + userLongitude);
         findByLocations(theLocation);
-        LoadUberFairs();
+
    }
 }
 
@@ -68,7 +68,8 @@ function findByLocations(area){
     var DestinationLongitude = object.get('Longitude');
 
     //TO DO: Get this data returned so we can parse through and set the html up
-    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
+    LoadReviews();
+
 
     LocalDestinations.push(object.id)
 
@@ -105,9 +106,11 @@ function findByLocations(area){
 
       $(content).appendTo(".destinations");
 
+      getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
+
   }
 
-    LoadReviews();
+
 
  },
   error: function(error) {
