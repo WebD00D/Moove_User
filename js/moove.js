@@ -66,9 +66,6 @@ function findByLocations(area){
     var DestinationLatitude = object.get('Latitude');
     var DestinationLongitude = object.get('Longitude');
 
-    console.log("DESTINATION " + DestinationLatitude + ' ' + DestinationLongitude);
-    console.log("USER " + userLatitude + ' ' + userLongitude);
-
     //TO DO: Get this data returned so we can parse through and set the html up
     getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
 
@@ -81,8 +78,6 @@ function findByLocations(area){
     if (typeof MooveOnCount === 'undefined' ){
       MooveOnCount = 0;
     }
-
-
 
     var content = "<div class='col s12 m6 l6'>" +
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
