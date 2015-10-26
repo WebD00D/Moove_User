@@ -112,7 +112,7 @@ function findByLocations(area){
   }
 
     LoadReviews();
-    LoadUberFairs();
+
 
 
 
@@ -130,6 +130,19 @@ function findByLocations(area){
 
 
   function LoadReviews(){
+
+
+    for (var i = 0; i < uberEstimates.length; i++){
+
+      var estimateID = uberEstimates[i][2];
+      var timeID = uberEstimates[i][3];
+      var theEstimate =  uberEstimates[i][0];
+      var theTime = uberEstimates[i][1] ;
+      console.log("TIMEID:" + timeID +"Time: " + theTime + " Estimate: " + theEstimate);
+      $("#"+estimateID).text(theEstimate);
+      $("#"+timeID).text(theTime);
+    }
+
 
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
