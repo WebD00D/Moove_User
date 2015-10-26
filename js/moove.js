@@ -110,8 +110,9 @@ function findByLocations(area){
       $(content).appendTo(".destinations");
 
   }
-    LoadUberFairs();
+
     LoadReviews();
+    LoadUberFairs();
 
 
 
