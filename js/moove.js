@@ -145,6 +145,7 @@ function findByLocations(area){
 
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
+      console.log("DESTINATION ID: " + theID);
       var Review = Parse.Object.extend("Reviews");
       var query = new Parse.Query(Review);
       query.equalTo("DestinationID", theID);
