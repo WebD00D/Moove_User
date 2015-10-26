@@ -138,7 +138,6 @@ function findByLocations(area){
       query.limit(3);
       query.find({
       success: function(results) {
-        LoadUberFairs();
         if (results.length > 0){
           for (var i = 0; i < results.length; i++) {
             var object = results[i];
@@ -150,6 +149,7 @@ function findByLocations(area){
             $(listitem).appendTo("#"+theID);
           }
         }
+        LoadUberFairs();
       },
       error: function(error) {
         alert("Error: " + error.code + " " + error.message);
@@ -160,16 +160,15 @@ function findByLocations(area){
   }
 
   function LoadUberFairs(){
-
     for (var i = 0; i < uberEstimates.length; i++){
-      console.log("INSIDE LOAD UBER FAIRS");
+
       var estimateID = uberEstimates[i][2]
       var timeID = uberEstimates[i][3]
       var theEstimate =  uberEstimates[i][0]
       var theTime = uberEstimates[i][1]
       console.log("TIMEID:" + timeID +"Time: " + theTime + " Estimate: " + theEstimate);
-      ("#"+estimateID).text(theEstimate);
-      ("#"+timeID).text(theTime);
+      $("#"+estimateID).text(theEstimate);
+      $("#"+timeID).text(theTime);
     }
 
   } // end Load Uber Fairs
