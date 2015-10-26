@@ -212,7 +212,7 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
         var theEstimate = shortest.estimate;
         var theTime = Math.ceil(shortest.duration / 60.0);
         $("#"+estimateID).text(theEstimate);
-        $("#"+timeID).text(theTime);
+        $("#"+timeID).text(theTime + " min.");
         //console.log("Logging Returned UBER Data " + data[0]);
     }
   }
