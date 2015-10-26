@@ -70,7 +70,7 @@ function findByLocations(area){
     console.log("USER " + userLatitude + ' ' + userLongitude);
 
     //TO DO: Get this data returned so we can parse through and set the html up
-    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude);
+    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
 
     LocalDestinations.push(object.id)
 
@@ -99,7 +99,7 @@ function findByLocations(area){
       "   <Br> " +
       "   <span><span style='color:#22313f'><b>FAIR ESTIMATES</b></span></span> " +
       "   <br> " +
-      "   <span style='font-size:larger'><span style='color:#ED4877'><i class='fa fa-usd'></i></span>16-34 <span style='color:#ED4877'><i  style='color:#ED4877' class='fa fa-clock-o'></i></span> 6 min</span> " +
+      "   <span style='font-size:larger'><span style='color:#ED4877'><i class='fa fa-money'></i></span><span id="+ 'eUBER'+ object.id + "></span> <span style='color:#ED4877'><i  style='color:#ED4877' class='fa fa-clock-o'></i></span> <span id="+ 'dUBER'+ object.id + "></span> " +
       "  </div> " +
       " <div data-name='"+ name +"' data-objectid="+ object.id +" class='center-align  mademoove' style='background-color:#22313f;padding:10px;'> " +
       "    <a  style='color:white'>Made the Moove?</a> " +
@@ -127,8 +127,16 @@ function findByLocations(area){
 
 
   function LoadUberFairs(){
-    console.log("UBER ESTIMATES ARRAY " + uberEstimates);
-  }
+    $.each(uberEstimates, function( index, value ) {
+
+      var estimateID = uberEstimates[index][2]
+      var timeID = ubserEstimates[index][3]
+
+      $("#"+estimateID).text(ubserEstimates[index][0]);
+      $("#"+timeID).text(ubserEstimates[index][1]);
+
+    });
+  } // end Load Uber Fairs
 
 
 
@@ -178,7 +186,7 @@ function findByLocations(area){
 //https://api.uber.com/v1/estimates/price?start_latitude=37.625732&
 //start_longitude=-122.377807&end_latitude=37.785114&end_longitude=-122.406677&server_token=isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE
 
-function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude) {
+function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude,obj) {
   $.ajax({
     url: "https://api.uber.com/v1/estimates/price",
     headers: {
@@ -208,7 +216,7 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
           console.log("IN " + Math.ceil(shortest.duration / 60.0) + " MIN");
         }
 
-        var uberStuff = [shortest.estimate,shortest.duration / 60.0];
+        var uberStuff = [shortest.estimate,shortest.duration / 60.0,"eUBER"+obj,"dUBER"+obj];
         uberEstimates.push(uberStuff);
         //console.log("Logging Returned UBER Data " + data[0]);
     }
