@@ -176,7 +176,7 @@ function findByLocations(area){
       var theEstimate = "<span>" + uberEstimates[index][0] + "</span>"
       var theTime = "<span>" +  uberEstimates[index][1] + "</span>"
 
-      console.log("Time: " + theTime + " Estimate: " + theEstimate);
+      console.log("TIMEID:" + timeID +"Time: " + theTime + " Estimate: " + theEstimate);
 
       $(theEstimate).appendTo("#"+estimateID);
       $(theTime).appendTo("#"+timeID);
