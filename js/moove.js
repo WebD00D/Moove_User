@@ -173,6 +173,7 @@ function findByLocations(area){
 //start_longitude=-122.377807&end_latitude=37.785114&end_longitude=-122.406677&server_token=isuO0uEgbauTgyUDh8-DxGTLmLBWoaEIAePdyIaE
 
 function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude,obj) {
+
   $.ajax({
     url: "https://api.uber.com/v1/estimates/price",
     headers: {
@@ -205,6 +206,13 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
         var uberStuff = [shortest.estimate,shortest.duration / 60.0,"eUBER"+obj,"dUBER"+obj];
         console.log(uberStuff);
         uberEstimates.push(uberStuff);
+
+        var estimateID = "eUBER"+obj;
+        var timeID = "dUBER"+obj;
+        var theEstimate = shortest.estimate;
+        var theTime = shortest.duration;
+        $("#"+estimateID).text(theEstimate);
+        $("#"+timeID).text(theTime);
         //console.log("Logging Returned UBER Data " + data[0]);
     }
   }
