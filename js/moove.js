@@ -112,7 +112,7 @@ function findByLocations(area){
   }
 
     LoadReviews();
-    LoadUberFairs();
+
 
  },
   error: function(error) {
@@ -175,9 +175,9 @@ function findByLocations(area){
       }
     });
 
-
-
   });
+
+    LoadUberFairs();
 
   }
 
