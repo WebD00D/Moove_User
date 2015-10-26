@@ -42,6 +42,7 @@ function gettheLocation(){
      // Continue with location found...
         console.log('found the location: ' + userLatitude + ' ,' + userLongitude);
         findByLocations(theLocation);
+        LoadUberFairs();
    }
 }
 
@@ -123,20 +124,7 @@ function findByLocations(area){
 
   function LoadReviews(){
 
-    console.log("UBER ESTIMATES LENGTH: " + uberEstimates.length);
 
-    for (var i = 0; i < uberEstimates.length; i++){
-
-      var estimateID = uberEstimates[i][2];
-      var timeID = uberEstimates[i][3];
-      var theEstimate =  uberEstimates[i][0];
-      var theTime = uberEstimates[i][1] ;
-      console.log("TIMEID:" + timeID +"Time: " + theTime + " Estimate: " + theEstimate);
-      $("#"+estimateID).text(theEstimate);
-      $("#"+timeID).text(theTime);
-    }
-
-    console.log("UBER ESTIMATES LENGTH AGAIN: " + uberEstimates.length);
 
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
@@ -171,8 +159,8 @@ function findByLocations(area){
   }
 
   function LoadUberFairs(){
+    console.log("UBER ESTIMATES LENGTH: " +uberEstimates.length);
     for (var i = 0; i < uberEstimates.length; i++){
-
       var estimateID = uberEstimates[i][2];
       var timeID = uberEstimates[i][3];
       var theEstimate =  uberEstimates[i][0];
