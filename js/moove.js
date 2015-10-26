@@ -171,14 +171,14 @@ function findByLocations(area){
     $.each(uberEstimates, function( index, value ) {
 
       var estimateID = uberEstimates[index][2]
-      var timeID = ubserEstimates[index][3]
+      var timeID = uberEstimates[index][3]
       var theEstimate = "<span>" + ubserEstimates[index][0] + "</span>"
       var theTime = "<span>" +  ubserEstimates[index][1] + "</span>"
 
       console.log("Time: " + theTime + " Estimate: " + theEstimate);
 
-      //$(theEstimate).appendTo("#"+estimateID);
-      //$(theTime).appendTo("#"+timeID);
+      $(theEstimate).appendTo("#"+estimateID);
+      $(theTime).appendTo("#"+timeID);
 
     });
   } // end Load Uber Fairs
