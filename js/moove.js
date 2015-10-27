@@ -154,6 +154,9 @@ function findByLocations(area){
               reviewHours =  reviewHours - 12;
               timestamp = "PM";
             }
+            if (reviewMinutes < 10){
+              reviewMinutes = 0 + "" + reviewMinutes;
+            }
 
             var listitem =  " <li class='collection-item' style='text-align:justify;'><i class='fa fa-quote-left pink-text'></i> " +
               object.get('Review') + ' ' +
