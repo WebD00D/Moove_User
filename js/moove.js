@@ -389,7 +389,8 @@ function refreshAfterReview(){
 
 $("#btnWhatstheMove").click(function(){
     selectedLocation = $("#ddlLocationSelect option:selected").val();
-    window.location.href = "theMoove.html?location=" + selectedLocation;
+    window.location.href = "https://webD00D.github.io/Moove_User/theMoove.html?location=" + selectedLocation;
+    
 })
 
 $(".dontmove").click(function(e){
