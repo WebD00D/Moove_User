@@ -385,11 +385,19 @@ function incrementTotals(Kind,LocationID){
 
 var Destinations = Parse.Object.extend("Destinations");
 var destinations = new Destinations();
-destinations.id = LocationID;
-destinations.increment(Kind);
-destinations.save();
-alert("saved review");
-refreshAfterReview();
+
+destinations.save(null, {
+  success: function(destinations) {
+    // Now let's update it with some new data. In this case, only cheatMode and score
+    // will get sent to the cloud. playerName hasn't changed.
+    destinations.id = LocationID;
+    destinations.increment(Kind);
+    destinations.save();
+    refreshAfterReview();
+  }
+});
+
+
 
 }
 
