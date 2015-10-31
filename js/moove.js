@@ -368,7 +368,7 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
 
 }, {
   success: function(gameScore) {
-    alert("success");
+
   },
   error: function(gameScore, error) {
     // The save failed.
