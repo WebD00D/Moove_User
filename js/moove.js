@@ -149,43 +149,26 @@ function findByLocations(area){
             var todaysMonth = today.getMonth() +1;
             var todaysday = today.getDate();
 
-            var timestamp = "AM";
-            if (reviewHours > 12){
-              reviewHours =  reviewHours - 12;
-              timestamp = "PM";
-            }
-            if (reviewMinutes < 10){
-              reviewMinutes = 0 + "" + reviewMinutes;
-            }
+            var currentTime = new Date(todaysYear + '/' + todaysMonth + '/' + todaysday + ' ' + today.getHours() + ':' + today.getMinutes());
+            console.log(currentTime);
+            var commentTime = new Date(reviewYear + '/' + reviewMonth + '/' + reviewDay + ' ' + reviewHours + ':' + reviewMinutes);
+            var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
+
+            var resultInMinutes = Math.round(difference / 60000);
+            console.log(resultInMinutes);
+
+
 
             var listitem =  " <li class='collection-item' style='text-align:justify;'><i class='fa fa-quote-left pink-text'></i> " +
               object.get('Review') + ' ' +
              "     <Br> " +
-             "  <small class='pink-text'> at  "+ reviewHours + ':' + reviewMinutes + ' ' + timestamp +"</small> " +
+             "  <small class='pink-text'> " + resultInMinutes +" minutes ago..</small> " +
              "   </li> "
 
-             //if review hours are greater than 6AM today, then show the review. Else, its old.. and doesn't matter.
-             var isGood = 'yes';
-             // 1. Check Year
-            if (reviewYear !== todaysYear){
-               isGood = "no";
-            }
-            // 2. check month
-            if (reviewMonth !== todaysMonth){
-               isGood = "no";
-            }
-             // 3. Check Date
-             if (reviewDay !== todaysday){
-                isGood = "no";
-             }
-              // 4. Check if greater than 6AM
-             if (reviewHours > 6 && timestamp === "AM" ){
-                isGood = "no";
-             }
-             // If all true than append the review.
-             if (isGood !== "no"){
-               $(listitem).appendTo("#"+theID);
-             }
+             $(listitem).appendTo("#"+theID);
+
+
+
 
           }
         }
