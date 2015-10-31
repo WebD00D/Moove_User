@@ -155,17 +155,45 @@ function findByLocations(area){
             var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
 
             var resultInMinutes = Math.round(difference / 60000);
-            console.log(resultInMinutes);
+            console.log('total minutes' + resultInMinutes);
+            console.log('total hours' + Math.floor(resultInMinutes / 60));
+            console.log('remaining minutes' +  resultInMinutes % 60);
 
+
+            var totalhours = Math.floor( resultInMinutes / 60 );
+            var remainingMinutes = resultInMinutes % 60
+
+
+
+            if (totalhours === 0){
+              if (remainingMinutes === 0){
+                timetext = 'just now..' ;
+              } else {
+                timetext = remainingMinutes + ' minutes ago..' ;
+              }
+
+            } else {
+
+              if ( reviewMinutes === 0 ){
+                timetext = totalhours + ' hour ago..';
+              } else {
+                timetext = totalhours + ' hour, ' + remainingMinutes + ' minutes ago..';
+              }
+            }
 
 
             var listitem =  " <li class='collection-item' style='text-align:justify;'><i class='fa fa-quote-left pink-text'></i> " +
               object.get('Review') + ' ' +
              "     <Br> " +
-             "  <small class='pink-text'> " + resultInMinutes +" minutes ago..</small> " +
+             "  <small class='pink-text'> " + timetext + "</small> " +
              "   </li> "
 
-             $(listitem).appendTo("#"+theID);
+
+             if (totalhours <= 24){
+               $(listitem).appendTo("#"+theID);
+             }
+
+
 
 
 
