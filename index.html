@@ -74,7 +74,18 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
   <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
   <script src="js/url.js"></script>
-   <script src="js/moove.js"></script>
+  <script>
+
+  $(document).ready(function(){
+
+    $("#btnWhatstheMove").click(function(){
+        selectedLocation = $("#ddlLocationSelect option:selected").val();
+        window.location.href = "https://webD00D.github.io/Moove_User/theMoove.html?location=" + selectedLocation;
+    })
+
+  })
+
+  </script>
 
  </body>
 </html>
