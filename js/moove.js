@@ -84,7 +84,7 @@ function findByLocations(area){
     var content = "<div class='col s12 m6 l6'>" +
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
       "  <span > " +
-      "  <b style='color:#ED4877;padding-left:15px;font-size:x-large'>"+ name +"</b> " +
+      "  <b style='color:#ED4877;padding-left:15px;font-size:x-large;font-family:Estilo-regular'>"+ name +"</b> " +
       "  <span class='right black-text' style='padding-left:15px;padding-right:15px;padding-top:7px;font-size:larger'> " + MooveOnCount + " <i class='fa fa-thumbs-o-down red-text'></i> </span> " +
       "  <span class='right' style='padding-top:7px;font-size:larger'> "+ MooveCount +" <i class='fa fa-thumbs-o-up green-text'></i> </span> " +
       " </span> " +
