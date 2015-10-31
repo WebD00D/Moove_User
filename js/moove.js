@@ -80,7 +80,7 @@ function findByLocations(area){
     if (typeof MooveOnCount === 'undefined' ){
       MooveOnCount = 0;
     }
-    console.log("about to log content");
+
     var content = "<div class='col s12 m6 l6'>" +
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
       "  <span > " +
@@ -124,7 +124,7 @@ function findByLocations(area){
   function LoadReviews(){
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
-      console.log("DESTINATION ID: " + theID);
+
       var Review = Parse.Object.extend("Reviews");
       var query = new Parse.Query(Review);
       query.equalTo("DestinationID", theID);
@@ -179,7 +179,7 @@ function findByLocations(area){
                 isGood = "no";
              }
               // 4. Check if greater than 6AM
-             if (reviewHours < 6 && timestamp === "AM" ){
+             if (reviewHours > 6 && timestamp === "AM" ){
                 isGood = "no";
              }
              // If all true than append the review.
