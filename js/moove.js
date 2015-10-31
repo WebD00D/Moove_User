@@ -368,12 +368,12 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
 
 }, {
   success: function(gameScore) {
-    // The object was saved successfully.
+    alert("success");
   },
   error: function(gameScore, error) {
     // The save failed.
     // error is a Parse.Error with an error code and message.
-    console.log(error.message);
+    alert(error.message);
   }
 });
 
@@ -388,6 +388,7 @@ var destinations = new Destinations();
 destinations.id = LocationID;
 destinations.increment(Kind);
 destinations.save();
+alert("saved review");
 refreshAfterReview();
 
 }
