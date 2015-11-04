@@ -15,16 +15,20 @@
 
    <div class="navbar-fixed">
    <nav role="navigation" class='grey darken-4'>
-    <div class="nav-wrapper container"><a id="logo-container" style="font-family:'Estilo-regular';font-weight:700;color:#ED4877" href="#" class="brand-logo"> Moove</a>
-      <ul class="right hide-on-med-and-down">
+    <div class="nav-wrapper container"><a id="logo-container" style="font-family:'Estilo-regular';font-weight:700;color:#ED4877" href="#" class="brand-logo">   <img style="margin-top:8%;margin-left:0%" height="50px" src="Moove_Logo2.png"></a>
+      <ul class="right hide-on-med-and-down ">
 
           <li><a  style="color:#ED4877" class="nicefont " href="#">So what's the Moove?</a></li>
 
       </ul>
 
-      <ul id="nav-mobile" class="side-nav " style="background-color:black">
-        <li><a style="color:#ED4877" class="nicefont " href="index.html">Choose Location</a></li>
-        <li><a  style="color:#ED4877" class="nicefont" href="#">So what's the Moove?</a></li>
+      <ul id="nav-mobile" class="side-nav  " style="background-color:black">
+        <img style="margin-top:10%;margin-left:10%" height="70px" src="Moove_Logo2.png">
+        <li><a style="color:#ED4877;font-size:x-large" class="nicefont " href="index.html">Choose Location</a></li>
+        <hr style=";border:none;height:1px;background-color:#ED4877">
+        <li><a  style="color:#ED4877;font-size:x-large" class="nicefont" href="#">Learn More</a></li>
+        <hr style=";border:none;height:1px;background-color:#ED4877">
+        <li><a  style="color:#ED4877;font-size:x-large" class="nicefont" href="#">Support</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
     </div>
@@ -37,21 +41,21 @@
      <br><br>
 
      <div class="row center" style="margin-top:10%">
-       <h5 class="nicefont center-align white-text">We make deciding where to spend your night out on the town easy.
-       </h5>
+       <h4 class="nicefont center-align white-text">Helping you bar-hop one moove at a time.
+       </h4>
      </div>
      <div class="row center">
-       <p class="center-align nicefont" style="color:white;font-size:larger">Where are you are looking to make mooves?</p>
-        <div class="input-field col l6 offset-l3 s12" >
+       <label class="center-align nicefont" style="color:white;font-size:larger">SELECT LOCATION</label>
+       <Br>
+        <div class="input-field col l6 m6 offset-m3 offset-l3 s12" >
           <select id="ddlLocationSelect" class="browser-default" >
-            <option  value="">No location selected</option>
             <option value="VCU/Fan">The Fan/VCU</option>
             <option  value="Bottom">The Bottom</option>
           </select>
 
           <Br>
 
-            <button id="btnWhatstheMove" style="background-color:#ED4877;font-family:'Estilo-regular'" class="btn waves-effect waves-light  center " type="submit" name="action">Find Mooves</button>
+            <button id="btnWhatstheMove" style="background-color:#ED4877;font-family:'Estilo-regular';width:55%;" class="btn waves-effect waves-light  center " type="submit" name="action">Find Mooves</button>
           </div>
 
      </div>
@@ -77,6 +81,7 @@
   <script>
 
   $(document).ready(function(){
+    $('.button-collapse').sideNav();
 
     $("#btnWhatstheMove").click(function(){
         selectedLocation = $("#ddlLocationSelect option:selected").val();
