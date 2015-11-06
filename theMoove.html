@@ -18,31 +18,35 @@
 
    <div class="animsition">
      <div class="navbar-fixed">
-     <nav role="navigation" class='grey darken-4'>
-      <div class="nav-wrapper container"><a id="logo-container" style="font-family:'Estilo-regular';font-weight:700;color:#ED4877" href="#" class="brand-logo">   <img style="margin-top:6%;margin-left:0%" height="50px" src="Moove_Logo2.png"></a>
-        <ul class="right hide-on-med-and-down ">
+       <nav role="navigation"  style="height:90px;background-color:rgba(01,01,01,1.0);box-shadow:none">
+        <div class="nav-wrapper container" >
+          <a id="logo-container" style="font-family:'Estilo-regular';font-weight:700;color:#ED4877" href="#" class="brand-logo hide-on-small-only">   <img style="margin-top:10%;" height="75px" src="MooveBrand.png"></a>
+            <a id="logo-container" style="font-family:'Estilo-regular';font-weight:700;color:#ED4877" href="#" class="brand-logo hide-on-med-and-up">   <img style="margin-top:25%;" height="60px" src="MooveCircle.png"></a>
+          <ul class="right hide-on-med-and-down" style="margin-top:3%">
 
-            <li><a  style="color:#ED4877" class="nicefont " href="#">So what's the Moove?</a></li>
+              <li><a class="white-text" href="index.html" style="font-weight:200">Select Location</a></li>
+              <li><a class="white-text" href="learnmore.html" style="font-weight:200">Learn More</a></li>
+              <li><a class="white-text" href="connect.html" style="font-weight:200">Connect</a></li>
 
-        </ul>
+          </ul>
 
-        <ul id="nav-mobile" class="side-nav  " style="background-color:black">
-          <img style="margin-top:10%;margin-left:10%" height="70px" src="Moove_Logo2.png">
-          <li><a style="color:#ED4877;font-size:x-large" class="nicefont " href="index.html">Choose Location</a></li>
-          <hr style=";border:none;height:1px;background-color:#ED4877">
-          <li><a  style="color:#ED4877;font-size:x-large" class="nicefont" href="#">Learn More</a></li>
-          <hr style=";border:none;height:1px;background-color:#ED4877">
-          <li><a  style="color:#ED4877;font-size:x-large" class="nicefont" href="#">Support</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
-      </div>
-    </nav>
+          <ul id="nav-mobile" class="side-nav" style="background-color:black">
+            <img style="margin-top:10%;margin-left:10%" height="60px" src="MooveBrand.png">
+            <li><a style="font-size:large;font-weight:200" class="white-text " href="index.html">Select Location</a></li>
+            <hr class="teal" style=";border:none;height:1px;">
+            <li><a style="font-size:large;font-weight:200" class="white-text " href="learnmore.html">Learn More</a></li>
+            <hr class="teal" style=";border:none;height:1px;">
+            <li><a style="font-size:large;font-weight:200" class="white-text " href="connect.html">Connect</a></li>
+          </ul>
+          <a href="#" style="margin-top:5%" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
   </div>
 
 
   <div class="section no-pad-bot mainview" id="index-banner">
     <div class="container">
-      <div class="row destinations left-align">
+      <div class="row destinations left-align" style="margin-top:7%">
 
 
 
@@ -50,7 +54,7 @@
 
 
       </div>
-      <h3 id="loadingMooves" style="color:#ED4877" class="nicefont center-align" href="#">Loading Mooves...</h3>
+      <h3 id="loadingMooves" style="font-weight:200" class="teal-text center-align" href="#">Loading Mooves...</h3>
    </div>
  </div>
 
@@ -61,15 +65,15 @@
  <!-- Modal Structure -->
 <div id="modal1" class="modal bottom-sheet" style="height:200px">
   <div class="modal-content center-align" style="padding:10px">
-    <p class='center-align nicefont' style="font-size:x-large">How is <span id="mDestinationName"></span>?</p>
+    <p class='center-align ' style="font-size:x-large;font-weight:200">How is <span id="mDestinationName"></span>?</p>
 
     <div class="input-field col s6 l6">
          <input id="input_text" type="text" length="60">
          <label for="input_text">Optional blurb..</label>
        </div>
 
-    <a id="btnMooveOn" href="" style="margin-right:10px;"  class=" modal-action modal-close waves-effect waves-light btn-flat grey lighten-2 center-align white-text "><i class="fa fa-thumbs-o-down white-text"></i> Moove On</a>
-    <a id="btnMakeMooves" style="background-color:#ED4877" href="" class="modal-action modal-close waves-effect waves-light btn-flat   center-align white-text "><i class="fa fa-thumbs-o-up white-text"></i> Make Mooves</a>
+    <a id="btnMooveOn" href="" style="margin-right:10px;"  class=" modal-action modal-close waves-effect waves-light btn-flat grey lighten-1 center-align white-text "><i class="fa fa-thumbs-o-down white-text"></i> Moove On</a>
+    <a id="btnMakeMooves" href="" class="modal-action modal-close waves-effect waves-light btn-flat teal   center-align white-text "><i class="fa fa-thumbs-o-up white-text"></i> Make Mooves</a>
     <Br>
 
   </div>
