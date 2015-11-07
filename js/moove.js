@@ -358,19 +358,19 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
   //review.set("Review", review);
   //review.save("ReviewTime",datetime);
 
-  var GameScore = Parse.Object.extend("Reviews");
-  var gameScore = new GameScore();
+  var Review = Parse.Object.extend("Reviews");
+  var review = new Review();
 
-  gameScore.save({
+  review.save({
   DestinationID: destination,
   Review: reviewz,
 
 
 }, {
-  success: function(gameScore) {
+  success: function(review) {
 
   },
-  error: function(gameScore, error) {
+  error: function(review, error) {
     // The save failed.
     // error is a Parse.Error with an error code and message.
     alert(error.message);
@@ -385,17 +385,22 @@ function incrementTotals(Kind,LocationID){
 
 var Destinations = Parse.Object.extend("Destinations");
 var destinations = new Destinations();
-
-destinations.save(null, {
-  success: function(destinations) {
-    // Now let's update it with some new data. In this case, only cheatMode and score
-    // will get sent to the cloud. playerName hasn't changed.
     destinations.id = LocationID;
     destinations.increment(Kind);
     destinations.save();
     refreshAfterReview();
-  }
-});
+
+
+//destinations.save(null, {
+//  success: function(destinations) {
+    // Now let's update it with some new data. In this case, only cheatMode and score
+    // will get sent to the cloud. playerName hasn't changed.
+//    destinations.id = LocationID;
+//    destinations.increment(Kind);
+//    destinations.save();
+//    refreshAfterReview();
+//  }
+//});
 
 
 
