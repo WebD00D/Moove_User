@@ -112,7 +112,7 @@ function findByLocations(area){
 
  },
   error: function(error) {
-  alert("Error: " + error.code + " " + error.message);
+  //alert("Error: " + error.code + " " + error.message);
   }
 
 
@@ -203,7 +203,7 @@ function findByLocations(area){
 
       },
       error: function(error) {
-        alert("Error: " + error.code + " " + error.message);
+        //alert("Error: " + error.code + " " + error.message);
       }
     });
 
@@ -373,7 +373,7 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
   error: function(review, error) {
     // The save failed.
     // error is a Parse.Error with an error code and message.
-    alert(error.message);
+  //  alert(error.message);
   }
 });
 
