@@ -115,10 +115,13 @@ function findByLocations(area){
 
   function LoadReviews(){
 
-    $("ul").empty();
+
+
 
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
+
+
 
       var Review = Parse.Object.extend("Reviews");
       var query = new Parse.Query(Review);
@@ -127,6 +130,8 @@ function findByLocations(area){
       query.limit(3);
       query.find({
       success: function(results) {
+
+        $("#"+theID).empty();
 
         if (results.length > 0){
           for (var i = 0; i < results.length; i++) {
