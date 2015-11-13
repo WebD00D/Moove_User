@@ -7,7 +7,7 @@
   var userLatitude,
       userLongitude;
 
-      gettheLocation();
+      //gettheLocation();
 
 
   var theLocation = url('?location');
