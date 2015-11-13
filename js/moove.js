@@ -116,6 +116,7 @@ function findByLocations(area){
   function LoadReviews(){
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
+      $("#"+theID).empty();
 
       var Review = Parse.Object.extend("Reviews");
       var query = new Parse.Query(Review);
