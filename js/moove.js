@@ -115,11 +115,10 @@ function findByLocations(area){
 
   function LoadReviews(){
 
-    $(".collection").empty();
+    $("ul").empty();
 
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
-
 
       var Review = Parse.Object.extend("Reviews");
       var query = new Parse.Query(Review);
@@ -188,10 +187,6 @@ function findByLocations(area){
              if (totalhours <= 24){
                $(listitem).appendTo("#"+theID);
              }
-
-
-
-
 
 
           }
