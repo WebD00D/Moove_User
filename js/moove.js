@@ -360,9 +360,11 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
 
 }, {
   success: function(review) {
+    alert("success!");
 
   },
   error: function(review, error) {
+    alert("failed:" + error.message);
     // The save failed.
     // error is a Parse.Error with an error code and message.
   //  alert(error.message);
