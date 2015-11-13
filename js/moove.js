@@ -142,14 +142,14 @@ function findByLocations(area){
             var todaysday = today.getDate();
 
             var currentTime = new Date(todaysYear + '/' + todaysMonth + '/' + todaysday + ' ' + today.getHours() + ':' + today.getMinutes());
-            console.log(currentTime);
+          //  console.log(currentTime);
             var commentTime = new Date(reviewYear + '/' + reviewMonth + '/' + reviewDay + ' ' + reviewHours + ':' + reviewMinutes);
             var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
 
             var resultInMinutes = Math.round(difference / 60000);
-            console.log('total minutes' + resultInMinutes);
-            console.log('total hours' + Math.floor(resultInMinutes / 60));
-            console.log('remaining minutes' +  resultInMinutes % 60);
+          //  console.log('total minutes' + resultInMinutes);
+          //  console.log('total hours' + Math.floor(resultInMinutes / 60));
+          //  console.log('remaining minutes' +  resultInMinutes % 60);
 
 
             var totalhours = Math.floor( resultInMinutes / 60 );
@@ -254,7 +254,7 @@ function getEstimatesForUserLocation(latitude,longitude,endLatitude,endLongitude
         }
 
         var uberStuff = [shortest.estimate,shortest.duration / 60.0,"eUBER"+obj,"dUBER"+obj];
-        console.log(uberStuff);
+        //console.log(uberStuff);
         uberEstimates.push(uberStuff);
 
         var estimateID = "eUBER"+obj;
@@ -399,7 +399,7 @@ function refreshAfterReview(){
   //location.reload(true);
   var theLocation = url('?location');
   findByLocations(theLocation);
-  
+
 }
 
 
