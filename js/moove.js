@@ -344,12 +344,6 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
                 + currentdate.getMinutes() + ":"
                 + currentdate.getSeconds();
 
-  //var Review = Parse.Object.extend("Reviews");
-  //var review = new Review();
-  //review.set("DestinationID", destination);
-  //review.set("Review", review);
-  //review.save("ReviewTime",datetime);
-
   var Review = Parse.Object.extend("Reviews");
   var review = new Review();
 
@@ -382,7 +376,7 @@ var destinations = new Destinations();
     destinations.id = LocationID;
     destinations.increment(Kind);
     destinations.save();
-    //refreshAfterReview();
+    refreshAfterReview();
 
 
 //destinations.save(null, {
@@ -402,7 +396,10 @@ var destinations = new Destinations();
 
 
 function refreshAfterReview(){
-  location.reload(true);
+  //location.reload(true);
+  var theLocation = url('?location');
+  findByLocations(theLocation);
+  
 }
 
 
