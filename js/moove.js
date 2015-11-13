@@ -361,6 +361,7 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
 }, {
   success: function(review) {
     console.log("success!");
+    $("#input_text").val('');
 
   },
   error: function(review, error) {
