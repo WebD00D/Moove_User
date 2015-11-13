@@ -59,6 +59,7 @@ function findByLocations(area){
   query.find({
   success: function(results) {
 
+
     for (var i = 0; i < results.length; i++) {
     var object = results[i];
     var name = object.get('Name');
@@ -96,6 +97,7 @@ function findByLocations(area){
       " </div> " +
 
       $(content).appendTo(".destinations");
+
 
   }
 
