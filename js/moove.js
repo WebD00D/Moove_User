@@ -12,7 +12,6 @@
   var theLocation = url('?location');
   findByLocations(theLocation);
 
-
 (function($){
   $(function(){
      $('.button-collapse').sideNav();
@@ -100,6 +99,7 @@ function findByLocations(area){
 
   }
 
+    $("#loadingMooves").hide();
     LoadReviews();
 
  },
