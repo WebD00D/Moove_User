@@ -9,8 +9,8 @@
 
       //gettheLocation();
 
-
   var theLocation = url('?location');
+  findByLocations(theLocation);
 
 
 (function($){
