@@ -65,17 +65,36 @@
 
 
  <!-- Modal Structure -->
-<div id="modal1" class="modal bottom-sheet" style="height:200px">
+<div id="modal1" class="modal bottom-sheet" style="height:300px">
   <div class="modal-content center-align" style="padding:10px">
     <p class='center-align ' style="font-size:x-large;font-weight:200">How is <span id="mDestinationName"></span>?</p>
 
     <div class="input-field col s6 l6">
-         <input id="input_text" type="text" length="60">
+         <input id="input_text" type="text" maxlength="40" length="40">
          <label for="input_text">Optional blurb..</label>
        </div>
+       <Br>
+        <div class="row">
+          <div class="col s12" style="padding:0px">
+            <div class="col l6 m6 s6 center-align" style="padding:0px">
+              <div class="s12" style="padding:5px">
+                <a id="btnMooveOn" href=""  class=" modal-action modal-close waves-effect btn-large waves-light btn-flat grey lighten-1 center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-down white-text"></i> Moove On </a>
+              </div>
+            </div>
+            <div class="col l6 m6 s6 center-align" style="padding:0px">
+              <div class="s12" style="padding:5px">
+              <a id="btnMakeMooves" href="" class="modal-action modal-close waves-effect waves-light btn-flat btn-large teal   center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-up white-text "></i> Make Mooves </a>
+              </div>
+            </div>
 
-    <a id="btnMooveOn" href="" style="margin-right:10px;"  class=" modal-action modal-close waves-effect waves-light btn-flat grey lighten-1 center-align white-text "><i class="fa fa-thumbs-o-down white-text"></i> Moove On</a>
-    <a id="btnMakeMooves" href="" class="modal-action modal-close waves-effect waves-light btn-flat teal   center-align white-text "><i class="fa fa-thumbs-o-up white-text"></i> Make Mooves</a>
+
+
+
+          </div>
+        </div>
+
+
+
     <Br>
 
   </div>

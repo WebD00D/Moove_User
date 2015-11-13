@@ -40,7 +40,6 @@ function gettheLocation(){
      return false;
    } else {
      // Continue with location found...
-
         console.log('found the location: ' + userLatitude + ' ,' + userLongitude);
         findByLocations(theLocation);
         $("#loadingMooves").hide();
@@ -70,7 +69,7 @@ function findByLocations(area){
     var DestinationLongitude = object.get('Longitude');
 
     //TO DO: Get this data returned so we can parse through and set the html up
-    getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
+    //getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
 
     LocalDestinations.push(object.id)
 
@@ -91,14 +90,7 @@ function findByLocations(area){
 
       " <ul id="+ object.id +" class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
 
-      " <div class='center-align' style='background-color:#eeeeee;padding-top:10px;padding-bottom:5px'> " +
-      "   <img height='15px' src='http://uber-codes.com/images/SIGN-UP-HERE-FOR-UBER.png'> " +
-      "   <Br> " +
-      "   <span><span style='color:#22313f'><b>FAIR ESTIMATES</b></span></span> " +
-      "   <br> " +
-      "   <span style='font-size:larger'><span style='color:#ED4877'><i class='fa fa-money'></i></span> <span id="+ 'eUBER'+ object.id + "></span> <span style='color:#ED4877'><i  style='color:#ED4877' class='fa fa-clock-o'></i></span> <span id="+ 'dUBER'+ object.id + " min.></span> " +
-      "  </div> " +
-      " <div data-name='"+ name +"' data-objectid="+ object.id +" class='center-align  mademoove' style='background-color:#22313f;padding:0px;font-weight:200'> " +
+      " <div data-name='"+ name +"' data-objectid="+ object.id +" class='center-align  mademoove' style='background-color:#22313f;padding-top:0px;padding-bottom:0px;font-weight:200'> " +
       "    <a class='btn waves-effect waves-light teal center '  style='color:white;width:100%'>Made the Moove?</a> " +
       " </div> " +
       " </div> " +
