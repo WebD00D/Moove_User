@@ -180,7 +180,7 @@ function findByLocations(area){
               if ( reviewMinutes === 0 ){
                 timetext = totalhours + ' hour ago..';
               } else {
-                timetext = totalhours + ' hour, ' + remainingMinutes + ' minutes ago..';
+                timetext = totalhours + ' hours, ' + remainingMinutes + ' minutes ago..';
               }
             }
 
