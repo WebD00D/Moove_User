@@ -122,9 +122,6 @@ function findByLocations(area){
 
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
-
-
-
       var Review = Parse.Object.extend("Reviews");
       var query = new Parse.Query(Review);
       query.equalTo("DestinationID", theID);
@@ -170,7 +167,11 @@ function findByLocations(area){
             if (totalhours === 0){
               if (remainingMinutes === 0){
                 timetext = 'just now..' ;
-              } else {
+              }
+              if (remainingMinutes === 1){
+                timetext = remainingMinutes + ' minute ago..' ;
+              }
+              else {
                 timetext = remainingMinutes + ' minutes ago..' ;
               }
 
@@ -191,7 +192,7 @@ function findByLocations(area){
              "   </li> "
 
 
-             if (totalhours <= 24){
+             if (totalhours < 24){
                $(listitem).appendTo("#"+theID);
              }
 
