@@ -36,7 +36,7 @@
         <hr class="teal" style=";border:none;height:1px;">
         <li><a style="font-size:large;font-weight:200" class="white-text " href="#">Connect</a></li> -->
       </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
+      <a id="navMobile" href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
     </div>
   </nav>
 </div>
@@ -51,22 +51,55 @@
         <h4 class="center-align white-text hide-on-med-and-up" style="font-weight:200;margin-top:50px">Helping you bar hop one moove at a time.</h4>
      </div>
      <div class="row center">
-       <label class="center-align " style="color:white;font-size:larger;font-weight:200">Select Location</label>
-       <Br>
-        <div class="input-field col l6 m6 offset-m3 offset-l3 s12" >
-          <select id="ddlLocationSelect" class="browser-default" >
-            <option value="VCU/Fan">Fan/VCU</option>
-            <option  value="Bottom">Shockoe Bottom</option>
-            <option  value="Cary">Carytown</option>
-            <option  value="ShortPump">Short Pump</option>
-            <option  value="RVABreweries">Breweries</option>
-            <option  value="RVAMusic">Music Venues</option>
 
-          </select>
+       <div id="selectLocationSection">
 
-          <Br>
-            <button id="btnWhatstheMove" style="background-color:#ED4877;width:70%;" class="btn waves-effect waves-light teal center btn-large " type="submit" name="action">Find Mooves</button>
-          </div>
+         <label class="center-align " style="color:white;font-size:larger;font-weight:200">Select Location</label>
+         <Br>
+          <div class="input-field col l6 m6 offset-m3 offset-l3 s12" >
+            <select id="ddlLocationSelect" class="browser-default" >
+              <option value="VCU/Fan">Fan/VCU</option>
+              <option  value="Bottom">Shockoe Bottom</option>
+              <option  value="Cary">Carytown</option>
+              <option  value="ShortPump">Short Pump</option>
+              <option  value="RVABreweries">Breweries</option>
+              <option  value="RVAMusic">Music Venues</option>
+            </select>
+            <Br>
+              <button id="btnWhatstheMove" style="background-color:#ED4877;width:70%;" class="btn waves-effect waves-light teal center btn-large " type="submit" name="action">Find Mooves</button>
+            </div>
+
+       </div>
+
+       <div id="signUpForm">
+            <label class="center-align " style="color:white;font-size:larger;font-weight:200">
+              Sign up with Moove
+            </label>
+            <Br>
+            <div class="input-field col l6 m6 offset-m3 offset-l3 s12">
+              <input id="txtPhoneNumber" maxLength="10" type="text" placeholder="10 Digit Phone Number" class="browser-default" style="background-color:rgba(255,255,255,1.0);padding-left:10px;border-radius:4px;font-size:20px;text-align:center">
+            </div>
+            <Br>
+              <button id="btnSignUp" style="background-color:#ED4877;width:70%;" class="btn waves-effect waves-light teal center btn-large " type="submit" name="action">Continue</button>
+              <Br>
+              <Br>
+
+       </div>
+
+       <div id="varificationForm">
+            <label class="center-align " style="color:white;font-size:larger;font-weight:200">
+              Enter the varification code sent below
+            </label>
+            <Br>
+            <div class="input-field col l6 m6 offset-m3 offset-l3 s12">
+              <input id="txtCodeEntered" type="text" placeholder="* * * * * *" maxLength="6" class="browser-default" style="background-color:rgba(255,255,255,1.0);padding-left:10px;border-radius:4px;font-size:20px;text-align:center">
+            </div>
+            <Br>
+        <button id="btnVarifyCode" style="background-color:#ED4877;width:70%;" class="btn waves-effect waves-light teal center btn-large " type="submit" name="action">Continue</button>
+       </div>
+
+
+
 
      </div>
 
@@ -87,11 +120,102 @@
    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
   <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
   <script src="js/url.js"></script>
   <script>
 
   $(document).ready(function(){
+
     $('.button-collapse').sideNav();
+    $("#selectLocationSection").hide();
+    $("#signUpForm").hide();
+    $("#varificationForm").hide();
+    $("#navMobile").hide();
+
+    var isMooveUser = Cookies.get('isMooveUser');
+
+    if (typeof(isMooveUser) === 'undefined'){
+      //show sign up forms
+      $("#signUpForm").show();
+    } else {
+      //show destination form
+      $("#selectLocationSection").show();
+    }
+
+    $('#txtPhoneNumber').keypress(function(key) {
+       if(key.charCode < 48 || key.charCode > 57) return false;
+   });
+
+
+    $("#btnSignUp").click(function(){
+      Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
+
+      var phoneNumber = $("#txtPhoneNumber").val();
+      if (phoneNumber.length === 10){
+
+        // phone number is good so far. Good to send varification code.
+        // Cloud code with Twillio
+
+        var last3 = phoneNumber.substr(phoneNumber.length - 3);
+        var theDate = new Date();
+        var theYear = theDate.getFullYear() + '';
+        var first3 = theYear.substr(theYear.length - 3);
+        var theCode = first3 + ' ' + last3;
+        var codeNotFormatted = first3 + '' + last3;
+
+
+        Parse.Cloud.run('sendText', { phoneNumber: '+1' + phoneNumber,verificationCode:theCode }, {
+          success: function(response) {
+          },
+          error: function(error) {
+          }
+        });
+
+        $("#signUpForm").hide();
+        $("#varificationForm").show();
+        $("#btnVarifyCode").attr("data-code",codeNotFormatted);
+        $("#btnVarifyCode").attr("data-number",phoneNumber);
+
+
+      } else {
+        //invalid phone number
+        $("#btnSignUp").removeClass("teal").addClass("red");
+        $("#btnSignUp").text("Invalid Number");
+      }
+    })
+
+    $("#btnVarifyCode").click(function(e){
+      var codeSent = $(this).attr('data-code');
+      var codeEntered = $("#txtCodeEntered").val();
+      var phone = $(this).attr('data-number');
+
+      if (codeEntered !== codeSent){
+        //invalid phone number
+        $("#btnVarifyCode").removeClass("teal").addClass("red");
+        $("#btnVarifyCode").text("Invalid Code");
+      } else {
+        // Create New Parse User then show them to the welcome screen, set cookie and show menu.
+        Parse.User.logOut();
+        var user = new Parse.User();
+        user.set("username", phone);
+        user.set("password", phone);
+        user.signUp(null, {
+        success: function(user) {
+          // Hooray! Let them use the app now.
+          $("#varificationForm").hide();
+          $("#selectLocationSection").show();
+          Cookies.set('isMooveUser', 'yes', { expires: 1000 });
+
+        },
+        error: function(user, error) {
+          // Show the error message somewhere and let the user try again.
+          console.log("Error: " + error.code + " " + error.message);
+        }
+      });
+
+      }
+    }) // end btnVarifyCode click event
+
 
     $("#btnWhatstheMove").click(function(){
         selectedLocation = $("#ddlLocationSelect option:selected").val();
