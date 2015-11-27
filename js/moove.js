@@ -330,6 +330,7 @@ $("#btnMooveOn").click(function(e){
 var theReviewDate;
 
 $("#btnMakeMooves").click(function(e){
+  var canLeaveReview = false;
   e.preventDefault();
   var location = $(this).attr("data-objectid");
   var currentUser = Parse.User.current()
@@ -339,15 +340,68 @@ $("#btnMakeMooves").click(function(e){
   var Reviews = Parse.Object.extend("Reviews");
   var query = new Parse.Query(Reviews);
   query.equalTo("theUser", currentUser);
+  query.equalTo("DestinationID", location);
+  query.ascending("createdAt");
   query.find({
   success: function(results) {
+    console.log(results.length);
+    if (results.length > 0){
+      // Do something with the returned Parse.Object values
+      for (var i = 0; i < results.length; i++) {
 
-    // Do something with the returned Parse.Object values
-    for (var i = 0; i < results.length; i++) {
-      var object = results[i];
-      var createdDate = object.get('createdAt');
-      theReviewDate = new Date(createdDate);
+        var object = results[i];
+        var datetime = object.get('createdAt');
+
+        var reviewYear = datetime.getFullYear();
+        var reviewMonth = datetime.getMonth() + 1;
+        var reviewDay = datetime.getDate();
+        var reviewHours = datetime.getHours(); //returns 0-23
+        var reviewMinutes = datetime.getMinutes(); //returns 0-59
+
+        var today = new Date();
+        var todaysYear = today.getFullYear();
+        var todaysMonth = today.getMonth() +1;
+        var todaysday = today.getDate();
+
+        var currentTime = new Date(todaysYear + '/' + todaysMonth + '/' + todaysday + ' ' + today.getHours() + ':' + today.getMinutes());
+        console.log('the current time is: ' + currentTime);
+        var commentTime = new Date(reviewYear + '/' + reviewMonth + '/' + reviewDay + ' ' + reviewHours + ':' + reviewMinutes);
+        var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
+
+        var resultInMinutes = Math.round(difference / 60000);
+        console.log('results in min: ' + resultInMinutes);
+
+        if (resultInMinutes <= 5){
+          canLeaveReview = false;
+        }else {
+          canLeaveReview = true;
+        }
+        console.log(canLeaveReview);
+
+      } //end for each review
+    } else {
+      canLeaveReview = true;
     }
+
+
+    if (canLeaveReview == true){
+      var review = $("#input_text").val();
+      if (review.length > 0){
+        if (review.length > 60){
+          return
+        } else {
+          //save the review to the database.
+          saveReview(location,review);
+        }
+      }
+      incrementTotals("MooveCount",location);
+    } else {
+      $("#modaldiv").removeClass("teal").addClass("red");
+      $("#modaldiv").addClass("lighten-2");
+      $("#modalMessage").text("You just rated "+ $("#ddlLocalDestinations option:selected").text() + "!");
+    }
+
+
   },
   error: function(error) {
     console.log("Error: " + error.code + " " + error.message);
@@ -357,16 +411,6 @@ $("#btnMakeMooves").click(function(e){
 
 
 
-  var review = $("#input_text").val();
-  if (review.length > 0){
-    if (review.length > 60){
-      return
-    } else {
-      //save the review to the database.
-      saveReview(location,review);
-    }
-  }
-  incrementTotals("MooveCount",location);
 
 })
 

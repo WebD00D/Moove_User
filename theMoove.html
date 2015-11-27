@@ -192,6 +192,9 @@
 
         $("#ddlLocalDestinations").change(function(){
 
+          $("#modaldiv").removeClass("red").addClass("teal");
+          $("#modaldiv").removeClass("lighten-2");
+
           var currentUser = Parse.User.current();
 
           console.log(currentUser.id);
