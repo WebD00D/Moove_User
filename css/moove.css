@@ -8,6 +8,14 @@ body{
   background-color: white;
 }
 
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   background:#999;
+}
+
 /* label color */
  .input-field label {
    color: #ED4877;

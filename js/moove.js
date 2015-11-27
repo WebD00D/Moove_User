@@ -42,7 +42,6 @@ function gettheLocation(){
         console.log('found the location: ' + userLatitude + ' ,' + userLongitude);
         findByLocations(theLocation);
         $("#loadingMooves").hide();
-
    }
 }
 
@@ -52,6 +51,7 @@ var uberEstimates = [];
 
 function findByLocations(area){
   $(".destinations").empty();
+
   var Destinations = Parse.Object.extend("Destinations");
   var query = new Parse.Query(Destinations);
   query.equalTo("Area", area);
@@ -73,6 +73,8 @@ function findByLocations(area){
 
     LocalDestinations.push(object.id)
 
+
+
     if (typeof MooveCount === 'undefined' ){
       MooveCount = 0;
     }
@@ -80,7 +82,7 @@ function findByLocations(area){
       MooveOnCount = 0;
     }
 
-    var content = "<div class='col s12 m6 l6'>" +
+    var content = "<div class='col s12 m6 l6' style='padding-left:0px;padding-right:0px'>" +
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
       "  <span > " +
       "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'>"+ name +"</span> " +
@@ -288,20 +290,20 @@ function GetCurrentLocation(latEnd, longEnd){
 }
 
 
-$(".destinations").delegate(".mademoove","mouseover",function(){
-  $(this).css("background-color","#2C3E50");
-  $(this).css("cursor","pointer");
-})
-$(".destinations").delegate(".mademoove","mouseout",function(){
-  $(this).css("background-color","#22313f");
-})
-$(".destinations").delegate(".mademoove","click",function(){
-  $('#modal1').openModal();
-  var location = $(this).attr('data-objectid');
-  $("#btnMooveOn").attr('data-objectid',location);
-  $("#btnMakeMooves").attr('data-objectid',location);
-  $("#mDestinationName").text($(this).attr('data-name'));
-})
+//$(".destinations").delegate(".mademoove","mouseover",function(){
+//  $(this).css("background-color","#2C3E50");
+//  $(this).css("cursor","pointer");
+//})
+//$(".destinations").delegate(".mademoove","mouseout",function(){
+//  $(this).css("background-color","#22313f");
+//})
+//$(".destinations").delegate(".mademoove","click",function(){
+//  $('#modal1').openModal();
+//  var location = $(this).attr('data-objectid');
+//  $("#btnMooveOn").attr('data-objectid',location);
+//  $("#btnMakeMooves").attr('data-objectid',location);
+//  $("#mDestinationName").text($(this).attr('data-name'));
+//})
 
 
 
@@ -325,9 +327,36 @@ $("#btnMooveOn").click(function(e){
 
 })
 
+var theReviewDate;
+
 $("#btnMakeMooves").click(function(e){
   e.preventDefault();
   var location = $(this).attr("data-objectid");
+  var currentUser = Parse.User.current()
+
+  //check if user has left a review in the last 5 minutes at this location.
+  //if so then, don't let them make a review.
+  var Reviews = Parse.Object.extend("Reviews");
+  var query = new Parse.Query(Reviews);
+  query.equalTo("theUser", currentUser);
+  query.find({
+  success: function(results) {
+    alert("Successfully retrieved " + results.length + " reviews.");
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) {
+      var object = results[i];
+      var createdDate = object.get('createdAt');
+      theReviewDate = new Date(createdDate);
+    }
+  },
+  error: function(error) {
+    console.log("Error: " + error.code + " " + error.message);
+  }
+});
+
+
+
+
   var review = $("#input_text").val();
   if (review.length > 0){
     if (review.length > 60){
@@ -342,7 +371,7 @@ $("#btnMakeMooves").click(function(e){
 })
 
 function saveReview(destination,reviewz){
-
+var currentUser = Parse.User.current();
 var currentdate = new Date();
 var datetime = "Last Sync: " + currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/"
@@ -356,7 +385,9 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
 
   review.save({
   DestinationID: destination,
+  theUser:currentUser,
   Review: reviewz,
+
 
 
 }, {
