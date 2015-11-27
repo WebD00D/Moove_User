@@ -92,8 +92,8 @@ function findByLocations(area){
 
       " <ul id="+ object.id +" class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
 
-      " <div data-name='"+ name +"' data-objectid="+ object.id +" class='center-align  mademoove' style='background-color:#22313f;padding-top:0px;padding-bottom:0px;font-weight:200'> " +
-      "    <a class='btn waves-effect waves-light teal center '  style='color:white;width:100%'>Made the Moove?</a> " +
+      " <div data-name='"+ name +"' data-objectid="+ object.id +" class='center-align teal mademoove' style='padding-top:7px;padding-bottom:7px;font-weight:200'> " +
+
       " </div> " +
       " </div> " +
       " </div> " +
@@ -341,7 +341,7 @@ $("#btnMakeMooves").click(function(e){
   query.equalTo("theUser", currentUser);
   query.find({
   success: function(results) {
-    alert("Successfully retrieved " + results.length + " reviews.");
+
     // Do something with the returned Parse.Object values
     for (var i = 0; i < results.length; i++) {
       var object = results[i];
