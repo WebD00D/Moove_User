@@ -335,8 +335,17 @@ function GetCurrentLocation(latEnd, longEnd){
 var theReviewDate;
 
 $("#btnMooveOn").click(function(e){
+  $("#modaldiv").removeClass("red").addClass("teal");
+  $("#modaldiv").removeClass("lighten-2");
+  $("#modalMessage").text("Saving...");
   var canLeaveReview = false;
   e.preventDefault();
+  if ($("#ddlLocalDestinations option:selected").text() === 'Select a destination'){
+    $("#modaldiv").removeClass("teal").addClass("red");
+    $("#modaldiv").addClass("lighten-2");
+    $("#modalMessage").text("Please select a location!");
+    return;
+  }
   var location = $(this).attr("data-objectid");
   var currentUser = Parse.User.current()
 
@@ -422,8 +431,17 @@ $("#btnMooveOn").click(function(e){
 
 
 $("#btnMakeMooves").click(function(e){
+  $("#modaldiv").removeClass("red").addClass("teal");
+  $("#modaldiv").removeClass("lighten-2");
+  $("#modalMessage").text("Saving...");
   var canLeaveReview = false;
   e.preventDefault();
+  if ($("#ddlLocalDestinations option:selected").text() === 'Select a destination'){
+    $("#modaldiv").removeClass("teal").addClass("red");
+    $("#modaldiv").addClass("lighten-2");
+    $("#modalMessage").text("Please select a location!");
+    return;
+  }
   var location = $(this).attr("data-objectid");
   var currentUser = Parse.User.current()
 
@@ -546,7 +564,7 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
 }
 
 function incrementTotals(Kind,LocationID){
-
+$("#modalMessage").text("Moove made!");
 var Destinations = Parse.Object.extend("Destinations");
 var destinations = new Destinations();
     destinations.id = LocationID;
