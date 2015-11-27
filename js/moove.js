@@ -164,25 +164,44 @@ function findByLocations(area){
             var totalhours = Math.floor( resultInMinutes / 60 );
             var remainingMinutes = resultInMinutes % 60
 
+            console.log('total hours:' + totalhours + ' remaining min:' + remainingMinutes);
+
 
 
             if (totalhours === 0){
-              if (remainingMinutes === 0){
+              if (remainingMinutes < 1){
                 timetext = 'just now..' ;
+              } else {
+                if (remainingMinutes === 1){
+                 timetext = remainingMinutes + ' minute ago..' ;
+               }
+               else {
+                 timetext = remainingMinutes + ' minutes ago..' ;
+               }
               }
-              if (remainingMinutes === 1){
-                timetext = remainingMinutes + ' minute ago..' ;
-              }
-              else {
-                timetext = remainingMinutes + ' minutes ago..' ;
-              }
+
 
             } else {
 
               if ( reviewMinutes === 0 ){
-                timetext = totalhours + ' hour ago..';
+                if (totalhours === 1){
+                  timetext = totalhours + ' hour ago..';
+                } else {
+                  timetext = totalhours + ' hours ago..';
+                }
+
               } else {
-                timetext = totalhours + ' hours, ' + remainingMinutes + ' minutes ago..';
+                if (totalhours === 1){
+                    if (remainingMinutes === 1){
+                      timetext = totalhours + ' hour, ' + remainingMinutes + ' minute ago..';
+                    } else {
+                      timetext = totalhours + ' hour, ' + remainingMinutes + ' minutes ago..';
+                    }
+
+                } else {
+                    timetext = totalhours + ' hours, ' + remainingMinutes + ' minutes ago..';
+                }
+
               }
             }
 
