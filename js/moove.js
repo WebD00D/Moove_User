@@ -195,7 +195,11 @@ function findByLocations(area){
 
 
              if (totalhours < 24){
-               $(listitem).appendTo("#"+theID);
+               var theReview = object.get('Review');
+               if (theReview != ''){
+                 $(listitem).appendTo("#"+theID);
+               }
+
              }
 
 
@@ -364,14 +368,15 @@ $("#btnMooveOn").click(function(e){
 
     if (canLeaveReview == true){
       var review = $("#input_text").val();
-      if (review.length > 0){
-        if (review.length > 60){
-          return
-        } else {
+    //  if (review.length > 0){
+    //    if (review.length > 60){
+    //      return
+    //    } else {
           //save the review to the database.
-          saveReview(location,review);
-        }
-      }
+
+    //    }
+    //  }
+      saveReview(location,review);
       incrementTotals("MooveOnCount",location);
     } else {
       $("#modaldiv").removeClass("teal").addClass("red");
@@ -450,14 +455,15 @@ $("#btnMakeMooves").click(function(e){
 
     if (canLeaveReview == true){
       var review = $("#input_text").val();
-      if (review.length > 0){
-        if (review.length > 60){
-          return
-        } else {
+      //if (review.length > 0){
+      //  if (review.length > 60){
+      //    return
+      //  } else {
           //save the review to the database.
-          saveReview(location,review);
-        }
-      }
+
+      //  }
+      //}
+      saveReview(location,review);
       incrementTotals("MooveCount",location);
     } else {
       $("#modaldiv").removeClass("teal").addClass("red");
