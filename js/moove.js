@@ -305,29 +305,93 @@ function GetCurrentLocation(latEnd, longEnd){
 //  $("#mDestinationName").text($(this).attr('data-name'));
 //})
 
-
+var theReviewDate;
 
 $("#btnMooveOn").click(function(e){
-  e.preventDefault()
+  var canLeaveReview = false;
+  e.preventDefault();
   var location = $(this).attr("data-objectid");
-  //need to save a the review if its not empty, and has met the length requirements.
-  var review = $("#input_text").val();
-  if (review.length > 0){
-    if (review.length > 60){
-      return
+  var currentUser = Parse.User.current()
+
+  //check if user has left a review in the last 5 minutes at this location.
+  //if so then, don't let them make a review.
+  var Reviews = Parse.Object.extend("Reviews");
+  var query = new Parse.Query(Reviews);
+  query.equalTo("theUser", currentUser);
+  query.equalTo("DestinationID", location);
+  query.ascending("createdAt");
+  query.find({
+  success: function(results) {
+    console.log(results.length);
+    if (results.length > 0){
+      // Do something with the returned Parse.Object values
+      for (var i = 0; i < results.length; i++) {
+
+        var object = results[i];
+        var datetime = object.get('createdAt');
+
+        var reviewYear = datetime.getFullYear();
+        var reviewMonth = datetime.getMonth() + 1;
+        var reviewDay = datetime.getDate();
+        var reviewHours = datetime.getHours(); //returns 0-23
+        var reviewMinutes = datetime.getMinutes(); //returns 0-59
+
+        var today = new Date();
+        var todaysYear = today.getFullYear();
+        var todaysMonth = today.getMonth() +1;
+        var todaysday = today.getDate();
+
+        var currentTime = new Date(todaysYear + '/' + todaysMonth + '/' + todaysday + ' ' + today.getHours() + ':' + today.getMinutes());
+        console.log('the current time is: ' + currentTime);
+        var commentTime = new Date(reviewYear + '/' + reviewMonth + '/' + reviewDay + ' ' + reviewHours + ':' + reviewMinutes);
+        var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
+
+        var resultInMinutes = Math.round(difference / 60000);
+        console.log('results in min: ' + resultInMinutes);
+
+        if (resultInMinutes <= 5){
+          canLeaveReview = false;
+        }else {
+          canLeaveReview = true;
+        }
+        console.log(canLeaveReview);
+
+      } //end for each review
     } else {
-      //save the review to the database.
-      saveReview(location,review);
+      canLeaveReview = true;
     }
+
+
+    if (canLeaveReview == true){
+      var review = $("#input_text").val();
+      if (review.length > 0){
+        if (review.length > 60){
+          return
+        } else {
+          //save the review to the database.
+          saveReview(location,review);
+        }
+      }
+      incrementTotals("MooveOnCount",location);
+    } else {
+      $("#modaldiv").removeClass("teal").addClass("red");
+      $("#modaldiv").addClass("lighten-2");
+      $("#modalMessage").text("You just rated "+ $("#ddlLocalDestinations option:selected").text() + "!");
+    }
+
+
+  },
+  error: function(error) {
+    console.log("Error: " + error.code + " " + error.message);
   }
-  // if no review , then just need to update the counter for Moove On
-  // Refresh to show the data.
-  incrementTotals("MooveOnCount",location);
+});
+
+
 
 
 })
 
-var theReviewDate;
+
 
 $("#btnMakeMooves").click(function(e){
   var canLeaveReview = false;
