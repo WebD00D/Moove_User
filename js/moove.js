@@ -67,6 +67,10 @@ function findByLocations(area){
     var MooveOnCount = object.get('MooveOnCount');
     var DestinationLatitude = object.get('Latitude');
     var DestinationLongitude = object.get('Longitude');
+    var promo = object.get('currentPromo');
+    if (typeof promo === 'undefined' || promo === ''){
+      promo = '...';
+    }
 
     //TO DO: Get this data returned so we can parse through and set the html up
     //getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
@@ -92,8 +96,8 @@ function findByLocations(area){
 
       " <ul id="+ object.id +" class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
 
-      " <div data-name='"+ name +"' data-objectid="+ object.id +" class='center-align teal mademoove' style='padding-top:7px;padding-bottom:7px;font-weight:200'> " +
-
+      " <div data-name='"+ name +"' data-objectid="+ object.id +" class=' teal mademoove' style='padding-top:7px;padding-bottom:7px;font-weight:200'> " +
+      "<label class='white-text ' style='font-size:15px;padding-left:10px'><i class='fa fa-bullhorn'></i><span style='padding-left:10px;'>"+ promo +"</span></label>" +
       " </div> " +
       " </div> " +
       " </div> " +
