@@ -168,7 +168,7 @@ function findByLocations(area){
             var totalhours = Math.floor( resultInMinutes / 60 );
             var remainingMinutes = resultInMinutes % 60
 
-            console.log('total hours:' + totalhours + ' remaining min:' + remainingMinutes);
+
 
 
 
@@ -348,7 +348,8 @@ $("#btnMooveOn").click(function(e){
   }
   var location = $(this).attr("data-objectid");
   var isParnter = $(this).attr("data-isMoovePartner");
-  var currentUser = Parse.User.current()
+  var currentUser = Parse.User.current();
+  var pointsNeeded = $(this).attr("data-pointsNeeded");
 
   //check if user has left a review in the last 5 minutes at this location.
   //if so then, don't let them make a review.
@@ -384,14 +385,14 @@ $("#btnMooveOn").click(function(e){
         var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
 
         var resultInMinutes = Math.round(difference / 60000);
-        console.log('results in min: ' + resultInMinutes);
+
 
         if (resultInMinutes <= 5){
           canLeaveReview = false;
         }else {
           canLeaveReview = true;
         }
-        console.log(canLeaveReview);
+
 
       } //end for each review
     } else {
@@ -401,17 +402,9 @@ $("#btnMooveOn").click(function(e){
 
     if (canLeaveReview == true){
       var review = $("#input_text").val();
-    //  if (review.length > 0){
-    //    if (review.length > 60){
-    //      return
-    //    } else {
-          //save the review to the database.
-
-    //    }
-    //  }
       saveReview(location,review);
       incrementTotals("MooveOnCount",location);
-    //  addPoints(location,isParnter);
+      addPoints(location,isParnter,$("#ddlLocalDestinations option:selected").text(),pointsNeeded);
     } else {
       $("#modaldiv").removeClass("teal").addClass("red");
       $("#modaldiv").addClass("lighten-2");
@@ -447,6 +440,7 @@ $("#btnMakeMooves").click(function(e){
   var location = $(this).attr("data-objectid");
   var isParnter = $(this).attr("data-isMoovePartner");
   var currentUser = Parse.User.current();
+  var pointsNeeded = $(this).attr("data-pointsNeeded");
 
   //check if user has left a review in the last 5 minutes at this location.
   //if so then, don't let them make a review.
@@ -477,19 +471,19 @@ $("#btnMakeMooves").click(function(e){
         var todaysday = today.getDate();
 
         var currentTime = new Date(todaysYear + '/' + todaysMonth + '/' + todaysday + ' ' + today.getHours() + ':' + today.getMinutes());
-        console.log('the current time is: ' + currentTime);
+
         var commentTime = new Date(reviewYear + '/' + reviewMonth + '/' + reviewDay + ' ' + reviewHours + ':' + reviewMinutes);
         var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
 
         var resultInMinutes = Math.round(difference / 60000);
-        console.log('results in min: ' + resultInMinutes);
+
 
         if (resultInMinutes <= 5){
           canLeaveReview = false;
         }else {
           canLeaveReview = true;
         }
-        console.log(canLeaveReview);
+
 
       } //end for each review
     } else {
@@ -499,17 +493,10 @@ $("#btnMakeMooves").click(function(e){
 
     if (canLeaveReview == true){
       var review = $("#input_text").val();
-      //if (review.length > 0){
-      //  if (review.length > 60){
-      //    return
-      //  } else {
-          //save the review to the database.
 
-      //  }
-      //}
       saveReview(location,review);
       incrementTotals("MooveCount",location);
-      //addPoints(location,isParnter);
+      addPoints(location,isParnter,$("#ddlLocalDestinations option:selected").text(),pointsNeeded);
     } else {
       $("#modaldiv").removeClass("teal").addClass("red");
       $("#modaldiv").addClass("lighten-2");
@@ -525,15 +512,15 @@ $("#btnMakeMooves").click(function(e){
 
 })
 
-function addPoints(destination,isPartner){
+function addPoints(destination,isPartner,establishment,pointsTheyNeed){
 
+  var pointData;
   // check Moove Points to see if user can earn points at the location.
   if (isPartner === 'true'){
     // check to see if user has made moove to a location since monday.
     var currentUser = Parse.User.current();
     var weekStart,theUser,theDestination;
     var theDate = new Date(Date.parse("last monday"));
-    var theExpirationDate = new Date(Date.parse("next monday"));
     var MoovePoints = Parse.Object.extend("Points");
     var query = new Parse.Query(MoovePoints);
     query.equalTo("User", currentUser);
@@ -543,12 +530,62 @@ function addPoints(destination,isPartner){
 
     query.find({
       success: function(results) {
-        alert("Successfully retrieved " + results.length + " points.");
-        var object = results[i];
+
+        pointData = results[0];
+
         if (results.length < 1){
           //create new record and add point
-        } else {
 
+          var Points = Parse.Object.extend("Points");
+          var points = new Points();
+
+          points.set("User", currentUser);
+          points.set("DestinationID", destination);
+          points.set("Points", 1);
+          points.set("isClaimed", false);
+          points.set("startedOn", theDate);
+
+          points.save(null, {
+            success: function(points) {
+              swal({
+                confirmButtonColor: "#009688",
+                title: "+1 Point Earned!",
+                text: "You've earned 1 point at " + establishment + "!",
+                type: "success"
+              })
+
+            },
+            error: function(points, error) {
+              console.log('Failed to create new object, with error code: ' + error.message);
+            }
+          }); // end save
+
+
+        } else {
+          //TODO: update points
+          // but before we update, lets compare their point threshhold to see  if the user
+          // has earned anything.
+
+          //use pointsTheyNeed variable as the establishments requred points.
+
+          // find out how many points the user currently has there.
+          // if less than points they need update. but if after update points are the amount they need show notification that
+          // they earned something.
+
+          // if not, then simply update the amount of points and tell how many more they have to go.
+
+
+          var PointSystem = Parse.Object.extend("Points");
+          var pointsystem = new PointSystem();
+              pointsystem.id = pointData.id;
+              pointsystem.increment("Points");
+              pointsystem.save();
+              swal({
+                confirmButtonColor: "#009688",
+                title: "+1 Point Earned!",
+                text: "You've earned another point at " + establishment + "!",
+                type: "success"
+              })
         }
 
       },
@@ -557,10 +594,9 @@ function addPoints(destination,isPartner){
       }
     });
 
+  } else{
 
-
-
-  } // end check if moove partner is true
+  }// end check if moove partner is true
 } // end addPoints fucnction
 
 

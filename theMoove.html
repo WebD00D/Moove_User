@@ -172,10 +172,11 @@
             var object = results[i];
             var name = object.get('Name');
             var isMoovePartner = object.get('isMoovePartner');
+            var pointsNeeded = object.get("pointsNeeded");
             var DestinationLatitude = object.get('Latitude');
             var DestinationLongitude = object.get('Longitude');
 
-            var locationOption = "<option data-who="+ object.id+ " data-isMoovePartner='"+ isMoovePartner +"' data-lon="+ DestinationLongitude +" data-lat="+ DestinationLatitude +">" + name + "</option>"
+            var locationOption = "<option data-who="+ object.id+ " data-pointsNeeded="+ pointsNeeded +" data-isMoovePartner='"+ isMoovePartner +"' data-lon="+ DestinationLongitude +" data-lat="+ DestinationLatitude +">" + name + "</option>"
 
             if (name != "EMPTY"){
               $(locationOption).appendTo("#ddlLocalDestinations")
@@ -193,7 +194,7 @@
           });
         }
 
-        var latitude,longitude,theObject,moovePartner
+        var latitude,longitude,theObject,moovePartner,pointsNeeded;
 
         $("#ddlLocalDestinations").change(function(){
 
@@ -203,15 +204,13 @@
 
           var currentUser = Parse.User.current();
 
-          console.log(currentUser.id);
-
           $("#mooveProgress").show();
 
           latitude = $("#ddlLocalDestinations option:selected").attr("data-lat");
           longitude = $("#ddlLocalDestinations option:selected").attr("data-lon");
           theObject = $("#ddlLocalDestinations option:selected").attr("data-who");
           moovePartner = $("#ddlLocalDestinations option:selected").attr("data-isMoovePartner");
-
+          pointsNeeded = $("#ddlLocalDestinations option:selected").attr("data-pointsNeeded");
 
 
 
@@ -251,7 +250,7 @@
              var destinationA = new google.maps.LatLng(latitude, longitude);
              var distanceBetween = google.maps.geometry.spherical.computeDistanceBetween(origin1,destinationA)
               console.log(distanceBetween);
-              if (distanceBetween > 304.8){ //that's 1000 feet in meters
+              if (distanceBetween < 304.8){ //that's 1000 feet in meters
                 $("#mooveProgress").hide();
                 $("#modaldiv").removeClass("teal").addClass("red");
                 $("#modaldiv").addClass("lighten-2");
@@ -271,6 +270,8 @@
                 $("#btnMooveOn").attr("data-objectid",theObject);
                 $("#btnMakeMooves").attr("data-isMoovePartner",moovePartner);
                 $("#btnMooveOn").attr("data-isMoovePartner",moovePartner);
+                $("#btnMakeMooves").attr("data-pointsNeeded",pointsNeeded);
+                $("#btnMooveOn").attr("data-pointsNeeded",pointsNeeded);
                 $("#input_text").show();
                 $("#errorIcon").hide();
 
