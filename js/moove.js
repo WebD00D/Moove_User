@@ -347,6 +347,7 @@ $("#btnMooveOn").click(function(e){
     return;
   }
   var location = $(this).attr("data-objectid");
+  var isParnter = $(this).attr("data-isMoovePartner");
   var currentUser = Parse.User.current()
 
   //check if user has left a review in the last 5 minutes at this location.
@@ -410,6 +411,7 @@ $("#btnMooveOn").click(function(e){
     //  }
       saveReview(location,review);
       incrementTotals("MooveOnCount",location);
+    //  addPoints(location,isParnter);
     } else {
       $("#modaldiv").removeClass("teal").addClass("red");
       $("#modaldiv").addClass("lighten-2");
@@ -443,7 +445,8 @@ $("#btnMakeMooves").click(function(e){
     return;
   }
   var location = $(this).attr("data-objectid");
-  var currentUser = Parse.User.current()
+  var isParnter = $(this).attr("data-isMoovePartner");
+  var currentUser = Parse.User.current();
 
   //check if user has left a review in the last 5 minutes at this location.
   //if so then, don't let them make a review.
@@ -506,6 +509,7 @@ $("#btnMakeMooves").click(function(e){
       //}
       saveReview(location,review);
       incrementTotals("MooveCount",location);
+      //addPoints(location,isParnter);
     } else {
       $("#modaldiv").removeClass("teal").addClass("red");
       $("#modaldiv").addClass("lighten-2");
@@ -519,11 +523,46 @@ $("#btnMakeMooves").click(function(e){
   }
 });
 
-
-
-
-
 })
+
+function addPoints(destination,isPartner){
+
+  // check Moove Points to see if user can earn points at the location.
+  if (isPartner === 'true'){
+    // check to see if user has made moove to a location since monday.
+    var currentUser = Parse.User.current();
+    var weekStart,theUser,theDestination;
+    var theDate = new Date(Date.parse("last monday"));
+    var theExpirationDate = new Date(Date.parse("next monday"));
+    var MoovePoints = Parse.Object.extend("Points");
+    var query = new Parse.Query(MoovePoints);
+    query.equalTo("User", currentUser);
+    query.equalTo("DestinationID", destination);
+    query.equalTo("isClaimed", false);
+    query.greaterThanOrEqualTo("startedOn", theDate);
+
+    query.find({
+      success: function(results) {
+        alert("Successfully retrieved " + results.length + " points.");
+        var object = results[i];
+        if (results.length < 1){
+          //create new record and add point
+        } else {
+
+        }
+
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+
+
+
+
+  } // end check if moove partner is true
+} // end addPoints fucnction
+
 
 function saveReview(destination,reviewz){
 var currentUser = Parse.User.current();
@@ -559,8 +598,6 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
   }
 });
 
-
-
 }
 
 function incrementTotals(Kind,LocationID){
@@ -572,20 +609,6 @@ var destinations = new Destinations();
     destinations.save();
     refreshAfterReview();
 
-
-//destinations.save(null, {
-//  success: function(destinations) {
-    // Now let's update it with some new data. In this case, only cheatMode and score
-    // will get sent to the cloud. playerName hasn't changed.
-//    destinations.id = LocationID;
-//    destinations.increment(Kind);
-//    destinations.save();
-//    refreshAfterReview();
-//  }
-//});
-
-
-
 }
 
 
@@ -595,7 +618,6 @@ function refreshAfterReview(){
   findByLocations(theLocation);
 
 }
-
 
 
 

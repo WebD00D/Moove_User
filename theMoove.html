@@ -67,15 +67,16 @@
        <label>Review</label>
      </div>
      <div class="col s3 comingsoon" style="padding:6px">
+       <i style="font-size:30px" class="material-icons teal-text">local_play</i>
+       <Br>
+       <label>Points</label>
+     </div>
+     <div class="col s3 comingsoon" style="padding:6px">
        <i style="font-size:30px;" class="material-icons teal-text">redeem</i>
        <Br>
        <label>Redeem</label>
      </div>
-     <div class="col s3 comingsoon" style="padding:6px">
-       <i style="font-size:30px" class="material-icons teal-text">local_play</i>
-       <Br>
-       <label>Specials</label>
-     </div>
+
 
    </div>
 
@@ -145,11 +146,14 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
    <script src="js/url.js"></script>
    <script src="js/animsition.js"></script>
+   <script src="js/date.js"></script>
    <script src="js/moove.js"></script>
 
    <script>
 
     $(document).ready(function(){
+
+      
       $("#mooveProgress").hide();
       $("#errorIcon").hide();
 
@@ -167,10 +171,11 @@
             for (var i = 0; i < results.length; i++) {
             var object = results[i];
             var name = object.get('Name');
+            var isMoovePartner = object.get('isMoovePartner');
             var DestinationLatitude = object.get('Latitude');
             var DestinationLongitude = object.get('Longitude');
 
-            var locationOption = "<option data-who="+ object.id+ " data-lon="+ DestinationLongitude +" data-lat="+ DestinationLatitude +">" + name + "</option>"
+            var locationOption = "<option data-who="+ object.id+ " data-isMoovePartner='"+ isMoovePartner +"' data-lon="+ DestinationLongitude +" data-lat="+ DestinationLatitude +">" + name + "</option>"
 
             if (name != "EMPTY"){
               $(locationOption).appendTo("#ddlLocalDestinations")
@@ -188,9 +193,10 @@
           });
         }
 
-        var latitude,longitude,theObject
+        var latitude,longitude,theObject,moovePartner
 
         $("#ddlLocalDestinations").change(function(){
+
 
           $("#modaldiv").removeClass("red").addClass("teal");
           $("#modaldiv").removeClass("lighten-2");
@@ -204,6 +210,9 @@
           latitude = $("#ddlLocalDestinations option:selected").attr("data-lat");
           longitude = $("#ddlLocalDestinations option:selected").attr("data-lon");
           theObject = $("#ddlLocalDestinations option:selected").attr("data-who");
+          moovePartner = $("#ddlLocalDestinations option:selected").attr("data-isMoovePartner");
+
+
 
 
           //get users current latitude longitude.
@@ -213,6 +222,10 @@
 
           } else {
             /* geolocation IS NOT available */
+            $("#modaldiv").removeClass("teal").addClass("red");
+            $("#modaldiv").addClass("lighten-2");
+            $("#modalMessage").text("We're having trouble finding your location.");
+            return;
 
           }
 
@@ -238,7 +251,7 @@
              var destinationA = new google.maps.LatLng(latitude, longitude);
              var distanceBetween = google.maps.geometry.spherical.computeDistanceBetween(origin1,destinationA)
               console.log(distanceBetween);
-              if (distanceBetween > 304.8){ //that's 1000 feet in meters
+              if (distanceBetween < 304.8){ //that's 1000 feet in meters
                 $("#mooveProgress").hide();
                 $("#modaldiv").removeClass("teal").addClass("red");
                 $("#modaldiv").addClass("lighten-2");
@@ -256,6 +269,8 @@
                 $("#btnMooveOn").show();
                 $("#btnMakeMooves").attr("data-objectid",theObject);
                 $("#btnMooveOn").attr("data-objectid",theObject);
+                $("#btnMakeMooves").attr("data-isMoovePartner",moovePartner);
+                $("#btnMooveOn").attr("data-isMoovePartner",moovePartner);
                 $("#input_text").show();
                 $("#errorIcon").hide();
 
