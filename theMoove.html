@@ -250,7 +250,7 @@
              var origin1 = new google.maps.LatLng(userLatitude, userLongitude);
              var destinationA = new google.maps.LatLng(latitude, longitude);
              var distanceBetween = google.maps.geometry.spherical.computeDistanceBetween(origin1,destinationA)
-              if (distanceBetween < 304.8){ //that's 1000 feet in meters
+              if (distanceBetween > 304.8){ //that's 1000 feet in meters
                 $("#mooveProgress").hide();
                 $("#modaldiv").removeClass("teal").addClass("red");
                 $("#modaldiv").addClass("lighten-2");
