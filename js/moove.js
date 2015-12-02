@@ -123,9 +123,6 @@ function findByLocations(area){
 
   function LoadReviews(){
 
-
-
-
     $.each(LocalDestinations, function( index, value ) {
       var theID = LocalDestinations[index];
       var Review = Parse.Object.extend("Reviews");
@@ -167,9 +164,6 @@ function findByLocations(area){
 
             var totalhours = Math.floor( resultInMinutes / 60 );
             var remainingMinutes = resultInMinutes % 60
-
-
-
 
 
             if (totalhours === 0){
@@ -514,6 +508,7 @@ $("#btnMakeMooves").click(function(e){
 
 function addPoints(destination,isPartner,establishment,pointsTheyNeed){
 
+
   var pointData;
   // check Moove Points to see if user can earn points at the location.
   if (isPartner === 'true'){
@@ -525,7 +520,6 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
     var query = new Parse.Query(MoovePoints);
     query.equalTo("User", currentUser);
     query.equalTo("DestinationID", destination);
-    query.equalTo("isClaimed", false);
     query.greaterThanOrEqualTo("startedOn", theDate);
 
     query.find({
@@ -542,7 +536,7 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
           points.set("User", currentUser);
           points.set("DestinationID", destination);
           points.set("Points", 1);
-          points.set("isClaimed", false);
+          points.set("rewardEarned", false);
           points.set("startedOn", theDate);
 
           points.save(null, {
@@ -562,11 +556,26 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
 
 
         } else {
+
           //TODO: update points
           // but before we update, lets compare their point threshhold to see  if the user
           // has earned anything.
 
-          //use pointsTheyNeed variable as the establishments requred points.
+          //use pointsTheyNeed variable as the establishments required points.
+          var pointsTheyHave = pointData.get('Points');
+          var titleMessage = '';
+          var confirmMessage = '';
+          var rewardEarned = false;
+
+          if (pointsTheyHave + 1 == pointsTheyNeed){
+            titleMessage = 'Hurray!'
+            confirmMessage = "You've just earned a reward at ";
+            rewardEarned = true;
+          } else {
+            titleMessage = '+1 Point Earned!'
+            confirmMessage = "You've earned another point at ";
+          }
+
 
           // find out how many points the user currently has there.
           // if less than points they need update. but if after update points are the amount they need show notification that
@@ -574,18 +583,36 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
 
           // if not, then simply update the amount of points and tell how many more they have to go.
 
+          //will need to change out the message text, if they have earned a reward or not. and if they have
+          // earned a reward,use rewardEarned variable to update. When we pull rewards we will look for the Date
+          // and the flag of rewardEarned set to true.
+
+          if (pointsTheyHave == pointsTheyNeed){
+            //they've already earned the reward, so no need to update anything. Maybe just let them know they
+            //can't earn any more points until they redeem their current reward.
+            swal({
+              confirmButtonColor: "#009688",
+              title: "Moove Made!",
+              text: "Did you know you have a reward for " + establishment + " waiting to be used? Hurry and use it before it expires on Monday!",
+              type: "success"
+            })
+            return;
+          }
+
 
           var PointSystem = Parse.Object.extend("Points");
           var pointsystem = new PointSystem();
               pointsystem.id = pointData.id;
               pointsystem.increment("Points");
+              pointsystem.set("rewardEarned",rewardEarned);
               pointsystem.save();
               swal({
                 confirmButtonColor: "#009688",
-                title: "+1 Point Earned!",
-                text: "You've earned another point at " + establishment + "!",
+                title: titleMessage,
+                text: confirmMessage + ' ' + establishment + "!",
                 type: "success"
               })
+
         }
 
       },

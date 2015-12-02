@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+ <head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Moove | What's the moove?</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+  <link type="text/css" rel="stylesheet" href="css/animsition.css">
+  <link type="text/css" rel="stylesheet" href="css/moove.css">
+  <script src="https://use.typekit.net/fpd5bbp.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+ </head>
+ <body style='background-color:black'>
+
+   <div class="animsition">
+     <div class="navbar-fixed">
+       <nav role="navigation"  style="background-color:rgba(01,01,01,1.0);box-shadow:none">
+        <div class="nav-wrapper container" >
+            <a id="logo-container" style="font-family:'Estilo-regular';font-weight:700;color:#ED4877" href="#" class="brand-logo hide-on-med-and-up ">   <img style="margin-top:25%;" height="60px" src="MooveCircle.png"></a>
+        </div>
+      </nav>
+  </div>
+
+
+
+
+  <div class="section no-pad-bot mainview" id="index-banner">
+    <div class="container">
+      <div id="loadingPoints" class="progress" style="margin-top:20px">
+          <div class="indeterminate"></div>
+      </div>
+
+
+
+
+
+      <div class="row pointLocations center-align" style="margin-top:7%;max-height:70vh;overflow-y:scroll;">
+
+
+
+      </div>
+
+
+
+ </div>
+
+
+ <div id="footer" style="padding-left:10px;padding-right:10px;background-color:white">
+
+   <div class="row center-align" style="margin-bottom:0px">
+
+     <div id="goToLocations" class="col s3" style="padding:6px">
+       <i style="font-size:30px" class="material-icons teal-text">location_on</i>
+       <Br>
+       <label>Locations</label>
+     </div>
+     <div id="goToReview" class="col s3" style="padding:6px">
+       <i style="font-size:30px" class="material-icons teal-text">rate_review</i>
+       <Br>
+       <label>Review</label>
+     </div>
+     <div class="col s3 comingsoon" style="padding:6px">
+       <i style="font-size:30px" class="material-icons teal-text">local_play</i>
+       <Br>
+       <label>Points</label>
+     </div>
+     <div class="col s3 comingsoon" style="padding:6px">
+       <i style="font-size:30px;" class="material-icons teal-text">redeem</i>
+       <Br>
+       <label>Redeem</label>
+     </div>
+
+
+   </div>
+
+
+
+
+
+
+
+ </div>
+
+
+
+
+
+ <!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet" style="min-height:235px;padding-top:0px;margin-top:0px">
+  <div id="modaldiv" class="col s12 teal center-align" style="padding:10px">
+
+    <label style='color:white;margin-left:30px'><span id="modalMessage"> Leave a review or rating</span> </label> <i id="closeReviewModal"  class="material-icons right white-text" style="margin-left:0px">close</i>
+  </div>
+  <div id="mooveProgress" class="progress" style="margin-top:0px">
+      <div class="indeterminate"></div>
+  </div>
+  <div class="modal-content center-align" style="padding:10px">
+
+    <div class="input-field col s6 l6" style="margin-top:0px">
+
+      <select id="ddlLocalDestinations" class="browser-default" >
+        <option value="" disabled selected>Select a destination</option>
+
+      </select>
+
+    </div>
+
+    <div class="input-field col s6 l6">
+
+         <input id="input_text" placeholder="Have anything to say?" type="text" maxlength="40" length="40">
+         <a href="index.html" id="errorIcon" style="background-color:#E57373" class="btn btn-large btn-flat waves-effect waves-light white-text" >Back To Locations</a>
+
+       </div>
+       <Br>
+        <div class="row">
+          <div class="col s12" style="padding:0px">
+            <div class="col l6 m6 s6 center-align" style="padding:0px">
+              <div class="s12" style="padding:5px">
+                <a id="btnMooveOn" href=""  class=" waves-effect btn-large waves-light btn-flat grey lighten-1 center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-down white-text"></i> Moove On </a>
+              </div>
+            </div>
+            <div class="col l6 m6 s6 center-align" style="padding:0px">
+              <div class="s12" style="padding:5px">
+              <a id="btnMakeMooves" href="" class=" waves-effect waves-light btn-flat btn-large teal  center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-up white-text "></i> Make Mooves </a>
+              </div>
+            </div>
+          </div>
+        </div>
+    <Br>
+  </div>
+</div>
+
+
+
+   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+   <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAT6SGmUbd4nfyE8zLN68idFD7Buixx-d4&libraries=geometry" type="text/javascript"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+   <script src="js/url.js"></script>
+   <script src="js/animsition.js"></script>
+   <script src="js/date.js"></script>
+
+
+   <script>
+
+    $(document).ready(function(){
+      Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
+
+      $("#loadingPoints").hide();
+
+
+      loadAllPoints();
+      var EstablishmentArray = [];
+
+      function loadAllPoints(){
+        $(".pointLocations").empty();
+
+        //query points by user.
+        var currentUser = Parse.User.current();
+        var theDate = new Date(Date.parse("last monday"));
+        var nextMonday = new Date(Date.parse("next monday"));
+
+        var Points = Parse.Object.extend("Points");
+        var query = new Parse.Query(Points);
+        query.equalTo("User", currentUser);
+        query.greaterThanOrEqualTo("startedOn", theDate);
+        query.find({
+          success: function(results) {
+
+            // Do something with the returned Parse.Object values
+
+
+            if (results.length > 0){
+              for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                var rewardEarned = object.get('rewardEarned');
+                var thePoints = object.get('Points');
+                  var pointsEarned = '';
+                if (thePoints == 1){
+                  pointsEarned = thePoints + ' point! ' ;
+                } else {
+                  pointsEarned = thePoints + ' points! ' ;
+                }
+
+                var content = '';
+                var EstablishmentName = '';
+                var EstablishmentID = object.get('DestinationID');
+
+                EstablishmentArray.push(EstablishmentID)
+
+
+                if (rewardEarned){
+
+
+                content =  "<div class='col s12 m6 l6' style='padding-left:0px;padding-right:0px;border-radius:15px'>" +
+                   " <div class='card-panel' style='background-color:white;padding:0px;'>" +
+                   "<i style='margin-top:25px' class='fa fa-star fa-3x pink-text'></i><Br>"+
+
+                   "   <h4 style='color:#575757;margin-top:10px;font-weight:700' id='"+ EstablishmentID +"'></h4> " +
+
+
+                   " <div class=' white mademoove' style='padding-top:0px;padding-bottom:7px;font-weight:200;border-radius:15px'> " +
+                   "<h5 style='color:#797979'><b id='"+ EstablishmentID +"PROMO'><b></h5>" +
+                   "<span style='font-weight:400;color:#797979;padding-bottom:10px'>Expires: "+ nextMonday.toString('MMMM dS, yyyy') +"</span><Br><Br>" +
+
+                   //"<a style='margin-top:10px' href='#' data-pointID='"+ object.id +"' class='waves-effect  waves-dark btn-flat teal lighten-1 center-align white-text btnReward'><i class='fa fa-star white-text' style='font-size:15px'></i><b> REDEEM </b><i style='font-size:15px' class='fa fa-star white-text'></i></a>"
+                   " </div> " +
+                   " </div> " +
+                   " </div> "
+
+                }
+
+                //TODO: content if reward has been claimed.
+
+                  $(content).appendTo(".pointLocations");
+              }
+              LoadNames();
+
+            } else {
+              var content = "<h4 style='margin-top:35%' class='pink-text'>You don't have any points.<br>Start making Mooves!</h4><Br><a href='index.html' class='waves-effect waves-dark btn-flat btn-large white center-align'>FIND MOOVES</a>"
+              $(content).appendTo(".pointLocations");
+
+            }
+
+
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        }); // end query find
+
+      }
+
+      function LoadNames(){
+
+          $.each(EstablishmentArray, function( index, value ) {
+            var theID = EstablishmentArray[index];
+            //query the Name of establishment
+            var Establishment = Parse.Object.extend("Destinations");
+            var establishmentQuery = new Parse.Query(Establishment);
+            establishmentQuery.get(theID, {
+              success: function(establishment) {
+                // The object was retrieved successfully.
+
+                EstablishmentName = establishment.get('Name');
+
+                $("#"+theID).text(EstablishmentName);
+                $("#"+theID+'PROMO').text(establishment.get('currentPromo'));
+
+              },
+              error: function(object, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and message.
+                  alert(error);
+              }
+            });
+          })
+
+
+      } // end Load Names
+
+      $(".pointLocations").delegate(".btnReward","click",function(){
+
+        swal({
+          confirmButtonColor: "#009688",
+          confirmButtonText:"Redeem",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          title: "<i class='fa fa-star fa-3x pink-text'></i><Br>Hardywood Brewery",
+          text: "<h5><b>1/2 off any appetizer</b></h5><Br>Expires: Monday December 7th, 2015",
+          html:true
+        }, function(){
+          swal("Reward Claimed!", "Your reward been claimed at Hardywood Brewery. Please show this screen to your server.", "success");
+        });
+
+
+
+
+  //      var rewardID = $(this).attr("data-pointID");
+  //      var PointSystem = Parse.Object.extend("Points");
+  //      var pointsystem = new PointSystem();
+  //          pointsystem.id = rewardID;
+  //          pointsystem.set("isClaimed",true);
+  //          pointsystem.save();
+  //          swal({
+  //            confirmButtonColor: "#009688",
+  //            title: "Reward Claimed!",
+  //            text: "You can find your reward by clicking 'Redeem' in the menu at the bottom of your screen.",
+  //            type: "success"
+  //          })
+
+      })
+
+
+      $("#goToReview").click(function(){
+        window.location.href= "index.html";
+      })
+
+    }) // end doc ready
+
+   </script>
+   <script>
+$(document).ready(function() {
+$(".animsition").animsition({
+inClass: 'fade-in',
+outClass: 'fade-out',
+inDuration: 1500,
+outDuration: 800,
+linkElement: '.animsition-link',
+// e.g. linkElement: 'a:not([target="_blank"]):not([href^=#])'
+loading: true,
+loadingParentElement: 'body', //animsition wrapper element
+loadingClass: 'animsition-loading',
+loadingInner: '', // e.g '<img src="loading.svg" />'
+timeout: false,
+timeoutCountdown: 5000,
+onLoadEvent: true,
+browser: [ 'animation-duration', '-webkit-animation-duration'],
+// "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+// The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+overlay : false,
+overlayClass : 'animsition-overlay-slide',
+overlayParentElement : 'body',
+transition: function(url){ window.location.href = url; }
+});
+});
+</script>
+
+
+
+ </div>
+
+ </body>
+</html>
