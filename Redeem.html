@@ -167,6 +167,7 @@
         var Points = Parse.Object.extend("Points");
         var query = new Parse.Query(Points);
         query.equalTo("User", currentUser);
+        query.equalTo("rewardEarned", true);
         query.greaterThanOrEqualTo("startedOn", theDate);
         query.find({
           success: function(results) {
