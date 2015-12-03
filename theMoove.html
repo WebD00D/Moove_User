@@ -65,12 +65,12 @@
        <Br>
        <label>Review</label>
      </div>
-     <div class="col s3 comingsoon" style="padding:6px">
+     <div class="col s3 points" style="padding:6px">
        <i style="font-size:30px" class="material-icons teal-text">local_play</i>
        <Br>
        <label>Points</label>
      </div>
-     <div class="col s3 comingsoon" style="padding:6px">
+     <div class="col s3 redeem" style="padding:6px">
        <i style="font-size:30px;" class="material-icons teal-text">redeem</i>
        <Br>
        <label>Redeem</label>
@@ -296,15 +296,13 @@
           $('#modal1').closeModal();
       })
 
-      $(".comingsoon").click(function(){
-
-        swal({   title: "Stay tuned!",
-        text: "Some cool features are coming soon!",
-        confirmButtonColor: "#009688",
-        confirmButtonText: "Sweet!", });
+      $(".points").click(function(){
+          window.location.href = "https://webD00D.github.io/Moove_User/points.html";
       })
 
-    })
+      $(".redeem").click(function(){
+          window.location.href = "https://webD00D.github.io/Moove_User/Redeem.html";
+      })
 
    </script>
    <script>

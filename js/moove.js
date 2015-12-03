@@ -67,7 +67,7 @@ function findByLocations(area){
     var MooveOnCount = object.get('MooveOnCount');
     var DestinationLatitude = object.get('Latitude');
     var DestinationLongitude = object.get('Longitude');
-    var promo = object.get('currentPromo');
+    var promo = object.get('theSpecial');
     if (typeof promo === 'undefined' || promo === ''){
       promo = '...';
     }
