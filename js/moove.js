@@ -671,7 +671,6 @@ var destinations = new Destinations();
     destinations.increment(Kind);
     destinations.save();
     refreshAfterReview();
-
 }
 
 
