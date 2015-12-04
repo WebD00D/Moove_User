@@ -90,8 +90,8 @@ function findByLocations(area){
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
       "  <span > " +
       "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'>"+ name +"</span> " +
-      "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:7px;font-size:larger'> " + MooveOnCount + " <i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
-      "  <span class='right' style='padding-top:7px;font-size:larger'> "+ MooveCount +" <i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
+      "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:7px;font-size:larger'><span id="+ 'mooveon' + object.id +" > " + MooveOnCount + " </span><i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
+      "  <span class='right' style='padding-top:7px;font-size:larger'><span id="+ 'moove'+ object.id +"> "+ MooveCount +" </span><i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
       " </span> " +
 
       " <ul id="+ object.id +" class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
@@ -115,11 +115,140 @@ function findByLocations(area){
   //alert("Error: " + error.code + " " + error.message);
   }
 
-
   });
-
-
 }
+
+  function refreshSingleView(location){
+
+    //update new Counts
+    getNewCounts(location);
+
+    //clear out the reviews for the ul with the id of the moove made and pull in any new ones excluding the empties.
+    var Review = Parse.Object.extend("Reviews");
+    var query = new Parse.Query(Review);
+    query.equalTo("DestinationID", location);
+    query.descending("createdAt");
+    query.limit(3);
+    query.find({
+    success: function(results) {
+
+      if (results.length > 0){
+        $("#"+location).empty();
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          var datetime = object.get('createdAt');
+
+          var reviewYear = datetime.getFullYear();
+          var reviewMonth = datetime.getMonth() + 1;
+          var reviewDay = datetime.getDate();
+          var reviewHours = datetime.getHours(); //returns 0-23
+          var reviewMinutes = datetime.getMinutes(); //returns 0-59
+
+          var today = new Date();
+          var todaysYear = today.getFullYear();
+          var todaysMonth = today.getMonth() +1;
+          var todaysday = today.getDate();
+
+          var currentTime = new Date(todaysYear + '/' + todaysMonth + '/' + todaysday + ' ' + today.getHours() + ':' + today.getMinutes());
+        //  console.log(currentTime);
+          var commentTime = new Date(reviewYear + '/' + reviewMonth + '/' + reviewDay + ' ' + reviewHours + ':' + reviewMinutes);
+          var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
+
+          var resultInMinutes = Math.round(difference / 60000);
+        //  console.log('total minutes' + resultInMinutes);
+        //  console.log('total hours' + Math.floor(resultInMinutes / 60));
+        //  console.log('remaining minutes' +  resultInMinutes % 60);
+
+
+          var totalhours = Math.floor( resultInMinutes / 60 );
+          var remainingMinutes = resultInMinutes % 60
+
+
+          if (totalhours === 0){
+            if (remainingMinutes < 1){
+              timetext = 'just now..' ;
+            } else {
+              if (remainingMinutes === 1){
+               timetext = remainingMinutes + ' minute ago..' ;
+             }
+             else {
+               timetext = remainingMinutes + ' minutes ago..' ;
+             }
+            }
+
+
+          } else {
+
+            if ( reviewMinutes === 0 ){
+              if (totalhours === 1){
+                timetext = totalhours + ' hour ago..';
+              } else {
+                timetext = totalhours + ' hours ago..';
+              }
+
+            } else {
+              if (totalhours === 1){
+                  if (remainingMinutes === 1){
+                    timetext = totalhours + ' hour, ' + remainingMinutes + ' minute ago..';
+                  } else {
+                    timetext = totalhours + ' hour, ' + remainingMinutes + ' minutes ago..';
+                  }
+
+              } else {
+                  timetext = totalhours + ' hours, ' + remainingMinutes + ' minutes ago..';
+              }
+
+            }
+          }
+
+
+          var listitem =  " <li class='collection-item' style='text-align:justify;'><i class='fa fa-quote-left pink-text'></i> " +
+            object.get('Review') + ' ' +
+           "     <Br> " +
+           "  <small class='pink-text'> " + timetext + "</small> " +
+           "   </li> "
+
+
+           if (totalhours < 24){
+             var theReview = object.get('Review');
+             if (theReview != ''){
+               $(listitem).appendTo("#"+location);
+             }
+
+           }
+
+
+        }
+      }
+
+
+    },
+    error:function(object,error){
+
+    }});
+
+
+
+  } // end refresh single view
+
+  function getNewCounts(location){
+    var Destinations = Parse.Object.extend("Destinations");
+    var query = new Parse.Query(Destinations);
+    query.get(location, {
+   success: function(destination) {
+
+     $("#moove"+location).text(destination.get('MooveCount'));
+     $("#mooveon"+location).text(destination.get('MooveOnCount'));
+
+
+   },
+  error: function(object, error) {
+    // The object was not retrieved successfully.
+    // error is a Parse.Error with an error code and message.
+  }
+  });
+  } // end get New Counts
+
 
   function LoadReviews(){
 
@@ -670,16 +799,9 @@ var destinations = new Destinations();
     destinations.id = LocationID;
     destinations.increment(Kind);
     destinations.save();
-    refreshAfterReview();
+    refreshSingleView(LocationID);
 }
 
-
-function refreshAfterReview(){
-  //location.reload(true);
-  var theLocation = url('?location');
-  findByLocations(theLocation);
-
-}
 
 
 
