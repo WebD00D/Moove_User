@@ -67,9 +67,14 @@ function findByLocations(area){
     var MooveOnCount = object.get('MooveOnCount');
     var DestinationLatitude = object.get('Latitude');
     var DestinationLongitude = object.get('Longitude');
+    var isMooveParnter = object.get('isMoovePartner');
     var promo = object.get('theSpecial');
+    var isPartnerIcon = "<i class='fa fa-star pink-text'></i> ";
     if (typeof promo === 'undefined' || promo === ''){
       promo = '...';
+    }
+    if (typeof isMooveParnter === 'undefined' || isMooveParnter == false){
+     isPartnerIcon = '';
     }
 
     //TO DO: Get this data returned so we can parse through and set the html up
@@ -89,7 +94,7 @@ function findByLocations(area){
     var content = "<div class='col s12 m6 l6' style='padding-left:0px;padding-right:0px'>" +
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
       "  <span > " +
-      "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'><b>"+ name +"</b></span> " +
+      "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'>"+ isPartnerIcon +"<b>"+ name +"</b></span> " +
       "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:7px;font-size:larger'><span id="+ 'mooveon' + object.id +" > " + MooveOnCount + " </span><i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
       "  <span class='right' style='padding-top:7px;font-size:larger'><span id="+ 'moove'+ object.id +"> "+ MooveCount +" </span><i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
       " </span> " +
