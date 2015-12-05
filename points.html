@@ -173,9 +173,9 @@
                 var thePoints = object.get('Points');
                   var pointsEarned = '';
                 if (thePoints == 1){
-                  pointsEarned = thePoints + ' point! ' ;
+                  pointsEarned = thePoints + ' point ' ;
                 } else {
-                  pointsEarned = thePoints + ' points! ' ;
+                  pointsEarned = thePoints + ' points ' ;
                 }
 
                 var content = '';
@@ -189,7 +189,7 @@
 
                 content =  "<div class='col s12 m6 l6' style='padding-left:0px;padding-right:0px'>" +
                    " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
-                   "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'><span id='"+ EstablishmentID +"'></span></span> " +
+                   "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'><b><span id='"+ EstablishmentID +"'></span></b></span> " +
                    " <ul class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
 
                    " <div class=' teal mademoove' style='padding-top:7px;padding-bottom:7px;font-weight:200'> " +
@@ -202,11 +202,11 @@
 
                   content = "<div class='col s12 m6 l6' style='padding-left:0px;padding-right:0px'>" +
                    " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
-                   "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'><span id='"+ EstablishmentID +"'></span></span> " +
+                   "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'><b><span id='"+ EstablishmentID +"'></span></b></span> " +
                    " <ul class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
 
                    " <div class=' teal mademoove' style='padding-top:7px;padding-bottom:7px;font-weight:200'> " +
-                   "<label class='white-text ' style='font-size:15px;padding-left:10px'><i class='fa fa-star'></i><span > "+ pointsEarned  +"</span><i class='fa fa-star'></i></label>" +
+                   "<label class='white-text ' style='font-size:15px;padding-left:10px'><i class='fa fa-star'></i><b><span > "+ pointsEarned  +"</span></b><i class='fa fa-star'></i></label>" +
                    " </div> " +
                    " </div> " +
                    " </div> "
