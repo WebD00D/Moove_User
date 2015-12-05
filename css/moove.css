@@ -48,3 +48,7 @@ body{
  .input-field .prefix.active {
    color: #ED4877;
  }
+
+ @media screen and (device-aspect-ratio: 40/71) {
+   
+ }
