@@ -68,7 +68,34 @@ function findByLocations(area){
     var DestinationLatitude = object.get('Latitude');
     var DestinationLongitude = object.get('Longitude');
     var isMooveParnter = object.get('isMoovePartner');
-    var promo = object.get('theSpecial');
+    var promo;
+    var theDateToday = new Date()
+    var theday = theDateToday.getDay();
+    switch(theday) {
+    case 0:
+        promo = object.get('sunday');
+        break;
+    case 1:
+          promo = object.get('monday');
+        break;
+        case 2:
+              promo = object.get('tuesday');
+            break;
+            case 3:
+                  promo = object.get('wednesday');
+                break;
+                case 4:
+                      promo = object.get('thursday');
+                    break;
+                    case 5:
+                          promo = object.get('friday');
+                        break;
+                        case 6:
+                              promo = object.get('saturday');
+                            break;
+                              default:
+                                promo = object.get('theSpecial');
+                                                    }
     var isPartnerIcon = "<i class='fa fa-star pink-text'></i> ";
     if (typeof promo === 'undefined' || promo === ''){
       promo = '...';
@@ -806,7 +833,6 @@ var destinations = new Destinations();
     destinations.save();
     refreshSingleView(LocationID);
 }
-
 
 
 
