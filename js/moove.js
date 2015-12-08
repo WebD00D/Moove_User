@@ -649,7 +649,7 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
     // check to see if user has made moove to a location since monday.
     var currentUser = Parse.User.current();
     var weekStart,theUser,theDestination;
-    var theDate = new Date(Date.parse("last monday"));
+    var theDate = new Date(Date.parse("last sunday"));
     var MoovePoints = Parse.Object.extend("Points");
     var query = new Parse.Query(MoovePoints);
     query.equalTo("User", currentUser);
@@ -697,6 +697,7 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
 
           //use pointsTheyNeed variable as the establishments required points.
           var pointsTheyHave = pointData.get('Points');
+
           var titleMessage = '';
           var confirmMessage = '';
           var rewardEarned = false;

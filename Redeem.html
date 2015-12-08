@@ -155,9 +155,8 @@
 
         //query points by user.
         var currentUser = Parse.User.current();
-        var theDate = new Date(Date.parse("last monday"));
+        var theDate = new Date(Date.parse("last sunday"));
         var nextMonday = new Date(Date.parse("next monday"));
-
         var Points = Parse.Object.extend("Points");
         var query = new Parse.Query(Points);
         query.equalTo("User", currentUser);
