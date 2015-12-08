@@ -642,7 +642,6 @@ $("#btnMakeMooves").click(function(e){
 
 function addPoints(destination,isPartner,establishment,pointsTheyNeed){
 
-
   var pointData;
   // check Moove Points to see if user can earn points at the location.
   if (isPartner === 'true'){
