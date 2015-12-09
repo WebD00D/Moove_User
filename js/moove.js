@@ -372,7 +372,7 @@ function findByLocations(area){
              "   </li> "
 
 
-             if (totalhours < 24){
+             if (totalhours < 12){
                var theReview = object.get('Review');
                if (theReview != ''){
                  $(listitem).appendTo("#"+theID);
