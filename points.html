@@ -159,6 +159,7 @@
         var query = new Parse.Query(Points);
         query.equalTo("User", currentUser);
         query.greaterThanOrEqualTo("startedOn", theDate);
+        query.equalTo("isClaimed", false);
         query.find({
           success: function(results) {
 

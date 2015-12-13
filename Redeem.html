@@ -161,6 +161,7 @@
         var query = new Parse.Query(Points);
         query.equalTo("User", currentUser);
         query.equalTo("rewardEarned", true);
+        query.equalTo("isClaimed", false);
         query.greaterThanOrEqualTo("startedOn", theDate);
         query.find({
           success: function(results) {
@@ -201,7 +202,7 @@
                    "<h5 style='color:#797979'><b id='"+ EstablishmentID +"PROMO'><b></h5>" +
                    "<span style='font-weight:400;color:#797979;padding-bottom:10px'>Expires: "+ nextMonday.toString('MMMM dS, yyyy') +"</span><Br><Br>" +
 
-                   //"<a style='margin-top:10px' href='#' data-pointID='"+ object.id +"' class='waves-effect  waves-dark btn-flat teal lighten-1 center-align white-text btnReward'><i class='fa fa-star white-text' style='font-size:15px'></i><b> REDEEM </b><i style='font-size:15px' class='fa fa-star white-text'></i></a>"
+                   "<a style='margin-top:1px' href='#' data-pointID='"+ object.id +"' class='waves-effect  btn-large waves-dark btn-flat pink lighten-1 center-align white-text btnReward'><b> REDEEM </b></a>"+
                    " </div> " +
                    " </div> " +
                    " </div> "
@@ -258,36 +259,42 @@
       } // end Load Names
 
       $(".pointLocations").delegate(".btnReward","click",function(){
+        var rewardID = $(this).attr("data-pointID");
+
 
         swal({
-          confirmButtonColor: "#009688",
+          confirmButtonColor: "#ec407a",
           confirmButtonText:"Redeem",
           showCancelButton: true,
           closeOnConfirm: false,
-          title: "<i class='fa fa-star fa-3x pink-text'></i><Br>Hardywood Brewery",
-          text: "<h5><b>1/2 off any appetizer</b></h5><Br>Expires: Monday December 7th, 2015",
+          type:'warning',
+          title: "Are you sure?",
+          text: "<b>Please show to your bartender or server.</b><Br><Br><small>By tapping 'Redeem', you're reward will be applied, and you will not be able to view or use it again.</small>",
           html:true
         }, function(){
-          swal("Reward Claimed!", "Your reward been claimed at Hardywood Brewery. Please show this screen to your server.", "success");
+          var PointSystem = Parse.Object.extend("Points");
+          var pointsystem = new PointSystem();
+              pointsystem.id = rewardID;
+              pointsystem.set("isClaimed",true);
+              pointsystem.save();
+          swal({
+            confirmButtonColor: "#ec407a",
+            confirmButtonText:"Cool",
+            showCancelButton: false,
+            closeOnConfirm: false,
+            type:'success',
+            title: "Reward Claimed!",
+            text: "",
+            html:true
+          },function(){
+            window.location.reload();
+          });
+
+
+
         });
 
-
-
-
-  //      var rewardID = $(this).attr("data-pointID");
-  //      var PointSystem = Parse.Object.extend("Points");
-  //      var pointsystem = new PointSystem();
-  //          pointsystem.id = rewardID;
-  //          pointsystem.set("isClaimed",true);
-  //          pointsystem.save();
-  //          swal({
-  //            confirmButtonColor: "#009688",
-  //            title: "Reward Claimed!",
-  //            text: "You can find your reward by clicking 'Redeem' in the menu at the bottom of your screen.",
-  //            type: "success"
-  //          })
-
-      })
+      }) //end btnRewar click event
 
 
       $("#goToReview").click(function(){

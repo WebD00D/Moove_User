@@ -633,7 +633,7 @@ $("#btnMakeMooves").click(function(e){
         var resultInMinutes = Math.round(difference / 60000);
 
 
-        if (resultInMinutes <= 5){
+        if (resultInMinutes <= 30){
           canLeaveReview = false;
         }else {
           canLeaveReview = true;
@@ -680,6 +680,7 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
     var query = new Parse.Query(MoovePoints);
     query.equalTo("User", currentUser);
     query.equalTo("DestinationID", destination);
+
     query.greaterThanOrEqualTo("startedOn", theDate);
 
     query.find({
@@ -690,6 +691,8 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
         if (results.length < 1){
           //create new record and add point
 
+
+
           var Points = Parse.Object.extend("Points");
           var points = new Points();
 
@@ -697,6 +700,7 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
           points.set("DestinationID", destination);
           points.set("Points", 1);
           points.set("rewardEarned", false);
+          points.set("isClaimed", false);
           points.set("startedOn", theDate);
 
           points.save(null, {
@@ -748,13 +752,25 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
           // earned a reward,use rewardEarned variable to update. When we pull rewards we will look for the Date
           // and the flag of rewardEarned set to true.
 
+
+          var message = '';
+
+          var isRewardClaimed = pointData.get('isClaimed');
+          if (isRewardClaimed){
+
+              message = "Thanks for making all the mooves you have at " + establishment + "!  Start again next Monday to earn another reward!";
+          } else {
+
+            message = "Did you know you have a reward for " + establishment + " waiting to be used? Hurry and use it before it expires on Monday!"
+          }
+
           if (pointsTheyHave == pointsTheyNeed){
             //they've already earned the reward, so no need to update anything. Maybe just let them know they
             //can't earn any more points until they redeem their current reward.
             swal({
               confirmButtonColor: "#009688",
               title: "Moove Made!",
-              text: "Did you know you have a reward for " + establishment + " waiting to be used? Hurry and use it before it expires on Monday!",
+              text: message,
               type: "success"
             })
             return;
