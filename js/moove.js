@@ -125,18 +125,21 @@ function findByLocations(area){
     var content = "<div class='col s12' style='padding-left:0px;padding-right:0px'>" +
 
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px;margin:0px'>" +
-        "<div style='min-height:200px;background-image:url("+ object.get('profilePic') +");background-size:cover'>"+
-          "  <span class='white-text' style='padding:7px;font-size:x-large;font-weight:200;background-color:rgba(33,33,33,0.7)'>"+ isPartnerIcon +"<b>"+ name +"</b>"+
+        "<div style='min-height:200px;background-image:url("+ object.get('profilePic') +");background-size:cover;'>"+
 
-          "</span> " +
+        "<div class='white-text' style='padding:5px;background-color:rgba(01,01,01,0.7);font-size:large'>" +
+         isPartnerIcon +"<b>"+ name +"</b>" +
+         "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:0px;font-size:larger'><span style='color:white' id="+ 'mooveon' + object.id +" > " + MooveOnCount + " </span><i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
+         "  <span class='right' style='padding-top:0px;font-size:larger'><span style='color:white' id="+ 'moove'+ object.id +"> "+ MooveCount +" </span><i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
+        "</div>" +
+
       "  </div>"+
 
       " <ul id="+ object.id +" class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
 
       " <div data-name='"+ name +"' data-objectid="+ object.id +" class='  mademoove' style='padding-top:7px;padding-bottom:7px;font-weight:200;background-color:rgba(33,33,33,1.0)'> " +
       "<label class='white-text ' style='font-size:17px;padding-left:10px'><i class='fa fa-bullhorn'></i><span style='padding-left:10px;'>"+ promo +"</span></label>" +
-      "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:0px;font-size:larger'><span style='color:white' id="+ 'mooveon' + object.id +" > " + MooveOnCount + " </span><i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
-      "  <span class='right' style='padding-top:0px;font-size:larger'><span style='color:white' id="+ 'moove'+ object.id +"> "+ MooveCount +" </span><i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
+
       " </div> " +
       " </div> " +
       " </div> " +
