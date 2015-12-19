@@ -118,18 +118,25 @@ function findByLocations(area){
       MooveOnCount = 0;
     }
 
-    var content = "<div class='col s12 m6 l6' style='padding-left:0px;padding-right:0px'>" +
-      " <div class='card-panel' style='background-color:#f5f5f5;padding:0px'>" +
-      "  <span > " +
-      "  <span class='teal-text' style='padding-left:7px;font-size:x-large;font-weight:200'>"+ isPartnerIcon +"<b>"+ name +"</b></span> " +
-      "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:7px;font-size:larger'><span id="+ 'mooveon' + object.id +" > " + MooveOnCount + " </span><i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
-      "  <span class='right' style='padding-top:7px;font-size:larger'><span id="+ 'moove'+ object.id +"> "+ MooveCount +" </span><i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
-      " </span> " +
+    var content = "<div class='col s12' style='padding-left:2px;padding-right:2px'>" +
+
+      " <div class='card-panel' style='background-color:#f5f5f5;padding:0px;'>" +
+        "<div style='min-height:200px;background-image:url("+ object.get('profilePic') +");background-size:cover'>"+
+          "  <span class='white-text' style='padding:7px;font-size:x-large;font-weight:200;background-color:rgba(01,01,01,0.5)'>"+ isPartnerIcon +"<b>"+ name +"</b>"+
+
+          "</span> " +
+      "  </div>"+
+
+
+
+
 
       " <ul id="+ object.id +" class='collection' style='margin-top:0px;margin-bottom:0px'> </ul> " +
 
-      " <div data-name='"+ name +"' data-objectid="+ object.id +" class=' teal mademoove' style='padding-top:7px;padding-bottom:7px;font-weight:200'> " +
-      "<label class='white-text ' style='font-size:15px;padding-left:10px'><i class='fa fa-bullhorn'></i><span style='padding-left:10px;'><b>"+ promo +"</b></span></label>" +
+      " <div data-name='"+ name +"' data-objectid="+ object.id +" class=' grey darken-4 mademoove' style='padding-top:7px;padding-bottom:7px;font-weight:200'> " +
+      "<label class='white-text ' style='font-size:17px;padding-left:10px'><i class='fa fa-bullhorn'></i><span style='padding-left:10px;'>"+ promo +"</span></label>" +
+      "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:0px;font-size:larger'><span style='color:white' id="+ 'mooveon' + object.id +" > " + MooveOnCount + " </span><i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
+      "  <span class='right' style='padding-top:0px;font-size:larger'><span style='color:white' id="+ 'moove'+ object.id +"> "+ MooveCount +" </span><i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
       " </div> " +
       " </div> " +
       " </div> " +
@@ -541,8 +548,7 @@ $("#btnMooveOn").click(function(e){
 
         var resultInMinutes = Math.round(difference / 60000);
 
-
-        if (resultInMinutes <= 5){
+        if (resultInMinutes <= 30){
           canLeaveReview = false;
         }else {
           canLeaveReview = true;
