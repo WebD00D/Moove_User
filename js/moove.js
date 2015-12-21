@@ -122,7 +122,7 @@ function findByLocations(area){
       MooveOnCount = 0;
     }
 
-    var content = "<div class='col s12' style='padding-left:0px;padding-right:0px'>" +
+    var content = "<div data-address='"+ object.get('address') +"' data-name='"+ name +"' class='col s12 establishmentpanel' style='padding-left:0px;padding-right:0px'>" +
 
       " <div class='card-panel' style='background-color:#f5f5f5;padding:0px;margin:0px'>" +
         "<div style='min-height:200px;background-image:url("+ object.get('profilePic') +");background-size:cover;'>"+
