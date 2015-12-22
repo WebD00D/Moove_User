@@ -238,51 +238,66 @@
 
         function checkLocation(){
 
-          navigator.geolocation.watchPosition(function(position) {
-            // Update latitude and longitude
-            userLatitude = position.coords.latitude;
-            userLongitude = position.coords.longitude;
-          });
+          $("#mooveProgress").hide();
+          $("#modaldiv").removeClass("red").addClass("teal");
+          $("#modaldiv").removeClass("lighten-2");
+          $("#modalMessage").text("What's the Moove for " +$("#ddlLocalDestinations option:selected").text() + "?");
+          $("#btnMakeMooves").show();
+          $("#btnMooveOn").show();
+          $("#btnMakeMooves").attr("data-objectid",theObject);
+          $("#btnMooveOn").attr("data-objectid",theObject);
+          $("#btnMakeMooves").attr("data-isMoovePartner",moovePartner);
+          $("#btnMooveOn").attr("data-isMoovePartner",moovePartner);
+          $("#btnMakeMooves").attr("data-pointsNeeded",pointsNeeded);
+          $("#btnMooveOn").attr("data-pointsNeeded",pointsNeeded);
+          $("#input_text").show();
+          $("#errorIcon").hide();
 
-          if(typeof userLatitude === 'undefined' || typeof userLongitude === 'undefined') {
-             $("#modalMessage").text("Verifying your location...");
-             setTimeout(function(){ checkLocation(); }, 500); // Try to submit form after timeout
-             return false;
-           } else {
+          // navigator.geolocation.watchPosition(function(position) {
+          //   // Update latitude and longitude
+          //   userLatitude = position.coords.latitude;
+          //   userLongitude = position.coords.longitude;
+          // });
+
+          // if(typeof userLatitude === 'undefined' || typeof userLongitude === 'undefined') {
+          //    $("#modalMessage").text("Verifying your location...");
+          //    setTimeout(function(){ checkLocation(); }, 500); // Try to submit form after timeout
+          //    return false;
+          //  } else {
              // Continue with location found...
-             $("#modalMessage").text("Checking distance from " + $("#ddlLocalDestinations option:selected").text() + '...');
+             //$("#modalMessage").text("Checking distance from " + $("#ddlLocalDestinations option:selected").text() + '...');
              //now make call to Google API to get distance.
-             var origin1 = new google.maps.LatLng(userLatitude, userLongitude);
-             var destinationA = new google.maps.LatLng(latitude, longitude);
-             var distanceBetween = google.maps.geometry.spherical.computeDistanceBetween(origin1,destinationA)
-              if (distanceBetween > 304.8){ //that's 1000 feet in meters
-                $("#mooveProgress").hide();
-                $("#modaldiv").removeClass("teal").addClass("red");
-                $("#modaldiv").addClass("lighten-2");
-                $("#modalMessage").text("Hmm..Looks like you aren't at " +$("#ddlLocalDestinations option:selected").text());
-                $("#btnMakeMooves").hide();
-                $("#btnMooveOn").hide();
-                $("#input_text").hide();
-                $("#errorIcon").show()
-              } else {
-                $("#mooveProgress").hide();
-                $("#modaldiv").removeClass("red").addClass("teal");
-                $("#modaldiv").removeClass("lighten-2");
-                $("#modalMessage").text("What's the Moove for " +$("#ddlLocalDestinations option:selected").text() + "?");
-                $("#btnMakeMooves").show();
-                $("#btnMooveOn").show();
-                $("#btnMakeMooves").attr("data-objectid",theObject);
-                $("#btnMooveOn").attr("data-objectid",theObject);
-                $("#btnMakeMooves").attr("data-isMoovePartner",moovePartner);
-                $("#btnMooveOn").attr("data-isMoovePartner",moovePartner);
-                $("#btnMakeMooves").attr("data-pointsNeeded",pointsNeeded);
-                $("#btnMooveOn").attr("data-pointsNeeded",pointsNeeded);
-                $("#input_text").show();
-                $("#errorIcon").hide();
+            //  var origin1 = new google.maps.LatLng(userLatitude, userLongitude);
+            //  var destinationA = new google.maps.LatLng(latitude, longitude);
+            //  var distanceBetween = google.maps.geometry.spherical.computeDistanceBetween(origin1,destinationA)
+              // if (distanceBetween > 304.8){ //that's 1000 feet in meters
+              //   $("#mooveProgress").hide();
+              //   $("#modaldiv").removeClass("teal").addClass("red");
+              //   $("#modaldiv").addClass("lighten-2");
+              //   $("#modalMessage").text("Hmm..Looks like you aren't at " +$("#ddlLocalDestinations option:selected").text());
+              //   $("#btnMakeMooves").hide();
+              //   $("#btnMooveOn").hide();
+              //   $("#input_text").hide();
+              //   $("#errorIcon").show()
+              // } else {
+              //   $("#mooveProgress").hide();
+              //   $("#modaldiv").removeClass("red").addClass("teal");
+              //   $("#modaldiv").removeClass("lighten-2");
+              //   $("#modalMessage").text("What's the Moove for " +$("#ddlLocalDestinations option:selected").text() + "?");
+              //   $("#btnMakeMooves").show();
+              //   $("#btnMooveOn").show();
+              //   $("#btnMakeMooves").attr("data-objectid",theObject);
+              //   $("#btnMooveOn").attr("data-objectid",theObject);
+              //   $("#btnMakeMooves").attr("data-isMoovePartner",moovePartner);
+              //   $("#btnMooveOn").attr("data-isMoovePartner",moovePartner);
+              //   $("#btnMakeMooves").attr("data-pointsNeeded",pointsNeeded);
+              //   $("#btnMooveOn").attr("data-pointsNeeded",pointsNeeded);
+              //   $("#input_text").show();
+              //   $("#errorIcon").hide();
+              //
+              // }
 
-              }
-
-           }
+          // }
         }
 
 
