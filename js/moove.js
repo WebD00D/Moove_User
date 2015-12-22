@@ -570,8 +570,8 @@ $("#btnMooveOn").click(function(e){
       incrementTotals("MooveOnCount",location);
       addPoints(location,isParnter,$("#ddlLocalDestinations option:selected").text(),pointsNeeded);
     } else {
-      $("#modaldiv").removeClass("teal").addClass("red");
-      $("#modaldiv").addClass("lighten-2");
+      $("#modaldiv").removeClass("pink").addClass("red");
+      //$("#modaldiv").addClass("lighten-2");
       $("#modalMessage").text("You just rated "+ $("#ddlLocalDestinations option:selected").text() + "!");
     }
 
@@ -662,8 +662,8 @@ $("#btnMakeMooves").click(function(e){
       incrementTotals("MooveCount",location);
       addPoints(location,isParnter,$("#ddlLocalDestinations option:selected").text(),pointsNeeded);
     } else {
-      $("#modaldiv").removeClass("teal").addClass("red");
-      $("#modaldiv").addClass("lighten-2");
+      $("#modaldiv").removeClass("pink").addClass("red");
+      //$("#modaldiv").addClass("lighten-2");
       $("#modalMessage").text("You just rated "+ $("#ddlLocalDestinations option:selected").text() + "!");
     }
 
