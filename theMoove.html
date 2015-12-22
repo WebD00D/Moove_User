@@ -101,9 +101,9 @@
 
  <!-- Modal Structure -->
 <div id="modal1" class="modal bottom-sheet" style="min-height:235px;padding-top:0px;margin-top:0px">
-  <div id="modaldiv" class="col s12 teal center-align" style="padding:10px">
+  <div id="modaldiv" class="col s12 pink center-align" style="padding:10px">
 
-    <label style='color:white;margin-left:30px'><span id="modalMessage"> Leave a review or rating</span> </label> <i id="closeReviewModal"  class="material-icons right white-text" style="margin-left:0px">close</i>
+    <label style='color:white;margin-left:30px;'><span id="modalMessage"> Leave a review or rating</span> </label> <i id="closeReviewModal"  class="material-icons right white-text" style="margin-left:0px">close</i>
   </div>
   <div id="mooveProgress" class="progress" style="margin-top:0px">
       <div class="indeterminate"></div>
@@ -130,12 +130,12 @@
           <div class="col s12" style="padding:0px">
             <div class="col l6 m6 s6 center-align" style="padding:0px">
               <div class="s12" style="padding:5px">
-                <a id="btnMooveOn" href=""  class=" waves-effect btn-large waves-light btn-flat grey lighten-1 center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-down white-text"></i> Moove On </a>
+                <a id="btnMooveOn" href=""  class=" waves-effect btn-large waves-light btn-flat grey lighten-2 center-align grey-text text-darken-3 " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-down grey-text text-darken-3"></i> Moove On </a>
               </div>
             </div>
             <div class="col l6 m6 s6 center-align" style="padding:0px">
               <div class="s12" style="padding:5px">
-              <a id="btnMakeMooves" href="" class=" waves-effect waves-light btn-flat btn-large teal  center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-up white-text "></i> Make Mooves </a>
+              <a id="btnMakeMooves" href="" class=" waves-effect waves-light btn-flat btn-large pink   center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-up white-text "></i> Make Mooves </a>
               </div>
             </div>
           </div>
@@ -205,8 +205,8 @@
         $("#ddlLocalDestinations").change(function(){
 
 
-          $("#modaldiv").removeClass("red").addClass("teal");
-          $("#modaldiv").removeClass("lighten-2");
+          $("#modaldiv").removeClass("red").addClass("pink");
+          // $("#modaldiv").removeClass("lighten-2");
 
           var currentUser = Parse.User.current();
 
@@ -227,7 +227,7 @@
 
           } else {
             /* geolocation IS NOT available */
-            $("#modaldiv").removeClass("teal").addClass("red");
+            $("#modaldiv").removeClass("pink").addClass("red");
             $("#modaldiv").addClass("lighten-2");
             $("#modalMessage").text("We're having trouble finding your location.");
             return;
@@ -239,7 +239,7 @@
         function checkLocation(){
 
           $("#mooveProgress").hide();
-          $("#modaldiv").removeClass("red").addClass("teal");
+          $("#modaldiv").removeClass("red").addClass("pink");
           $("#modaldiv").removeClass("lighten-2");
           $("#modalMessage").text("What's the Moove for " +$("#ddlLocalDestinations option:selected").text() + "?");
           $("#btnMakeMooves").show();

@@ -500,14 +500,14 @@ function GetCurrentLocation(latEnd, longEnd){
 var theReviewDate;
 
 $("#btnMooveOn").click(function(e){
-  $("#modaldiv").removeClass("red").addClass("teal");
-  $("#modaldiv").removeClass("lighten-2");
+  $("#modaldiv").removeClass("red").addClass("pink");
+
   $("#modalMessage").text("Saving...");
   var canLeaveReview = false;
   e.preventDefault();
   if ($("#ddlLocalDestinations option:selected").text() === 'Select a destination'){
-    $("#modaldiv").removeClass("teal").addClass("red");
-    $("#modaldiv").addClass("lighten-2");
+    $("#modaldiv").removeClass("pink").addClass("red");
+
     $("#modalMessage").text("Please select a location!");
     return;
   }
@@ -590,14 +590,14 @@ $("#btnMooveOn").click(function(e){
 
 
 $("#btnMakeMooves").click(function(e){
-  $("#modaldiv").removeClass("red").addClass("teal");
-  $("#modaldiv").removeClass("lighten-2");
+  $("#modaldiv").removeClass("red").addClass("pink");
+  // $("#modaldiv").removeClass("lighten-2");
   $("#modalMessage").text("Saving...");
   var canLeaveReview = false;
   e.preventDefault();
   if ($("#ddlLocalDestinations option:selected").text() === 'Select a destination'){
-    $("#modaldiv").removeClass("teal").addClass("red");
-    $("#modaldiv").addClass("lighten-2");
+    $("#modaldiv").removeClass("pink").addClass("red");
+    // $("#modaldiv").addClass("lighten-2");
     $("#modalMessage").text("Please select a location!");
     return;
   }
