@@ -97,11 +97,9 @@
   </div>
 
 
-
-
  <!-- Modal Structure -->
 <div id="modal1" class="modal bottom-sheet" style="min-height:235px;padding-top:0px;margin-top:0px">
-  <div id="modaldiv" class="col s12 pink center-align" style="padding:10px">
+  <div id="modaldiv" class="col s12 teal center-align" style="padding:10px">
 
     <label style='color:white;margin-left:30px;'><span id="modalMessage"> Leave a review or rating</span> </label> <i id="closeReviewModal"  class="material-icons right white-text" style="margin-left:0px">close</i>
   </div>
@@ -111,16 +109,12 @@
   <div class="modal-content center-align" style="padding:10px">
 
     <div class="input-field col s6 l6" style="margin-top:0px">
-
       <select id="ddlLocalDestinations" class="browser-default" >
         <option value="" disabled selected>Select a destination</option>
-
       </select>
-
     </div>
 
     <div class="input-field col s6 l6">
-
          <input id="input_text" placeholder="Have anything to say?" type="text" maxlength="40" length="40">
          <a href="index.html" id="errorIcon" style="background-color:#E57373" class="btn btn-large btn-flat waves-effect waves-light white-text" >Back To Locations</a>
 
@@ -135,7 +129,7 @@
             </div>
             <div class="col l6 m6 s6 center-align" style="padding:0px">
               <div class="s12" style="padding:5px">
-              <a id="btnMakeMooves" href="" class=" waves-effect waves-light btn-flat btn-large pink   center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-up white-text "></i> Make Mooves </a>
+              <a id="btnMakeMooves" href="" class=" waves-effect waves-light btn-flat btn-large teal   center-align white-text " style="width:100%;padding-left:10px;padding-right:10px"><i style="font-size:20px" class="fa fa-thumbs-o-up white-text "></i> Make Mooves </a>
               </div>
             </div>
           </div>
@@ -205,7 +199,7 @@
         $("#ddlLocalDestinations").change(function(){
 
 
-          $("#modaldiv").removeClass("red").addClass("pink");
+          $("#modaldiv").removeClass("red").addClass("teal");
           // $("#modaldiv").removeClass("lighten-2");
 
           var currentUser = Parse.User.current();
@@ -227,7 +221,7 @@
 
           } else {
             /* geolocation IS NOT available */
-            $("#modaldiv").removeClass("pink").addClass("red");
+            $("#modaldiv").removeClass("teal").addClass("red");
             $("#modaldiv").addClass("lighten-2");
             $("#modalMessage").text("We're having trouble finding your location.");
             return;
@@ -239,7 +233,7 @@
         function checkLocation(){
 
           $("#mooveProgress").hide();
-          $("#modaldiv").removeClass("red").addClass("pink");
+          $("#modaldiv").removeClass("red").addClass("teal");
           $("#modaldiv").removeClass("lighten-2");
           $("#modalMessage").text("What's the Moove for " +$("#ddlLocalDestinations option:selected").text() + "?");
           $("#btnMakeMooves").show();

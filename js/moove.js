@@ -100,7 +100,7 @@ function findByLocations(area){
                               default:
                                 promo = object.get('theSpecial');
                                                     }
-    var isPartnerIcon = "<i class='fa fa-star pink-text'></i> ";
+    var isPartnerIcon = "<i class='fa fa-star teal-text'></i> ";
     if (typeof promo === 'undefined' || promo === ''){
       promo = '...';
     }
@@ -112,7 +112,6 @@ function findByLocations(area){
     //getEstimatesForUserLocation(userLatitude,userLongitude,DestinationLatitude,DestinationLongitude,object.id);
 
     LocalDestinations.push(object.id)
-
 
 
     if (typeof MooveCount === 'undefined' ){
@@ -129,8 +128,8 @@ function findByLocations(area){
 
         "<div class='white-text' style='padding:5px;background-color:rgba(01,01,01,0.7);font-size:large'>" +
          isPartnerIcon +"<b>"+ name +"</b>" +
-         "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:0px;font-size:larger'><span style='color:white' id="+ 'mooveon' + object.id +" > " + MooveOnCount + " </span><i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
-         "  <span class='right' style='padding-top:0px;font-size:larger'><span style='color:white' id="+ 'moove'+ object.id +"> "+ MooveCount +" </span><i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
+         "  <span class='right black-text' style='padding-left:5px;padding-right:5px;padding-top:0px;'><span style='color:white' id="+ 'mooveon' + object.id +" > " + MooveOnCount + " </span><i class='fa fa-thumbs-o-down pink-text'></i> </span> " +
+         "  <span class='right' style='padding-top:0px;'><span style='color:white' id="+ 'moove'+ object.id +"> "+ MooveCount +" </span><i class='fa fa-thumbs-o-up pink-text'></i> </span> " +
         "</div>" +
 
       "  </div>"+
@@ -500,13 +499,13 @@ function GetCurrentLocation(latEnd, longEnd){
 var theReviewDate;
 
 $("#btnMooveOn").click(function(e){
-  $("#modaldiv").removeClass("red").addClass("pink");
+  $("#modaldiv").removeClass("red").addClass("teal");
 
   $("#modalMessage").text("Saving...");
   var canLeaveReview = false;
   e.preventDefault();
   if ($("#ddlLocalDestinations option:selected").text() === 'Select a destination'){
-    $("#modaldiv").removeClass("pink").addClass("red");
+    $("#modaldiv").removeClass("teal").addClass("red");
 
     $("#modalMessage").text("Please select a location!");
     return;
@@ -570,7 +569,7 @@ $("#btnMooveOn").click(function(e){
       incrementTotals("MooveOnCount",location);
       addPoints(location,isParnter,$("#ddlLocalDestinations option:selected").text(),pointsNeeded);
     } else {
-      $("#modaldiv").removeClass("pink").addClass("red");
+      $("#modaldiv").removeClass("teal").addClass("red");
       //$("#modaldiv").addClass("lighten-2");
       $("#modalMessage").text("You just rated "+ $("#ddlLocalDestinations option:selected").text() + "!");
     }
@@ -590,13 +589,13 @@ $("#btnMooveOn").click(function(e){
 
 
 $("#btnMakeMooves").click(function(e){
-  $("#modaldiv").removeClass("red").addClass("pink");
+  $("#modaldiv").removeClass("red").addClass("teal");
   // $("#modaldiv").removeClass("lighten-2");
   $("#modalMessage").text("Saving...");
   var canLeaveReview = false;
   e.preventDefault();
   if ($("#ddlLocalDestinations option:selected").text() === 'Select a destination'){
-    $("#modaldiv").removeClass("pink").addClass("red");
+    $("#modaldiv").removeClass("teal").addClass("red");
     // $("#modaldiv").addClass("lighten-2");
     $("#modalMessage").text("Please select a location!");
     return;
@@ -662,7 +661,7 @@ $("#btnMakeMooves").click(function(e){
       incrementTotals("MooveCount",location);
       addPoints(location,isParnter,$("#ddlLocalDestinations option:selected").text(),pointsNeeded);
     } else {
-      $("#modaldiv").removeClass("pink").addClass("red");
+      $("#modaldiv").removeClass("teal").addClass("red");
       //$("#modaldiv").addClass("lighten-2");
       $("#modalMessage").text("You just rated "+ $("#ddlLocalDestinations option:selected").text() + "!");
     }
