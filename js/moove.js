@@ -278,8 +278,18 @@ function findByLocations(area){
     query.get(location, {
    success: function(destination) {
 
-     $("#moove"+location).text( destination.get('MooveCount') + " ");
-     $("#mooveon"+location).text( destination.get('MooveOnCount')+ " ");
+     var MooveCount = destination.get('MooveCount');
+     var MooveOnCount = destination.get('MooveOnCount');
+     if (typeof MooveCount === 'undefined' ){
+       MooveCount = 0;
+     }
+     if (typeof MooveOnCount === 'undefined' ){
+       MooveOnCount = 0;
+     }
+
+
+     $("#moove"+location).text( MooveCount + " ");
+     $("#mooveon"+location).text( MooveOnCount + " ");
 
 
    },
