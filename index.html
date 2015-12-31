@@ -245,7 +245,7 @@
         $("#btnVarifyCode").text("Invalid Code");
       } else {
         // Create New Parse User then show them to the welcome screen, set cookie and show menu.
-        Parse.User.logOut();
+        //Parse.User.logOut();
         var user = new Parse.User();
         user.set("username", phone);
         user.set("password", phone);
