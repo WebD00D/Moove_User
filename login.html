@@ -107,7 +107,7 @@
 
     $("#btnFacebookLogin").click(function(){
 
-      Parse.FacebookUtils.logIn(null, {
+      Parse.FacebookUtils.logIn("user_posts,email", {
         success: function(user) {
           if (!user.existed()) {
             alert("User signed up and logged in through Facebook!");
