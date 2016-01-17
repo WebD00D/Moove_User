@@ -709,8 +709,6 @@ function addPoints(destination,isPartner,establishment,pointsTheyNeed){
         if (results.length < 1){
           //create new record and add point
 
-
-
           var Points = Parse.Object.extend("Points");
           var points = new Points();
 
