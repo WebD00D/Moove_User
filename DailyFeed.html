@@ -103,8 +103,8 @@
       FB.getLoginStatus(function(response) {
           if (response.status === 'connected') {
             console.log('Logged in.');
-             FB.api('/me', function(response) {
-               console.log(response);
+             FB.api('/me?fields=first_name', function(response) {
+               console.log(response.first_name);
              });
           }
           else {
