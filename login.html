@@ -107,12 +107,14 @@
 
     $("#btnFacebookLogin").click(function(){
 
-      Parse.FacebookUtils.logIn("user_posts,email", {
+      Parse.FacebookUtils.logIn(null, {
         success: function(user) {
           if (!user.existed()) {
             alert("User signed up and logged in through Facebook!");
+            window.location.href="DailyFeed.html";
           } else {
             alert("User logged in through Facebook!");
+            window.location.href="DailyFeed.html";
           }
         },
         error: function(user, error) {
