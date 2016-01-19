@@ -74,36 +74,42 @@
 
   <script>
 
-    Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
 
-    window.fbAsyncInit = function() {
-      Parse.FacebookUtils.init({
-        appId      : '125164621195934',
-        status     : false,
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v2.5'
-      });
-    };
-
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/all.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
 
 
 
      $(window).load(function(){
+
+
+       Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
+
+       window.fbAsyncInit = function() {
+         Parse.FacebookUtils.init({
+           appId      : '125164621195934',
+           status     : false,
+           cookie     : true,
+           xfbml      : true,
+           version    : 'v2.5'
+         });
+       };
+
+       (function(d, s, id){
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
        Parse.FacebookUtils.init();
-      //  FB.api('/me', function(response) {
-      //    console.log(response);
-      //  });
+
       FB.getLoginStatus(function(response) {
           if (response.status === 'connected') {
             console.log('Logged in.');
+
+             FB.api('/me', function(response) {
+                console.log(response);
+              });
           }
           else {
             console.log('initiate FB login...');
