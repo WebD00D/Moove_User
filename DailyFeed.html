@@ -95,10 +95,15 @@
      }(document, 'script', 'facebook-jssdk'));
 
 
-     Parse.FacebookUtils.init();
-     FB.api('/me', function(response) {
-       alert('Your name is ' + response.name);
-     });
+
+     $(window).load(function(){
+       Parse.FacebookUtils.init();
+       FB.api('/me', function(response) {
+         alert('Your name is ' + response.name);
+       });
+     })
+
+
 
 
 
