@@ -109,15 +109,15 @@
       Parse.FacebookUtils.logIn("public_profile,user_posts,publish_actions", {
         success: function(user) {
           if (!user.existed()) {
-            alert("User signed up and logged in through Facebook!");
+          //  alert("User signed up and logged in through Facebook!");
             window.location.href="DailyFeed.html";
           } else {
-            alert("User logged in through Facebook!");
+            //alert("User logged in through Facebook!");
             window.location.href="DailyFeed.html";
           }
         },
         error: function(user, error) {
-          alert("User cancelled the Facebook login or did not fully authorize.");
+          //alert("User cancelled the Facebook login or did not fully authorize.");
         }
       });
 
