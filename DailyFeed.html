@@ -99,37 +99,10 @@
 
      $(window).load(function(){
 
-       Parse.FacebookUtils.init();
 
-      FB.getLoginStatus(function(response) {
-          if (response.status === 'connected') {
-            console.log('Logged in.');
-             FB.api('/me?fields=first_name', function(response) {
-               console.log(response.first_name);
-               $("#firstName").text(response.first_name);
-             });
-          }
-          else {
-            console.log('initiate FB login...');
-            FB.login();
-          }
-        });
-
-
-        $("#testPost").click(function(){
-          FB.api('/me/feed', 'post', {message: 'Testing Facebook functionality from @Moove App!'});
-        })
 
 
      })
-
-
-
-
-
-
-
-
 
  </script>
 
@@ -139,6 +112,28 @@
 
   $(document).ready(function(){
     $('.button-collapse').sideNav();
+
+    Parse.FacebookUtils.init();
+
+   FB.getLoginStatus(function(response) {
+       if (response.status === 'connected') {
+         console.log('Logged in.');
+          FB.api('/me?fields=first_name', function(response) {
+            console.log(response.first_name);
+            $("#firstName").text(response.first_name);
+          });
+       }
+       else {
+         console.log('initiate FB login...');
+         FB.login();
+       }
+     });
+
+
+            $("#testPost").click(function(e){
+              e.preventDefault();
+              FB.api('/me/feed', 'post', {message: 'Testing Facebook functionality from @Moove App!'});
+            })
 
 
 
