@@ -99,7 +99,7 @@
      $(window).load(function(){
        Parse.FacebookUtils.init();
        FB.api('/me', function(response) {
-         alert('Your name is ' + response.name);
+         console.log(response);
        });
      })
 
