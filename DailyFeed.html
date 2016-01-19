@@ -39,8 +39,7 @@
 <div class="col s12" style="background-color:white;padding:10px;padding-left:5%;padding-right:5%">
   <h4 style="font-weight:300">Hi, <span id="firstName"></span>.</h4>
   <p style="font-size:larger">Here's your daily list of Mooves to make in Richmond, Virginia.</p>
-  <a href="#" id="testPost">Hello World!<a>
-    <a href="#" id="logMeOut">Log Out</a>
+
 </div>
 <hr>
 
@@ -59,7 +58,7 @@
      <h5 text-align:justify>
        Tuesday night tap takeover starts at 7pm, featuring Hardywood Park Craft Brewery.
      </h5>
-      <p><a href="#"><i class="fa fa-facebook"></i> Made the Moove? Share with friends!</a></p>
+      <p><a class="testPost" data-name="Postbellum" href="#"><i class="fa fa-facebook"></i> Made the Moove? Share with friends!</a></p>
    </div>
  </div>
 
@@ -115,21 +114,23 @@
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
 
-
-
     $('.button-collapse').sideNav();
 
-
-
-    $("#testPost").click(function(e){
+    $(".testPost").click(function(e){
       e.preventDefault();
-      var body = 'I just earned a point at Bellytimber on the Moove App! #makemooves';
+      var name = $(this).attr("data-name");
+      var body = 'I just made a moove at '+ Name +' on the Moove App! #makemooves';
       FB.api('/me/feed', 'post', { message: body }, function(response) {
         if (!response || response.error) {
           console.log(response.error);
 
         } else {
-          alert('Post ID: ' + response.id);
+          swal({
+            confirmButtonColor: "#009688",
+            title: "Moove Made!",
+            text: "Thanks for sharing your Moove at " + name + "!",
+            type: "success"
+          })
         }
       });
     })
