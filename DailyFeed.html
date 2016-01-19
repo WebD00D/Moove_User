@@ -125,11 +125,17 @@
 
 
 
-                $("#testPost").click(function(e){
-                  e.preventDefault();
-                  alert("test");
-                  FB.api('/me/feed', 'post', {message: 'Testing Facebook functionality from @Moove App!'});
-                })
+    $("#testPost").click(function(e){
+      e.preventDefault();
+      var body = 'Reading JS SDK documentation';
+      FB.api('/me/feed', 'post', { message: body }, function(response) {
+        if (!response || response.error) {
+          alert('Error occured');
+        } else {
+          alert('Post ID: ' + response.id);
+        }
+      });
+    })
 
 
 
