@@ -119,7 +119,7 @@
     $(".testPost").click(function(e){
       e.preventDefault();
       var name = $(this).attr("data-name");
-      var body = 'I just made a moove at '+ Name +' on the Moove App! #makemooves';
+      var body = 'I just made a moove at '+ name +' on the Moove App! #makemooves';
       FB.api('/me/feed', 'post', { message: body }, function(response) {
         if (!response || response.error) {
           console.log(response.error);
