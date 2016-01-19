@@ -37,8 +37,9 @@
 </div>
 
 <div class="col s12" style="background-color:white;padding:10px;padding-left:5%;padding-right:5%">
-  <h4 style="font-weight:300">Hi, Christian</h4>
+  <h4 style="font-weight:300">Hi, <span id="firstName"></span>.</h4>
   <p style="font-size:larger">Here's your daily list of Mooves to make in Richmond, Virginia.</p>
+  <a href="#" id="testPost">Hello World!<a>
 </div>
 <hr>
 
@@ -105,6 +106,7 @@
             console.log('Logged in.');
              FB.api('/me?fields=first_name', function(response) {
                console.log(response.first_name);
+               $("#firstName").text(response.first_name);
              });
           }
           else {
@@ -112,7 +114,16 @@
             FB.login();
           }
         });
+
+
+        $("#testPost").click(function(){
+          FB.api('/me/feed', 'post', {message: 'Testing Facebook functionality from @Moove App!'});
+        })
+
+
      })
+
+
 
 
 
