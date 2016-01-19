@@ -123,7 +123,7 @@
 
     $("#testPost").click(function(e){
       e.preventDefault();
-      var body = 'A Test post from the @Moove App';
+      var body = 'I just earned a point at [LOCATION] on the @[450723448462368] App! #makemooves';
       FB.api('/me/feed', 'post', { message: body }, function(response) {
         if (!response || response.error) {
           console.log(response.error);
