@@ -40,6 +40,7 @@
   <h4 style="font-weight:300">Hi, <span id="firstName"></span>.</h4>
   <p style="font-size:larger">Here's your daily list of Mooves to make in Richmond, Virginia.</p>
   <a href="#" id="testPost">Hello World!<a>
+    <a href="#" id="logMeOut">Log Out</a>
 </div>
 <hr>
 
@@ -104,7 +105,20 @@
          }
          else {
            console.log('initiate FB login...');
-           FB.login();
+           Parse.FacebookUtils.logIn("public_profile,user_posts", {
+             success: function(user) {
+               if (!user.existed()) {
+                 alert("User signed up and logged in through Facebook!");
+                 window.location.href="DailyFeed.html";
+               } else {
+                 alert("User logged in through Facebook!");
+                 window.location.href="DailyFeed.html";
+               }
+             },
+             error: function(user, error) {
+               alert("User cancelled the Facebook login or did not fully authorize.");
+             }
+           });
          }
        });
 
@@ -138,6 +152,10 @@
       });
     })
 
+
+    $("#logMeOut").click(function(){
+      Parse.User.logOut();
+    })
 
 
 
