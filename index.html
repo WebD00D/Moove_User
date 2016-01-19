@@ -243,9 +243,11 @@
         //invalid phone number
         $("#btnVarifyCode").removeClass("teal").addClass("red");
         $("#btnVarifyCode").text("Invalid Code");
+        alert("wrong Code!");
       } else {
         // Create New Parse User then show them to the welcome screen, set cookie and show menu.
         //Parse.User.logOut();
+        alert("time to create the new user!")
         var user = new Parse.User();
         user.set("username", phone);
         user.set("password", phone);
