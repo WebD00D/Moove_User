@@ -94,7 +94,7 @@
 
       // run code after FaceBook SDK has been loaded.
       Parse.FacebookUtils.init();
-      Parse.User.logOut();
+      FB.logOut();
 
       FB.getLoginStatus(function(response) {
          if (response.status === 'connected') {
