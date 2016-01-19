@@ -94,7 +94,6 @@
 
       // run code after FaceBook SDK has been loaded.
       Parse.FacebookUtils.init();
-      FB.logOut();
 
       FB.getLoginStatus(function(response) {
          if (response.status === 'connected') {
@@ -103,26 +102,8 @@
               console.log(response.first_name);
               $("#firstName").text(response.first_name);
             });
-         }
-         else {
-           console.log('initiate FB login...');
-           Parse.FacebookUtils.logIn("public_profile,user_posts", {
-             success: function(user) {
-               if (!user.existed()) {
-                 alert("User signed up and logged in through Facebook!");
-                 window.location.href="DailyFeed.html";
-               } else {
-                 alert("User logged in through Facebook!");
-                 window.location.href="DailyFeed.html";
-               }
-             },
-             error: function(user, error) {
-               alert("User cancelled the Facebook login or did not fully authorize.");
-             }
-           });
-         }
+         }         
        });
-
 
     };
 
