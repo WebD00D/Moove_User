@@ -177,8 +177,8 @@ function findByLocations(area){
         $("#"+location).empty();
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
-          var datetime = object.get('createdAt');
 
+          var datetime = object.get('createdAt');
           var reviewYear = datetime.getFullYear();
           var reviewMonth = datetime.getMonth() + 1;
           var reviewDay = datetime.getDate();
@@ -216,8 +216,6 @@ function findByLocations(area){
                timetext = remainingMinutes + ' minutes ago..' ;
              }
             }
-
-
           } else {
 
             if ( reviewMinutes === 0 ){
