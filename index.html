@@ -26,14 +26,16 @@
 
   <nav role="navigation"  style="height:70px;background-color:rgba(01,01,01,0.0);box-shadow:none">
    <div class="nav-wrapper container" style="margi-top:0px">
-     <ul id="nav-mobile" class="side-nav" style="background-color:black">
-       <img style="margin-top:10%;margin-left:10%" height="60px" src="MooveBrand.png">
-       <li><a style="font-size:large;font-weight:200" class="white-text " href="#">About</a></li>
+     <div id="nav-mobile" class="side-nav" style="background-color:black">
+       <img style="margin-top:10%;margin-left:27%" height="100px" src="MooveCircle.png">
+       <div style="line-height:20px;padding:10px;text-align:center;font-weight:200">
+         <b>"Make the most of your night out."</b>
+         <Br>
+           www.makemooves.com
+       </div>
            <hr class="teal" style=";border:none;height:1px;">
 
-       <li><a style="font-size:large;font-weight:200" class="white-text " href="#">Sign Out</a></li>
-       <hr class="teal" style=";border:none;height:1px;">
-     </ul>
+     </div>
      <a id="navMobile" href="#" data-activates="nav-mobile" class="button-collapse white-text"><img style="margin-top:45%;" height="50px" src="MooveCircle.png"></a>
      <span class="white-text right"><b id="MooveDay"></b></span>
    </div>
@@ -74,6 +76,28 @@
     </ul>
 
 
+
+  </div>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4><b id="theName"></b></h4>
+    <p>
+    <input class="with-gap" name="group3" type="radio" id="rbMakeMooves" />
+    <label for="rbMakeMooves">Make Mooves</label>
+    <input class="with-gap" name="group3" type="radio" id="rbMooveOn"  />
+    <label for="rbMooveOn">Moove On</label>
+  </p>
+      <div class="input-field col s12">
+        <textarea placeholder="Have something to say?" id="textarea1" length="99" maxlength="99" class="materialize-textarea" style="padding-bottom:4px;min-height:1rem"></textarea>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <a id="btnMakeMooves" href="#!" class=" modal-action  waves-effect waves-light btn-flat pink white-text" style="text-transform:none"><b id="btnText">Post Moove<b/></a>
   </div>
 </div>
 
@@ -89,10 +113,6 @@
 
 
   <script>
-
-    $(window).load(function(){
-
-    });
 
   $(document).ready(function(){
 
@@ -126,10 +146,20 @@
                   promo = '...';
                 }
 
+                var MooveCount = object.get('MooveCount');
+                var MooveOnCount = object.get('MooveOnCount');
 
-                var content = "<ul class='collection with-header' style='border:none;margin-bottom:0px'>"+
+                if (typeof MooveCount === 'undefined' ){
+                  MooveCount = 0;
+                }
+                if (typeof MooveOnCount === 'undefined' ){
+                  MooveOnCount = 0;
+                }
 
-                "<li class='collection-header teal' style='padding-top:5px;border-bottom:1px solid #cbcbcb;;padding-bottom:0px;padding-left:0px;padding-right:0px'><span><h6 style='padding-left:10px;padding-right:10px;padding-bottom:5px' class='white-text'><b>"+ object.get("Name") +"</b><a href=''#!' class='secondary-content'><i style='font-size:18px' class='material-icons teal-text text-darken-3'>thumb_down</i><span style='padding-left:5px;color:#cbcbcb'><span id='Down"+ object.id +"'></span></span></a><a href='#!' class='secondary-content' style='margin-left:10px'><i  style='font-size:18px' class='material-icons teal-text text-darken-3'>thumb_up</i><span style='padding-right:10px;padding-left:3px;color:#cbcbcb'><span id='Up"+ object.id +"'></span></span></a></h6></span><div class='teal darken-1' style='padding:5px;padding-left:10px' ><b>"+ promo +"</b></div></li>"+
+
+                var content = "<ul data-id="+ object.id +" data-name='"+ object.get("Name") +"' class='collection with-header makeMooves' style='border:none;margin-bottom:0px'>"+
+
+                "<li class='collection-header teal' style='padding-top:5px;border-bottom:1px solid #cbcbcb;;padding-bottom:0px;padding-left:0px;padding-right:0px'><span><h6 style='padding-left:10px;padding-right:10px;padding-bottom:5px' class='white-text'><b>"+ object.get("Name") +"</b><a href='#modal1' class='secondary-content downVote modal-trigger'><i style='font-size:18px' class='material-icons teal-text text-darken-3'>thumb_down</i><span style='padding-left:5px;color:#cbcbcb'>"+ MooveOnCount +"</span></a><a href='#modal1' class='secondary-content upVote modal-trigger' style='margin-left:10px'><i  style='font-size:18px' class='material-icons teal-text text-darken-3'>thumb_up</i><span style='padding-right:10px;padding-left:3px;color:#cbcbcb'>"+ MooveCount +"</span></a></h6></span><div class='teal darken-1' style='padding:5px;padding-left:10px' ><b>"+ promo +"</b></div></li>"+
                 "<li><ul class='"+ object.id +" collection'  style='border:none;overflow-y:scroll;max-height:150px;margin-top:0px;margin-bottom:0px' ></ul></li></ul>"+
 
 
@@ -138,7 +168,7 @@
 
               }
 
-                $('#preloader').fadeOut('slow',function(){$(this).remove();});
+
           }
       })
 
@@ -148,106 +178,112 @@
 
       console.log("about to check review for... "+ parent);
       var Reviews = Parse.Object.extend("Reviews");
-      var Destination = Parse.Object.extend("Destinations");
-          var destination = new Destination();
-              destination.id = parent;
+
                 var query = new Parse.Query(Reviews);
-                    query.equalTo("DestinationID", destination);
+                    query.equalTo("DestinationID", parent);
+                    query.descending("createdAt");
                         query.find({
                           success: function(results) {
                             // comments now contains the comments for posts without images.
 
-                            var MooveOnCount = 0;
-                            var MooveCount = 0;
-                              for (var i = 0; i < results.length; i++) {
+                            if (results.length > 0 ){
 
-                                var object = results[i];
+                                for (var i = 0; i < results.length; i++) {
 
-                                var datetime = object.get('createdAt');
-                                var reviewYear = datetime.getFullYear();
-                                var reviewMonth = datetime.getMonth() + 1;
-                                var reviewDay = datetime.getDate();
-                                var reviewHours = datetime.getHours(); //returns 0-23
-                                var reviewMinutes = datetime.getMinutes(); //returns 0-59
+                                  var object = results[i];
 
-                                var today = new Date();
-                                var todaysYear = today.getFullYear();
-                                var todaysMonth = today.getMonth() +1;
-                                var todaysday = today.getDate();
+                                  var datetime = object.get('createdAt');
+                                  var reviewYear = datetime.getFullYear();
+                                  var reviewMonth = datetime.getMonth() + 1;
+                                  var reviewDay = datetime.getDate();
+                                  var reviewHours = datetime.getHours(); //returns 0-23
+                                  var reviewMinutes = datetime.getMinutes(); //returns 0-59
 
-                                var currentTime = new Date(todaysYear + '/' + todaysMonth + '/' + todaysday + ' ' + today.getHours() + ':' + today.getMinutes());
-                              //  console.log(currentTime);
-                                var commentTime = new Date(reviewYear + '/' + reviewMonth + '/' + reviewDay + ' ' + reviewHours + ':' + reviewMinutes);
-                                var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
+                                  var today = new Date();
+                                  var todaysYear = today.getFullYear();
+                                  var todaysMonth = today.getMonth() +1;
+                                  var todaysday = today.getDate();
 
-                                var resultInMinutes = Math.round(difference / 60000);
-                              //  console.log('total minutes' + resultInMinutes);
-                              //  console.log('total hours' + Math.floor(resultInMinutes / 60));
-                              //  console.log('remaining minutes' +  resultInMinutes % 60);
+                                  var currentTime = new Date(todaysYear + '/' + todaysMonth + '/' + todaysday + ' ' + today.getHours() + ':' + today.getMinutes());
+                                //  console.log(currentTime);
+                                  var commentTime = new Date(reviewYear + '/' + reviewMonth + '/' + reviewDay + ' ' + reviewHours + ':' + reviewMinutes);
+                                  var difference = currentTime.getTime() - commentTime.getTime(); // This will give difference in milliseconds
 
-
-                                var totalhours = Math.floor( resultInMinutes / 60 );
-                                var remainingMinutes = resultInMinutes % 60
+                                  var resultInMinutes = Math.round(difference / 60000);
+                                //  console.log('total minutes' + resultInMinutes);
+                                //  console.log('total hours' + Math.floor(resultInMinutes / 60));
+                                //  console.log('remaining minutes' +  resultInMinutes % 60);
 
 
-                                if (totalhours === 0){
-                                  if (remainingMinutes < 1){
-                                    timetext = 'just now..' ;
-                                  } else {
-                                    if (remainingMinutes === 1){
-                                     timetext = remainingMinutes + ' minute ago..' ;
-                                   }
-                                   else {
-                                     timetext = remainingMinutes + ' minutes ago..' ;
-                                   }
-                                  }
-                                } else {
+                                  var totalhours = Math.floor( resultInMinutes / 60 );
+                                  var remainingMinutes = resultInMinutes % 60
 
-                                  if ( reviewMinutes === 0 ){
-                                    if (totalhours === 1){
-                                      timetext = totalhours + ' hour ago..';
+
+                                  if (totalhours === 0){
+                                    if (remainingMinutes < 1){
+                                      timetext = 'just now..' ;
                                     } else {
-                                      timetext = totalhours + ' hours ago..';
+                                      if (remainingMinutes === 1){
+                                       timetext = remainingMinutes + ' minute ago..' ;
+                                     }
+                                     else {
+                                       timetext = remainingMinutes + ' minutes ago..' ;
+                                     }
                                     }
-
                                   } else {
-                                    if (totalhours === 1){
-                                        if (remainingMinutes === 1){
-                                          timetext = totalhours + ' hour, ' + remainingMinutes + ' minute ago..';
-                                        } else {
-                                          timetext = totalhours + ' hour, ' + remainingMinutes + ' minutes ago..';
-                                        }
+
+                                    if ( reviewMinutes === 0 ){
+                                      if (totalhours === 1){
+                                        timetext = totalhours + ' hour ago..';
+                                      } else {
+                                        timetext = totalhours + ' hours ago..';
+                                      }
 
                                     } else {
-                                        timetext = totalhours + ' hours, ' + remainingMinutes + ' minutes ago..';
+                                      if (totalhours === 1){
+                                          if (remainingMinutes === 1){
+                                            timetext = totalhours + ' hour, ' + remainingMinutes + ' minute ago..';
+                                          } else {
+                                            timetext = totalhours + ' hour, ' + remainingMinutes + ' minutes ago..';
+                                          }
+
+                                      } else {
+                                          timetext = totalhours + ' hours, ' + remainingMinutes + ' minutes ago..';
+                                      }
+
                                     }
-
                                   }
-                                }
 
 
 
 
-                                var content =   "<li class='collection-item'><i class='fa fa-quote-left pink-text'></i>"+
-                                                "  <span>"+ object.get("Review") +"</span> " +
-                                                "  <br><span class='pink-text' style='font-style:italic;font-weight:400'><small>- "+ timetext +"</small></span>  " +
-                                                "</li>"
+                                  var content =   "<li class='collection-item'><i class='fa fa-quote-left pink-text'></i>"+
+                                                  "  <span>"+ object.get("Review") +"</span> " +
+                                                  "  <br><span class='pink-text' style='font-style:italic;font-weight:400'><small>"+ timetext +"</small></span>  " +
+                                                  "</li>"
 
-                                $(content).appendTo("."+parent);
+                                  if (object.get("Review") != ''){
+                                    $(content).appendTo("."+parent);
+                                  }
 
-                                var MadeMoove = object.get("MadeMoove");
 
-                                if (MadeMoove){
-                                  MooveCount++;
-                                } else {
-                                  MooveOnCount++;
-                                }
 
-                              } //...end loop
 
-                              // .. append the moove counters for destination...
-                              $("#Down"+parent).text(MooveOnCount);
-                              $("#Up"+parent).text(MooveCount);
+
+                                } //...end loop
+                            } else {
+
+                              var content =   "<li class='collection-item isTemp'>"+
+                                              "  <span style='font-style:italic;color:#cbcbcb'>Be the first to post!</span> " +
+                                              "</li>"
+
+                              $(content).appendTo("."+parent);
+
+                            }
+
+
+
+                              $('#preloader').fadeOut('slow',function(){$(this).remove();});
 
 
                           }
@@ -256,7 +292,72 @@
 
 
 
+    $("#mooveContainer").delegate(".makeMooves","click",function(e){
+      e.preventDefault();
+      $("#btnText").text("Post Moove");
+      var name = $(this).attr("data-name");
+      var id = $(this).attr("data-id");
+      $("#theName").text(name);
+      $("#btnMakeMooves").attr("data-id",id);
+      $('#modal1').openModal();
+    })
 
+    $("#btnMakeMooves").click(function(){
+      var theID = $(this).attr("data-id");
+      //..see which one is checked.
+      var madeMoove = '';
+
+        if($('#rbMakeMooves').is(':checked')) {
+          madeMoove = true;
+          postMoove("MooveCount", theID);
+          $('#modal1').closeModal();
+        }
+
+        if($('#rbMooveOn').is(':checked')) {
+          madeMoove = false;
+          postMoove("MooveOnCount",theID);
+          $('#modal1').closeModal();
+        }
+
+        if (madeMoove == ''){
+          console.log("nothing selected");
+          $("#btnText").text("Nothing selected!");
+        }
+    })
+
+    function postMoove(Moove,id){
+
+      var Review = Parse.Object.extend("Reviews");
+      var review = new Review();
+          review.save({
+          DestinationID:id,
+          Review: $("#textarea1").val(),
+          }, {
+          success: function(review) {
+            console.log("success!");
+            $("#textarea1").val('');
+
+            incrementTotals(Moove,id);
+
+          },
+          error: function(review, error) {
+            console.log("failed:" + error.message);
+          }
+        });
+
+    } // end post Moove
+
+
+    function incrementTotals(Kind,LocationID){
+
+        var Destinations = Parse.Object.extend("Destinations");
+        var destinations = new Destinations();
+            destinations.id = LocationID;
+            destinations.increment(Kind);
+            destinations.save();
+            window.location.reload(true);
+
+    } // end increment totalhours
 
 
 
