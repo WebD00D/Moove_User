@@ -14,7 +14,12 @@
  </head>
   <body style="background-color:#21282F;">
 
-
+    <div id="preloader">
+      <div class="spinner">
+         <div class="double-bounce1"></div>
+         <div class="double-bounce2"></div>
+      </div>
+    </div>
 
 
 <div class="col s12" style="position:relative;background:linear-gradient(rgba(01,01,01,0.6),rgba(01,01,01,0.6)),url(http://plusmgt.com/wp-content/gallery/richmond/richmond-pre-dawn-for-dill-ad.jpg);background-position-x:22%;background-position-y:22%;height:200px">
@@ -85,6 +90,10 @@
 
   <script>
 
+    $(window).load(function(){
+    $('#preloader').fadeOut('slow',function(){$(this).remove();});
+    });
+
   $(document).ready(function(){
 
     Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
@@ -120,7 +129,7 @@
 
                 var content = "<ul class='collection with-header' style='border:none;margin-bottom:0px'>"+
 
-                "<li class='collection-header teal' style='padding-top:5px;border-bottom:1px solid #cbcbcb;;padding-bottom:0px;padding-left:0px;padding-right:0px'><span><h5 style='padding-left:10px;padding-right:10px' class='white-text'><b>"+ object.get("Name") +"</b><a href=''#!' class='secondary-content'><i class='material-icons teal-text text-darken-3'>thumb_down</i><span style='padding-left:5px;color:#cbcbcb'><span id='Down"+ object.id +"'></span></span></a><a href='#!' class='secondary-content' style='margin-left:10px'><i class='material-icons teal-text text-darken-3'>thumb_up</i><span style='padding-right:10px;padding-left:3px;color:#cbcbcb'><span id='Up"+ object.id +"'></span></span></a></h5></span><div class='teal darken-1' style='padding:5px;padding-left:10px' ><b>"+ promo +"</b></div></li>"+
+                "<li class='collection-header teal' style='padding-top:5px;border-bottom:1px solid #cbcbcb;;padding-bottom:0px;padding-left:0px;padding-right:0px'><span><h6 style='padding-left:10px;padding-right:10px;padding-bottom:5px' class='white-text'><b>"+ object.get("Name") +"</b><a href=''#!' class='secondary-content'><i style='font-size:18px' class='material-icons teal-text text-darken-3'>thumb_down</i><span style='padding-left:5px;color:#cbcbcb'><span id='Down"+ object.id +"'></span></span></a><a href='#!' class='secondary-content' style='margin-left:10px'><i  style='font-size:18px' class='material-icons teal-text text-darken-3'>thumb_up</i><span style='padding-right:10px;padding-left:3px;color:#cbcbcb'><span id='Up"+ object.id +"'></span></span></a></h6></span><div class='teal darken-1' style='padding:5px;padding-left:10px' ><b>"+ promo +"</b></div></li>"+
                 "<li><ul class='"+ object.id +" collection'  style='border:none;overflow-y:scroll;max-height:150px;margin-top:0px;margin-bottom:0px' ></ul></li></ul>"+
 
 
