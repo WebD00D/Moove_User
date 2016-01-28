@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+ <head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Moove | What's the moove?</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+  <link type="text/css" rel="stylesheet" href="css/moove.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+ </head>
+  <body style='background:linear-gradient( rgba(01,01,01,1.0),rgba(01,01,01,0.6)100%),url(https://files.parsetfss.com/db2d56ca-fb33-4f71-ab70-5c5f9f6c85b0/tfss-e87311ef-de65-435b-bdd4-04c3ca24fef3-Establishment.jpg)'>
+
+   <div class="navbar-fixed">
+   <nav role="navigation"  style="height:70px;background-color:rgba(01,01,01,0.0);box-shadow:none">
+    <div class="nav-wrapper container" >
+      <a id="logo-container" style=";font-weight:700;color:#ED4877" href="#" class="brand-logo hide-on-small-only">   <img style="margin-top:10%;" height="75px" src="MooveBrand.png"></a>
+        <a id="logo-container" style=";font-weight:700;color:#ED4877" href="#" class="brand-logo hide-on-med-and-up">   <img style="margin-top:45%;" height="120px" src="MooveCircle.png"></a>
+      <ul class="right hide-on-med-and-down" style="margin-top:3%">
+
+          <li><a class="white-text" href="index.html" style="font-weight:200">Select Location</a></li>
+          <!--
+          <li><a class="white-text" href="#" style="font-weight:200">Learn More</a></li>
+          <li><a class="white-text" href="#" style="font-weight:200">Connect</a></li> -->
+
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav  " style="background-color:black">
+        <img style="margin-top:10%;margin-left:10%" height="60px" src="MooveBrand.png">
+        <li><a style="font-size:large;font-weight:200" class="white-text " href="index.html">Select Location</a></li>
+        <hr class="teal" style=";border:none;height:1px;">
+      </ul>
+      <a id="navMobile" href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+</div>
+
+<div id="index-banner" class="parallax-container" >
+ <div class="section no-pad-bot">
+   <div class="container" style="margin-bottom:0px">
+     <br><br>
+
+     <div class="row center" style="margin-top:10%">
+       <h3 class="center-align white-text hide-on-small-only" style="font-weight:200"><b>Make the most of your night out.</b></h3>
+        <h5 class="center-align white-text hide-on-med-and-up" style="font-weight:200;margin-top:120px;font-size:20px"><b>Make the most of your night out.</b></h5>
+     </div>
+      <div class="row center">
+            <a href="DailyFeed.html" style="background-color:#ED4877;width:70%;" class="btn waves-effect waves-light teal center btn-large " type="submit" name="action"><span style="text-transform:none;font-size:large"><b>Find Mooves</b></span></a>
+        <!-- <button id="btnFacebookLogin" style="background-color:#ED4877;width:70%;" class="btn waves-effect waves-light teal center btn-large " type="submit" name="action"><span style="text-transform:none;font-size:large"><b>Facebook Login</b></span></button> -->
+      <Br>
+      <Br>
+
+     </div>
+
+
+
+   </div>
+ </div>
+
+</div>
+
+
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+  <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+  <script src="js/url.js"></script>
+
+  <script>
+
+    Parse.initialize("JcVNtENTjHAn2pOrldHR7pnDj2dnaqzm5zhKxE37", "6qnbKsBLmRvpa6ksobU7NuYv2haPtzWVf8jzYs0c");
+
+    window.fbAsyncInit = function() {
+      Parse.FacebookUtils.init({
+        appId      : '125164621195934',
+        status     : false,
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.5'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+ </script>
+
+  <script>
+
+  $(document).ready(function(){
+    $('.button-collapse').sideNav();
+    $("#navMobile").hide();
+
+    $("#btnFacebookLogin").click(function(){
+
+      Parse.FacebookUtils.logIn("public_profile,user_posts,publish_actions", {
+        success: function(user) {
+          if (!user.existed()) {
+          //  alert("User signed up and logged in through Facebook!");
+            window.location.href="https://webD00D.github.io/Moove_User/DailyFeed.html";
+          } else {
+            //alert("User logged in through Facebook!");
+            window.location.href="https://webD00D.github.io/Moove_User/DailyFeed.html";
+          }
+        },
+        error: function(user, error) {
+          //alert("User cancelled the Facebook login or did not fully authorize.");
+        }
+      });
+
+    }) // end Facebook Login
+
+
+
+
+
+  })
+
+
+
+  </script>
+
+ </body>
+</html>
